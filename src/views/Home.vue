@@ -27,8 +27,11 @@
           <v-flex xs12 sm6>
             <textarea id="editor"></textarea>
           </v-flex>
-          <v-flex xs12 sm6 style="padding-top: 0px; padding-right: 10px; padding-left: 10px">
-            <div class="markdown-body">
+          <v-flex xs12 sm6 style="padding-top: 0px; padding-right: 0px; padding-left: 5px; ">
+            <div
+              class="markdown-body"
+              style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
+            >
               <div v-html="model"></div>
             </div>
           </v-flex>
@@ -87,7 +90,7 @@ export default {
           this.insertBefore("# ", 3);
           break;
         case "bold":
-          this.insertAround("**", "**");
+          this.insertAround("** ", "**");
           break;
         case "italicize":
           this.insertAround("*", "*");
@@ -114,11 +117,14 @@ export default {
           this.insert("---");
           break;
         case "footnote":
-          this.insert(`[^${this.footnote}] `);
+          this.insert(`[^1] `);
           this.footnote++;
           break;
         case "table":
           this.insert(`${config.templates.table}`);
+          break;
+        case "lorumipsum":
+          this.insert(`${config.templates.lorumipsum}`);
           break;
         case "mdToClipboard":
           this.copyMarkdownToClipboard();

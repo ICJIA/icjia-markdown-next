@@ -64,7 +64,9 @@ export default {
       if (e === "blank.css") {
         try {
           document.querySelector(`link[href$="/css/github.css"]`).remove();
-        } catch (e) {}
+        } catch (e) {
+          console.log(e);
+        }
         let file = document.createElement("link");
         file.rel = "stylesheet";
         file.href = "/css/blank.css";
@@ -137,23 +139,17 @@ export default {
           tooltip: "Table"
         },
         {
+          name: "lorumipsum",
+          action: "lorumipsum",
+          icon: "texture",
+          tooltip: "Lorum Ipsum chunk"
+        },
+        {
           name: "mdToClipboard",
           action: "mdToClipboard",
           icon: "assignment",
           tooltip: "Copy Markdown to clipboard"
         }
-
-        // {
-        //   name: "frontmatter",
-        //   action: "frontmatter",
-        //   icon: "fa fa-database"
-        // },
-        // {
-        //   name: "mdToClipboard",
-        //   action: "mdToClipboard",
-        //   icon: "fa fa-clipboard"
-        // }
-        // { name: "ref", action: "reference", icon: "reference", text: 'ref', showName: true },
       ],
       renderTools: [
         {
