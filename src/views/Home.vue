@@ -90,7 +90,7 @@ export default {
           this.insertBefore("# ", 3);
           break;
         case "bold":
-          this.insertAround("** ", "**");
+          this.insertAround("**", "**");
           break;
         case "italicize":
           this.insertAround("*", "*");
