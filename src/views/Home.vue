@@ -21,6 +21,10 @@
           <v-btn icon @click.native="toggleHtml" dark>
             <v-icon>close</v-icon>
           </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="copyHtmlToClipboard" dark>
+            <v-icon>assignment</v-icon>
+          </v-btn>
         </v-toolbar>
 
         <v-layout row wrap>
@@ -35,21 +39,25 @@
 </template>
 
 <script>
+import config from "@/config";
+
 /* Thanks to: https://github.com/musicbed/mirrormark/blob/master/src/js/mirrormark.js */
 const beautify_html = require("js-beautify").html;
-
 let codeMirror = require("codemirror");
-
-let md = require("markdown-it")().use(require("markdown-it-footnote"));
+let md = require("markdown-it")(config.markdownItOptions)
+  .use(require("markdown-it-footnote"))
+  .use(require("markdown-it-named-headers"));
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
-// require("codemirror/theme/lesser-dark.css");
+//require("codemirror/theme/lesser-dark.css");
 
-const table = `\r\n| Tables        | Are           | Cool  |
+const table = `
+\r\n| Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
 | col 3 is      | right-aligned | $1600 |
 | col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |\r\n`;
+| zebra stripes | are neat      |    $1 |\r\n
+`;
 
 export default {
   name: "Home",
@@ -122,7 +130,6 @@ export default {
       });
       let renderWrapper = document.getElementById("renderbar");
       renderWrapper.parentNode.insertBefore(toolbar, renderWrapper);
-      console.log(toolbar);
     },
 
     generateToolList: function(tools) {
@@ -203,11 +210,14 @@ export default {
           this.insert("---");
           break;
         case "footnote":
-          this.footnote++;
           this.insert(`[^${this.footnote}] `);
+          this.footnote++;
           break;
         case "table":
-          this.insert(`${table}`);
+          this.insert(`${config.templates.table}`);
+          break;
+        case "mdToClipboard":
+          this.copyMarkdownToClipboard();
           break;
         case "showHtml":
           this.toggleHtml();
@@ -263,6 +273,26 @@ export default {
     },
     closeDialog: function() {
       this.showHtml = false;
+    },
+    copyHtmlToClipboard() {
+      this.$copyText(this.raw).then(
+        function(e) {
+          alert("Copied HTML to clipboard");
+        },
+        function(e) {
+          alert("ERROR: Can not copy to clipboard");
+        }
+      );
+    },
+    copyMarkdownToClipboard() {
+      this.$copyText(this.editor.getValue()).then(
+        function(e) {
+          alert("Copied markdown to clipboard");
+        },
+        function(e) {
+          alert("ERROR: Can not copy to clipboard");
+        }
+      );
     }
   },
 
@@ -305,11 +335,11 @@ export default {
           className: "fa fa-superscript"
         },
         { name: "table", action: "table", className: "fa fa-table" },
-        {
-          name: "frontmatter",
-          action: "frontmatter",
-          className: "fa fa-database"
-        },
+        // {
+        //   name: "frontmatter",
+        //   action: "frontmatter",
+        //   className: "fa fa-database"
+        // },
         {
           name: "mdToClipboard",
           action: "mdToClipboard",
@@ -323,11 +353,6 @@ export default {
           action: "showHtml",
           className: "fa fa-code showHtml",
           id: "showHtml"
-        },
-        {
-          name: "htmlToClipboard",
-          action: "htmlToClipboard",
-          className: "fa fa-clipboard"
         }
       ]
     };
