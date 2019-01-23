@@ -1,45 +1,47 @@
 <template>
-  <v-content style="margin-left: 0; margin-right: 0;">
-    <v-container fluid grid-list-md class="markdown-container">
-      <v-layout row wrap>
-        <v-flex xs12 sm12 md6>
-          <textarea id="editor"></textarea>
-        </v-flex>
-        <v-flex xs12 sm12 md6>
-          <div class="renderedText">
-            <div class="renderbar" id="renderbar"></div>
+  <div class="markdown-page">
+    <v-content>
+      <v-dialog v-model="showHtml" width="80%" class="htmlDialog">
+        <v-card>
+          <v-toolbar dark color="indigo">
+            <v-btn icon @click.native="toggleHtml" dark>
+              <v-icon>close</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="copyHtmlToClipboard" dark>
+              <v-icon>assignment</v-icon>
+            </v-btn>
+          </v-toolbar>
+
+          <v-layout row wrap>
+            <v-flex xs12>
+              <pre><code class="html">{{html}}
+              </code></pre>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-dialog>
+      <nav-markdown></nav-markdown>
+      <div style="margin-top: 80px;">
+        <v-layout row wrap>
+          <v-flex xs12 sm6>
+            <textarea id="editor"></textarea>
+          </v-flex>
+          <v-flex xs12 sm6 style="padding-top: 0px; padding-right: 10px; padding-left: 10px">
             <div class="markdown-body">
               <div v-html="model"></div>
             </div>
-          </div>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-dialog v-model="showHtml" width="90%">
-      <v-card>
-        <v-toolbar dark color="indigo">
-          <v-btn icon @click.native="toggleHtml" dark>
-            <v-icon>close</v-icon>
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="copyHtmlToClipboard" dark>
-            <v-icon>assignment</v-icon>
-          </v-btn>
-        </v-toolbar>
-
-        <v-layout row wrap>
-          <v-flex xs12>
-            <pre><code class="raw">{{raw}}
-              </code></pre>
           </v-flex>
         </v-layout>
-      </v-card>
-    </v-dialog>
-  </v-content>
+      </div>
+    </v-content>
+  </div>
 </template>
 
 <script>
 import config from "@/config";
+import NavMarkdown from "@/components/NavMarkdown";
+import { EventBus } from "@/event-bus.js";
 
 /* Thanks to: https://github.com/musicbed/mirrormark/blob/master/src/js/mirrormark.js */
 const beautify_html = require("js-beautify").html;
@@ -49,40 +51,23 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-named-headers"));
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
-//require("codemirror/theme/lesser-dark.css");
-
-const table = `
-\r\n| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |\r\n
-`;
 
 export default {
-  name: "Home",
+  components: {
+    NavMarkdown
+  },
   mounted() {
     this.initializeEditor();
-    this.initializeToolbar(this.tools);
-    this.initializeRenderbar(this.renderTools);
     this.initializeEditorEvents();
-    // this.initializeAutoSave();
-    let el = document.getElementById("showHtml");
-    el.classList.remove("showHtml");
-  },
-
-  computed: {
-    raw: function() {
-      return beautify_html(`${this.model}`);
-    }
+    EventBus.$on("entityEvent", action => {
+      this.insertEntity(action);
+    });
   },
   methods: {
     initializeEditor: function() {
       this.editor = codeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
         mode: "markdown",
-        // theme: "lesser-dark",
-        // viewportMargin: Infinity,
         tabSize: "2",
         indentWithTabs: true,
         lineWrapping: true
@@ -92,92 +77,11 @@ export default {
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
-
-        let doc = cm.getDoc();
-        let cursor = doc.getCursor();
+        //let doc = cm.getDoc();
+        //let cursor = doc.getCursor();
       });
     },
-    // initializeAutoSave: function () {
-    //   window.setInterval(() => {
-    //     var time = new Date();
-    //     let myMd = this.editor.getValue();
-    //     localStorage.setItem('markdown', myMd);
-    //     let message = 'Auto saved to local storage: ' + time;
-    //   }, 15000);
-
-    //},
-    initializeToolbar: function(tools) {
-      let toolbar = document.createElement("ul");
-      toolbar.className = "icjia" + "-" + "toolbar";
-
-      let t = this.generateToolList(tools);
-
-      t.forEach(function(tool) {
-        toolbar.appendChild(tool);
-      });
-
-      let cmWrapper = this.editor.getWrapperElement();
-      cmWrapper.parentNode.insertBefore(toolbar, cmWrapper);
-    },
-    initializeRenderbar: function(tools) {
-      let toolbar = document.createElement("ul");
-      toolbar.className = "icjia" + "-" + "renderbar";
-
-      let t = this.generateToolList(tools);
-
-      t.forEach(function(tool) {
-        toolbar.appendChild(tool);
-      });
-      let renderWrapper = document.getElementById("renderbar");
-      renderWrapper.parentNode.insertBefore(toolbar, renderWrapper);
-    },
-
-    generateToolList: function(tools) {
-      return tools.map(tool => {
-        let item = document.createElement("li"),
-          anchor = document.createElement("a");
-
-        item.className = tool.name;
-
-        if (tool.className) {
-          anchor.className = tool.className;
-        }
-
-        if (tool.id) {
-          anchor.id = tool.id;
-        }
-
-        if (tool.showName) {
-          let text = document.createTextNode(tool.name);
-          anchor.appendChild(text);
-        }
-
-        if (tool.action) {
-          anchor.onclick = e => {
-            this.editor.focus();
-            //console.log(tool.action)
-            this.initiateAction(tool.action);
-          };
-        }
-        item.appendChild(anchor);
-
-        if (tool.nested) {
-          item.className += " has-nested";
-          let ul = document.createElement("ul");
-          ul.className = "icjia" + "-toolbar-list";
-          let nested = this.generateToolList.call(this, tool.nested);
-          nested.forEach(function(nestedItem) {
-            ul.appendChild(nestedItem);
-          });
-
-          item.appendChild(ul);
-        }
-
-        return item;
-      });
-    },
-    initiateAction: function(action) {
-      console.log("Action: ", action);
+    insertEntity(action) {
       switch (action) {
         case "header":
           this.insertBefore("# ", 3);
@@ -275,7 +179,7 @@ export default {
       this.showHtml = false;
     },
     copyHtmlToClipboard() {
-      this.$copyText(this.raw).then(
+      this.$copyText(this.html).then(
         function(e) {
           alert("Copied HTML to clipboard");
         },
@@ -285,7 +189,7 @@ export default {
       );
     },
     copyMarkdownToClipboard() {
-      this.$copyText(this.editor.getValue()).then(
+      this.$copyText(this.markdown).then(
         function(e) {
           alert("Copied markdown to clipboard");
         },
@@ -296,197 +200,43 @@ export default {
     }
   },
 
+  computed: {
+    html: function() {
+      return beautify_html(`${this.model}`);
+    },
+    markdown: function() {
+      return this.editor.getValue();
+    }
+  },
   data() {
     return {
       model: "",
       dialog: false,
       notifications: false,
-      sound: true,
-      widgets: false,
       showHtml: false,
-      line: 0,
-      toolbar: [],
       footnote: 1,
-      editor: null,
-      tools: [
-        { name: "header", action: "header", className: "fa fa-heading" },
-        { name: "bold", action: "bold", className: "fa fa-bold" },
-        { name: "italicize", action: "italicize", className: "fa fa-italic" },
-        // { name: "blockquote", action: "blockquote", className: "fa fa-quote-left" },
-        { name: "link", action: "link", className: "fa fa-link" },
-        { name: "image", action: "image", className: "fa fa-image" },
-        {
-          name: "unorderedList",
-          action: "unorderedList",
-          className: "fa fa-list"
-        },
-        {
-          name: "orderedList",
-          action: "orderedList",
-          className: "fa fa-list-ol"
-        },
-        { name: "code", action: "code", className: "fa fa-terminal" },
-        { name: "hr", action: "hr", className: "fa fa-ellipsis-h" },
-
-        // { name: "spacer", action: "", className: "spacer" },
-        {
-          name: "footnote",
-          action: "footnote",
-          className: "fa fa-superscript"
-        },
-        { name: "table", action: "table", className: "fa fa-table" },
-        // {
-        //   name: "frontmatter",
-        //   action: "frontmatter",
-        //   className: "fa fa-database"
-        // },
-        {
-          name: "mdToClipboard",
-          action: "mdToClipboard",
-          className: "fa fa-clipboard"
-        }
-        // { name: "ref", action: "reference", className: "reference", text: 'ref', showName: true },
-      ],
-      renderTools: [
-        {
-          name: "showHtml",
-          action: "showHtml",
-          className: "fa fa-code showHtml",
-          id: "showHtml"
-        }
-      ]
+      editor: null
     };
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 @import url("../../node_modules/codemirror/lib/codemirror.css");
 @import url("../../node_modules/github-markdown-css/github-markdown.css");
 
-.markdown-container {
-  padding: 0 !important;
-  margin: 0 !important;
+.CodeMirror {
+  height: 100vh !important;
+  background: #fff;
 }
 
-.CodeMirror {
-  border: 1px solid #eee;
-  /* height: auto; */
-  height: 100vh;
-  font-size: 18px;
-  overflow-y: auto;
+.markdown-container {
 }
 
 .markdown-body {
   height: 100vh;
   background: #fff;
   overflow-y: auto;
-}
-
-/* Toolbar Theme */
-
-.icjia-toolbar,
-.icjia-renderbar {
-  background: #f5f5f5;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  display: block;
-  width: 100%;
-  margin-top: 0px;
-  margin-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  height: 50px;
-}
-
-/* First level */
-
-.icjia-toolbar li {
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-}
-
-.icjia-renderbar li {
-  display: block;
-  position: relative;
-  z-index: 1;
-}
-
-.icjia-toolbar li a,
-.icjia-renderbar li a {
-  background-color: #f5f5f5;
-  color: #888;
-  cursor: pointer;
-  display: block;
-  font-size: 16px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  transition: color 0.2s linear;
-  width: 36px;
-}
-
-.icjia-toolbar li.has-nested:after {
-  content: "\2304";
-  color: #888;
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  font-size: 11px;
-  transform: scale(1.3, 1);
-}
-
-.icjia-toolbar li:hover a,
-.icjia-toolbar li.has-nested:hover:after,
-.icjia-renderbar li:hover a,
-.icjia-renderbar li.has-nested:hover:after {
-  color: #000;
-}
-
-.icjia-toolbar li:hover ul,
-.icjia-renderbar li:hover ul {
-  display: block;
-}
-
-/* Second Level */
-
-.icjia-toolbar ul {
-  background: #e5e5e5;
-  display: none;
-  position: absolute;
-  top: 41px;
-  width: 150px;
-  z-index: 1000;
-}
-
-.icjia-toolbar ul li {
-  float: none;
-  width: 100%;
-}
-
-.icjia-toolbar ul li a {
-  background: transparent;
-  color: #888 !important;
-  font-family: "Helvetica Neue", sans-serif;
-  font-size: 12px;
-  height: auto;
-  line-height: normal;
-  padding: 0.25rem 0.75rem;
-  text-align: left;
-  width: auto;
-}
-
-.icjia-toolbar ul li:hover a {
-  color: black !important;
-}
-
-.icjia-renderbar li {
-  float: right !important;
-}
-
-.renderedText {
-  height: 100vh;
 }
 
 #showHtml {
@@ -507,12 +257,16 @@ code {
   box-shadow: none;
 }
 
-code.raw {
+code.html {
   font-size: 18px;
   background: #fff;
   margin-top: 50px;
   padding-left: 30px;
   padding-right: 30px;
   font-weight: 400;
+}
+
+.v-dialog {
+  margin-top: 54px;
 }
 </style>
