@@ -18,4 +18,7 @@ export default {
 </script>
 
 <style lang="scss">
+.theme--light.application {
+  background: #ccc;
+}
 </style>

@@ -223,7 +223,7 @@ export default {
 
 <style>
 @import url("../../node_modules/codemirror/lib/codemirror.css");
-@import url("../../node_modules/github-markdown-css/github-markdown.css");
+/* @import url("../../node_modules/github-markdown-css/github-markdown.css"); */
 
 .CodeMirror {
   height: 100vh !important;
@@ -258,12 +258,12 @@ code {
 }
 
 code.html {
-  font-size: 18px;
+  font-size: 14px;
   background: #fff;
-  margin-top: 50px;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-weight: 400;
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 10px;
+  font-weight: 700;
 }
 
 .v-dialog {
