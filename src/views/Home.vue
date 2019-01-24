@@ -22,12 +22,12 @@
         </v-card>
       </v-dialog>
       <nav-markdown></nav-markdown>
-      <div style="margin-top: 80px;">
+      <div style="margin-top: 75px;">
         <v-layout row wrap>
           <v-flex xs12 sm6>
-            <textarea id="editor"></textarea>
+            <textarea id="editor" style="margin-top: -5px;"></textarea>
           </v-flex>
-          <v-flex xs12 sm6 style="padding-top: 0px; padding-right: 0px; padding-left: 5px; ">
+          <v-flex xs12 sm6 style="margin-top: -0px; padding-right: 0px; padding-left: 5px; ">
             <div
               class="markdown-body"
               style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
@@ -134,6 +134,7 @@ export default {
           break;
         case "loremipsum":
           this.insert(`${config.templates.loremipsum}`);
+          // this.generateLoremIpsum();
           break;
         case "mdToClipboard":
           this.copyMarkdownToClipboard();
@@ -244,7 +245,8 @@ export default {
           );
         }
       );
-    }
+    },
+    generateLoremIpsum() {}
   },
 
   computed: {
@@ -257,15 +259,19 @@ export default {
     wordCount: function() {
       if (this.editor) {
         let wordCount = this.editor.getValue().split(" ").length - 1;
-        EventBus.$emit("updateWordCount", wordCount);
+        // EventBus.$emit("updateWordCount", wordCount);
         return wordCount;
       } else {
-        EventBus.$emit("updateWordCount", 0);
+        // EventBus.$emit("updateWordCount", 0);
         return 0;
       }
     }
   },
-
+  watch: {
+    wordCount() {
+      EventBus.$emit("updateWordCount", this.wordCount);
+    }
+  },
   data() {
     return {
       model: "",
@@ -273,7 +279,8 @@ export default {
       notifications: false,
       showHtml: false,
       footnote: 1,
-      editor: null
+      editor: null,
+      isHidden: true
     };
   }
 };

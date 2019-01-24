@@ -22,6 +22,7 @@ export default {
       this.snackbar = true;
     });
     EventBus.$on("updateWordCount", count => {
+      console.log("wordcount");
       this.wordCount = count;
     });
   },

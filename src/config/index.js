@@ -13,6 +13,16 @@ const config = {
 
     quotes: "“”‘’"
   },
+  loremIpsumOptions: {
+    sentencesPerParagraph: {
+      max: 8,
+      min: 4
+    },
+    wordsPerSentence: {
+      max: 16,
+      min: 4
+    }
+  },
   stylesheets: [
     { text: "Default", value: "default.css" },
     { text: "Github", value: "github.css" }
@@ -106,7 +116,8 @@ const config = {
 | col 2 is      | centered      |   $12 |
 | zebra stripes | are neat      |    $1 |\r\n
 `,
-    loremipsum: `\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nibh mauris, porta ut lobortis a, laoreet id diam. Quisque euismod accumsan tempus. Quisque imperdiet urna ex. Sed dignissim non dolor eu mattis. Ut sed justo eu ipsum venenatis sodales. Nulla a felis sit amet quam facilisis pellentesque et id ante. Nulla ut neque orci. Cras faucibus semper nulla, nec condimentum arcu tempor ac. Integer eget congue ante.\r\n`,
+    loremipsum: `
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nibh mauris, porta ut lobortis a, laoreet id diam. Quisque euismod accumsan tempus. Quisque imperdiet urna ex. Sed dignissim non dolor eu mattis. Ut sed justo eu ipsum venenatis sodales. Nulla a felis sit amet quam facilisis pellentesque et id ante. Nulla ut neque orci. Cras faucibus semper nulla, nec condimentum arcu tempor ac. Integer eget congue ante.\r\n`,
     welcome: `
 # H1 Header
 
