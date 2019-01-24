@@ -24,6 +24,7 @@
     "markdown-it-katex": "^2.0.3",
     "markdown-it-named-headers": "^0.0.4",
     "vue": "^2.5.21",
+    "vue-browser-detect-plugin": "^0.1.2",
     "vue-clipboard2": "^0.2.1",
     "vue-router": "^3.0.1",
     "vuetify": "^1.4.3",

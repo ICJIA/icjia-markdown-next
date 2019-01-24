@@ -11,6 +11,9 @@ Vue.config.productionTip = false;
 import VueClipboard from "vue-clipboard2";
 Vue.use(VueClipboard);
 
+import browserDetect from "vue-browser-detect-plugin";
+Vue.use(browserDetect);
+
 new Vue({
   router,
   store,

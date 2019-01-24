@@ -21,7 +21,25 @@
           </v-layout>
         </v-card>
       </v-dialog>
+
       <nav-markdown></nav-markdown>
+      <div
+        v-if="$browserDetect.isIE"
+        class="text-xs-center pt-5 pb-5"
+        style="background-color: red; margin-top: 140px;"
+      >
+        <h1 style="color: white">
+          Your browser is out of date.
+          <br>In order to use this application, please update to the latest
+          <br>
+          <a href="https://www.google.com/chrome/" class="browserDetect">Chrome</a>,
+          <a href="https://www.mozilla.org/en-US/firefox/new/" class="browserDetect">Firefox</a>, or
+          <a
+            href="https://www.microsoft.com/en-us/windows/microsoft-edge"
+            class="browserDetect"
+          >Microsoft Edge</a>.
+        </h1>
+      </div>
       <div style="margin-top: 75px;">
         <v-layout row wrap>
           <v-flex xs12 sm6>
@@ -337,5 +355,9 @@ code.html {
 
 .v-dialog {
   margin-top: 54px;
+}
+
+a.browserDetect {
+  color: #333 !important;
 }
 </style>
