@@ -3,6 +3,8 @@
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title>ICJIA Markdown Editor</v-toolbar-title>
+      <v-spacer></v-spacer>
+      Words: {{wordCount}}
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
@@ -23,7 +25,8 @@ export default {
   data() {
     return {
       snackbar: false,
-      msg: ""
+      msg: "",
+      wordCount: 0
     };
   }
 };

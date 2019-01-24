@@ -9,7 +9,7 @@
         <div v-for="tool in config.tools" :key="tool.action" class="hidden-sm-and-down">
           <v-tooltip bottom>
             <v-btn small icon slot="activator" @click.prevent="getEntity(tool.action)">
-              <v-icon size="16px">{{tool.icon}}</v-icon>
+              <v-icon size="20px">{{tool.icon}}</v-icon>
             </v-btn>
             <span>{{tool.tooltip}}</span>
           </v-tooltip>
@@ -22,7 +22,7 @@
             slot="activator"
             @click.prevent="getEntity('saveMarkdown')"
             style="font-size: 12px"
-          >Save MD
+          >Save
             <v-icon dark right style="font-size: 18px">save_alt</v-icon>
           </v-btn>
           <span>Save As Markdown</span>
@@ -110,5 +110,9 @@ export default {
 <style>
 .v-input {
   max-width: 175px;
+}
+
+.v-btn--icon.v-btn--small {
+  width: 20px !important;
 }
 </style>

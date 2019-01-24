@@ -66,6 +66,7 @@ export default {
     EventBus.$on("entityEvent", action => {
       this.insertEntity(action);
     });
+    this.setInitialText();
   },
   methods: {
     initializeEditor: function() {
@@ -84,6 +85,12 @@ export default {
         //let doc = cm.getDoc();
         //let cursor = doc.getCursor();
       });
+    },
+    setInitialText() {
+      this.editor.getDoc().setValue(config.templates.welcome);
+    },
+    clear() {
+      this.editor.getDoc().setValue("");
     },
     insertEntity(action) {
       switch (action) {
@@ -138,6 +145,9 @@ export default {
           break;
         case "saveMarkdown":
           this.saveMarkdown();
+          break;
+        case "clear":
+          this.clear();
           break;
         default:
           break;
@@ -253,7 +263,6 @@ export default {
 
 <style>
 @import url("../../node_modules/codemirror/lib/codemirror.css");
-/* @import url("../../node_modules/github-markdown-css/github-markdown.css"); */
 
 .CodeMirror {
   height: 100vh !important;
