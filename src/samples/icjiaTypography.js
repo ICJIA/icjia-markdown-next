@@ -29,7 +29,7 @@ const icjiaTypography = `
 </div>
 
 
-![Sample Chart](/sampleChart.png)
+<img src="/sampleChart.png" style="width: 100%"/>
 
 ---
 # Sample article title (#)
