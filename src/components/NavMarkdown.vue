@@ -6,7 +6,12 @@
         color="grey lighten-2"
         style="padding-top: 5px; z-index: 100; position: fixed; top: 50px;"
       >
-        <div v-for="tool in config.tools" :key="tool.action" class="hidden-sm-and-down">
+        <div
+          v-for="tool in config.tools"
+          :key="tool.action"
+          class="hidden-sm-and-down"
+          style="margin-left: -5px"
+        >
           <v-tooltip bottom>
             <v-btn small icon slot="activator" @click.prevent="getEntity(tool.action)">
               <v-icon size="20px">{{tool.icon}}</v-icon>
@@ -14,6 +19,7 @@
             <span>{{tool.tooltip}}</span>
           </v-tooltip>
         </div>
+
         <v-tooltip bottom>
           <v-btn
             small
@@ -21,16 +27,22 @@
             color="blue darken-4"
             slot="activator"
             @click.prevent="getEntity('saveMarkdown')"
-            style="font-size: 12px"
+            style="font-size: 10px; font-weight: 900"
           >Save
-            <v-icon dark right style="font-size: 18px">save_alt</v-icon>
+            <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
           </v-btn>
           <span>Save As Markdown</span>
         </v-tooltip>
 
         <v-dialog v-model="dialog" persistent max-width="290">
-          <v-btn small slot="activator" color="blue darken-4" dark>Load
-            <v-icon dark right style="font-size: 18px">cloud_upload</v-icon>
+          <v-btn
+            small
+            slot="activator"
+            color="blue darken-4"
+            dark
+            style="font-size: 10px; font-weight: 900"
+          >Load
+            <v-icon dark right style="font-size: 14px; font-weight: 900">cloud_upload</v-icon>
           </v-btn>
           <v-card class="text-xs-center">
             <v-card-title class="headline">Load Markdown File</v-card-title>
@@ -43,6 +55,26 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+
+        <v-tooltip bottom>
+          <v-menu
+            offset-y
+            nudge-left="100"
+            transition="slide-x-transition"
+            style="z-index: 150;"
+            slot="activator"
+          >
+            <v-btn icon slot="activator">
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile v-for="(sample, index) in samples" :key="index" class="sampleTitle">
+                <v-list-tile-title v-on:click="loadSample(sample.body)">{{sample.title}}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+          <span>Load markdown samples</span>
+        </v-tooltip>
       </v-toolbar>
     </v-flex>
     <v-flex xs6 class="hidden-sm-and-down">
@@ -65,9 +97,9 @@
             dark
             slot="activator"
             @click.prevent="getEntity('showHtml')"
-            style="font-size: 11px"
+            style="font-size: 10px; font-weight: 900"
           >Show HTML
-            <v-icon dark right style="font-size: 18px">code</v-icon>
+            <v-icon dark right style="font-size: 14px;font-weight: 900">code</v-icon>
           </v-btn>
           <span>Show HTML</span>
         </v-tooltip>
@@ -78,9 +110,9 @@
             dark
             slot="activator"
             @click.prevent="getEntity('saveHtml')"
-            style="font-size: 12px"
+            style="font-size: 10px; font-weight: 900"
           >Save HTML
-            <v-icon dark right style="font-size: 18px">save_alt</v-icon>
+            <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
           </v-btn>
           <span>Save As HTML</span>
         </v-tooltip>
@@ -98,6 +130,7 @@ function clearFileInput(ctrl) {
     ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
   }
 }
+import { samples } from "@/samples";
 import { EventBus } from "@/event-bus.js";
 import config from "@/config";
 export default {
@@ -120,14 +153,16 @@ export default {
       document.head.appendChild(file);
       this.currentStyleSheet = e;
     },
+    loadSample(markdown) {
+      EventBus.$emit("loadMarkdown", markdown);
+    },
     loadMarkdown() {
       let fileInput = document.getElementById("fileInput");
-      let markdownDiv = document.getElementById("markdown");
+      //let markdownDiv = document.getElementById("markdown");
       let file = fileInput.files[0];
       let fileTitle = file.name;
       fileTitle = fileTitle.replace(/\.[^/.]+$/, "");
 
-      console.log(fileTitle);
       let reader = new FileReader();
       //Filereader: https://developer.mozilla.org/en-US/docs/Web/API/FileReader
       reader.onload = function(e) {
@@ -144,6 +179,7 @@ export default {
       currentStyleSheet: null,
       select: { text: "Default", value: "default.css" },
       config,
+      samples,
       dialog: false
     };
   }
@@ -161,5 +197,10 @@ export default {
 
 .v-btn--icon.v-btn--small {
   width: 20px !important;
+}
+
+.sampleTitle:hover {
+  cursor: pointer;
+  color: blue;
 }
 </style>

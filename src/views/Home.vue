@@ -63,13 +63,15 @@ export default {
   mounted() {
     this.initializeEditor();
     this.initializeEditorEvents();
+    this.setInitialText();
+
     EventBus.$on("entityEvent", action => {
       this.insertEntity(action);
     });
     EventBus.$on("loadMarkdown", content => {
       this.editor.getDoc().setValue(content);
     });
-    this.setInitialText();
+
     EventBus.$emit("updateWordCount", this.wordCount);
   },
   methods: {
@@ -262,10 +264,8 @@ export default {
     wordCount: function() {
       if (this.editor) {
         let wordCount = this.editor.getValue().split(" ").length - 1;
-        // EventBus.$emit("updateWordCount", wordCount);
         return wordCount;
       } else {
-        // EventBus.$emit("updateWordCount", 0);
         return 0;
       }
     }
