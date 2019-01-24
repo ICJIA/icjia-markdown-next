@@ -57,12 +57,12 @@ const config = {
       icon: "format_list_bulleted",
       tooltip: "Bulleted List"
     },
-    {
-      name: "orderedList",
-      action: "orderedList",
-      icon: "format_list_numbered",
-      tooltip: "Numbered List"
-    },
+    // {
+    //   name: "orderedList",
+    //   action: "orderedList",
+    //   icon: "format_list_numbered",
+    //   tooltip: "Numbered List"
+    // },
 
     {
       name: "footnote",
