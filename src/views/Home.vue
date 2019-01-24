@@ -124,8 +124,8 @@ export default {
         case "table":
           this.insert(`${config.templates.table}`);
           break;
-        case "lorumipsum":
-          this.insert(`${config.templates.lorumipsum}`);
+        case "loremipsum":
+          this.insert(`${config.templates.loremipsum}`);
           break;
         case "mdToClipboard":
           this.copyMarkdownToClipboard();
@@ -135,6 +135,9 @@ export default {
           break;
         case "saveHtml":
           this.saveHtml();
+          break;
+        case "saveMarkdown":
+          this.saveMarkdown();
           break;
         default:
           break;
@@ -183,8 +186,24 @@ export default {
       this.showHtml = !this.showHtml;
     },
     saveHtml: function() {
-      let blob = new Blob([this.html], { type: "text/plain;charset=utf-8" });
-      FileSaver.saveAs(blob, "icjiaMarkdownToHtml.html");
+      try {
+        let blob = new Blob([this.html], { type: "text/plain;charset=utf-8" });
+        FileSaver.saveAs(blob, "icjiaMarkdownToHtml.html");
+        EventBus.$emit("displayStatus", "HTML successfully saved.");
+      } catch (e) {
+        EventBus.$emit("displayStatus", "ERROR: HTML not saved.");
+      }
+    },
+    saveMarkdown: function() {
+      try {
+        let blob = new Blob([this.markdown], {
+          type: "text/plain;charset=utf-8"
+        });
+        FileSaver.saveAs(blob, "icjiaMarkdown.md");
+        EventBus.$emit("displayStatus", "Markdown successfully saved.");
+      } catch (e) {
+        EventBus.$emit("displayStatus", "ERROR: Markdown not saved.");
+      }
     },
     closeDialog: function() {
       this.showHtml = false;
