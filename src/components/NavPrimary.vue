@@ -4,7 +4,7 @@
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title>ICJIA Markdown Editor</v-toolbar-title>
       <v-spacer></v-spacer>
-      Words: {{wordCount}}
+      <div class="wordCount">Word count: {{wordCount}}</div>
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
@@ -21,6 +21,9 @@ export default {
       this.msg = msg;
       this.snackbar = true;
     });
+    EventBus.$on("updateWordCount", count => {
+      this.wordCount = count;
+    });
   },
   data() {
     return {
@@ -33,4 +36,9 @@ export default {
 </script>
 
 <style scoped>
+.wordCount {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 12px;
+}
 </style>

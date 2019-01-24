@@ -32,6 +32,7 @@
               class="markdown-body"
               style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
             >
+              {{wordCount}}
               <div v-html="model"></div>
             </div>
           </v-flex>
@@ -67,6 +68,7 @@ export default {
       this.insertEntity(action);
     });
     this.setInitialText();
+    EventBus.$emit("updateWordCount", this.wordCount);
   },
   methods: {
     initializeEditor: function() {
@@ -221,20 +223,26 @@ export default {
     copyHtmlToClipboard() {
       this.$copyText(this.html).then(
         function(e) {
-          alert("Copied HTML to clipboard");
+          EventBus.$emit("displayStatus", "HTML copied to clipboard.");
         },
         function(e) {
-          alert("ERROR: Can not copy to clipboard");
+          EventBus.$emit(
+            "displayStatus",
+            "ERROR: HTML not copied to clipboard."
+          );
         }
       );
     },
     copyMarkdownToClipboard() {
       this.$copyText(this.markdown).then(
         function(e) {
-          alert("Copied markdown to clipboard");
+          EventBus.$emit("displayStatus", "Markdown copied to clipboard.");
         },
         function(e) {
-          alert("ERROR: Can not copy to clipboard");
+          EventBus.$emit(
+            "displayStatus",
+            "ERROR: Markdown not copied to clipboard."
+          );
         }
       );
     }
@@ -246,8 +254,19 @@ export default {
     },
     markdown: function() {
       return this.editor.getValue();
+    },
+    wordCount: function() {
+      if (this.editor) {
+        let wordCount = this.editor.getValue().split(" ").length;
+        EventBus.$emit("updateWordCount", wordCount);
+        return wordCount;
+      } else {
+        EventBus.$emit("updateWordCount", 0);
+        return 0;
+      }
     }
   },
+
   data() {
     return {
       model: "",
