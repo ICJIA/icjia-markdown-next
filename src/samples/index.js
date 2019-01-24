@@ -23,12 +23,17 @@ const samples = [
     selectName: "What is Markdown?"
   },
   {
+    title: "ICJIA Typography",
+    body: icjiaTypography,
+    selectName: "ICJIA Style Guide"
+  },
+  {
     title: "Article Sample",
     body: article01,
     selectName: "Article 01"
   },
   {
-    title: "Boilerplate 01",
+    title: "Privacy Policy Sample",
     body: boilerplate01,
     selectName: "Privacy 01"
   },
@@ -38,12 +43,12 @@ const samples = [
   //   selectName: "Privacy 02"
   // },
   {
-    title: "Boilerplate 03",
+    title: "Markdown kitchen sink",
     body: boilerplate03,
     selectName: "Getting Started"
   },
   {
-    title: "Boilerplate 04",
+    title: "Footnotes",
     body: boilerplate04,
     selectName: "Footnotes"
   },
@@ -59,9 +64,9 @@ const samples = [
     selectName: "Tables"
   },
   // {
-  //   title: "Math",
+  //   title: "Math is fun",
   //   body: math,
-  //   selectName: "Math (using KaTeX)"
+  //   selectName: "Math is fun"
   // },
   {
     title: "GitHub Readme",
@@ -80,7 +85,7 @@ const samples = [
   //   selectName: "Return to page top"
   // },
   {
-    title: "Mixed",
+    title: "Mixed HTML and Markdown",
     body: mixed,
     selectName: "Mixed HTML and Markdown"
   },
@@ -88,11 +93,6 @@ const samples = [
     title: "Expandable details",
     body: expandable,
     selectName: "Expandable details"
-  },
-  {
-    title: "ICJIA Typography",
-    body: icjiaTypography,
-    selectName: "ICJIA Style Guide"
   }
 ];
 
