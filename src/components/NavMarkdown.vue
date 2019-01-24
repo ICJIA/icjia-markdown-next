@@ -27,6 +27,22 @@
           </v-btn>
           <span>Save As Markdown</span>
         </v-tooltip>
+
+        <v-dialog v-model="dialog" persistent max-width="290">
+          <v-btn small slot="activator" color="blue darken-4" dark>Load
+            <v-icon dark right style="font-size: 18px">cloud_upload</v-icon>
+          </v-btn>
+          <v-card class="text-xs-center">
+            <v-card-title class="headline">Load Markdown File</v-card-title>
+            <v-card-text>Load a previously saved .md file</v-card-text>
+            <input type="file" class="custom-file-input" id="fileInput">
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" flat @click="dialog=false">Cancel</v-btn>
+              <v-btn color="green darken-1" flat @click="loadMarkdown">Load file</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </v-flex>
     <v-flex xs6 class="hidden-sm-and-down">
@@ -95,13 +111,34 @@ export default {
       file.href = `/css/${e}`;
       document.head.appendChild(file);
       this.currentStyleSheet = e;
+    },
+    loadMarkdown() {
+      let fileInput = document.getElementById("fileInput");
+      let markdownDiv = document.getElementById("markdown");
+      let file = fileInput.files[0];
+      let fileTitle = file.name;
+      fileTitle = fileTitle.replace(/\.[^/.]+$/, "");
+      console.log(fileTitle);
+      let reader = new FileReader();
+      //Filereader: https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+      reader.onload = function(e) {
+        EventBus.$emit("loadMarkdown", reader.result);
+        console.log("File loaded:", reader.result);
+      };
+      reader.readAsText(file);
+      this.dialog = false;
     }
   },
   data() {
     return {
       currentStyleSheet: null,
       select: { text: "Default", value: "default.css" },
-      config
+      config,
+      dialog: false
+    };
+  }
+};
+</script>
     };
   }
 };

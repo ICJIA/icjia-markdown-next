@@ -66,6 +66,9 @@ export default {
     EventBus.$on("entityEvent", action => {
       this.insertEntity(action);
     });
+    EventBus.$on("loadMarkdown", content => {
+      this.editor.getDoc().setValue(content);
+    });
     this.setInitialText();
     EventBus.$emit("updateWordCount", this.wordCount);
   },

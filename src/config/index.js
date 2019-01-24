@@ -13,16 +13,7 @@ const config = {
 
     quotes: "“”‘’"
   },
-  loremIpsumOptions: {
-    sentencesPerParagraph: {
-      max: 8,
-      min: 4
-    },
-    wordsPerSentence: {
-      max: 16,
-      min: 4
-    }
-  },
+
   stylesheets: [
     { text: "Default", value: "default.css" },
     { text: "Github", value: "github.css" }
