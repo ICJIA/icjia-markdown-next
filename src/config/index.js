@@ -15,8 +15,8 @@ const config = {
   },
   stylesheets: [
     { text: "Default", value: "default.css" },
-    { text: "Github", value: "github.css" },
-    { text: "ICJIA", value: "icjia.css" }
+    { text: "Github", value: "github.css" }
+    // { text: "ICJIA", value: "icjia.css" }
   ],
 
   tools: [

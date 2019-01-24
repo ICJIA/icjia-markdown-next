@@ -32,7 +32,6 @@
               class="markdown-body"
               style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
             >
-              {{wordCount}}
               <div v-html="model"></div>
             </div>
           </v-flex>
@@ -257,7 +256,7 @@ export default {
     },
     wordCount: function() {
       if (this.editor) {
-        let wordCount = this.editor.getValue().split(" ").length;
+        let wordCount = this.editor.getValue().split(" ").length - 1;
         EventBus.$emit("updateWordCount", wordCount);
         return wordCount;
       } else {

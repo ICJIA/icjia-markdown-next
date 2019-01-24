@@ -4,7 +4,7 @@
       <v-toolbar
         flat
         color="grey lighten-2"
-        style="padding-top: 5px; z-index: 100; position: fixed; top: 50px;"
+        style="padding-top: 5px; z-index: 100; position: fixed; top: 48px;"
       >
         <div v-for="tool in config.tools" :key="tool.action" class="hidden-sm-and-down">
           <v-tooltip bottom>
