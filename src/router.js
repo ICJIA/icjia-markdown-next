@@ -12,13 +12,24 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
-    }
+    },
     // {
     //   path: "/sandbox",
     //   name: "sandbox",
 
     //   component: () =>
     //     import(/* webpackChunkName: "about" */ "./views/Sandbox.vue")
-    // }
+    // },
+    {
+      path: "/404",
+      name: "error",
+      component: () =>
+        import(/* webpackChunkName: "error" */ "./views/404.vue"),
+      meta: {}
+    },
+    {
+      path: "*",
+      redirect: { name: "error" }
+    }
   ]
 });

@@ -8,11 +8,11 @@
       <v-tooltip bottom open-delay="400">
         <v-btn
           slot="activator"
-          color="grey darken-1"
+          color="white"
           style="font-size: 10px"
-          dark
+          flat
           small
-          href="https://github.com/ICJIA/icjia-calendar/blob/master/CHANGELOG.md"
+          href="https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md"
           target="_blank"
         >
           <v-icon size="10px">fab fa-github</v-icon>
