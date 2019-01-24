@@ -45,6 +45,7 @@
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
 import { EventBus } from "@/event-bus.js";
+const FileSaver = require("file-saver");
 
 /* Thanks to: https://github.com/musicbed/mirrormark/blob/master/src/js/mirrormark.js */
 const beautify_html = require("js-beautify").html;
@@ -132,9 +133,9 @@ export default {
         case "showHtml":
           this.toggleHtml();
           break;
-        // case 'reference':
-        //   this.insertBefore('\r\n[^1]: ')
-        //   break;
+        case "saveHtml":
+          this.saveHtml();
+          break;
         default:
           break;
       }
@@ -180,6 +181,10 @@ export default {
     },
     toggleHtml: function() {
       this.showHtml = !this.showHtml;
+    },
+    saveHtml: function() {
+      let blob = new Blob([this.html], { type: "text/plain;charset=utf-8" });
+      FileSaver.saveAs(blob, "icjiaMarkdownToHtml.html");
     },
     closeDialog: function() {
       this.showHtml = false;

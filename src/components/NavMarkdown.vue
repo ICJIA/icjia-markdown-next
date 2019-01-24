@@ -22,7 +22,7 @@
           v-model="select"
           @change="loadStyleSheet"
           color="indigo"
-        ></v-select>&nbsp;&nbsp;&nbsp;
+        ></v-select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- <div v-for="tool in renderTools" :key="tool.action">
           <v-tooltip bottom>
             <v-btn icon slot="activator" @click.prevent="getEntity(tool.action)">
@@ -39,10 +39,25 @@
             dark
             slot="activator"
             @click.prevent="getEntity('showHtml')"
+            style="font-size: 12px"
           >Show HTML
-            <v-icon dark right>code</v-icon>
+            <v-icon dark right style="font-size: 18px">code</v-icon>
           </v-btn>
           <span>Show HTML</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn
+            flat
+            small
+            color="blue darken-4"
+            dark
+            slot="activator"
+            @click.prevent="getEntity('saveHtml')"
+            style="font-size: 12px"
+          >Save As HTML
+            <v-icon dark right style="font-size: 18px">save_alt</v-icon>
+          </v-btn>
+          <span>Save As HTML</span>
         </v-tooltip>
       </v-toolbar>
     </v-flex>
@@ -57,7 +72,6 @@ export default {
   },
   methods: {
     getEntity(action) {
-      console.log(action);
       EventBus.$emit("entityEvent", action);
     },
     loadStyleSheet(e) {
@@ -157,6 +171,12 @@ export default {
           action: "showHtml",
           icon: "code",
           tooltip: "Show HTML"
+        },
+        {
+          name: "saveHtml",
+          action: "saveHtml",
+          icon: "save_alt",
+          tooltip: "Save HTML"
         }
       ]
     };
@@ -166,6 +186,6 @@ export default {
 
 <style>
 .v-input {
-  max-width: 250px;
+  max-width: 175px;
 }
 </style>
