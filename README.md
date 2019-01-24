@@ -1,6 +1,6 @@
 # icjia-markdown-next
 
-> Simple Markdown editor with Vuetify and Markdown-It
+> Simple Markdown editor with [Vuetify](https://vuetifyjs.com/en/), [Markdown-It](https://github.com/markdown-it/markdown-it), and [CodeMirror](https://codemirror.net/)
 
 ## Project setup
 
