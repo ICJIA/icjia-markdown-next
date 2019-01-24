@@ -1,6 +1,6 @@
 {
   "name": "icjia-markdown-next",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
+  "license": "MIT",
+  "repository": "https://github.com/ICJIA/icjia-markdown-next",
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.1",
     "codemirror": "^5.43.0",

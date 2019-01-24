@@ -90,6 +90,14 @@
 </template>
 
 <script>
+function clearFileInput(ctrl) {
+  try {
+    ctrl.value = null;
+  } catch (ex) {}
+  if (ctrl.value) {
+    ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
+  }
+}
 import { EventBus } from "@/event-bus.js";
 import config from "@/config";
 export default {
@@ -118,15 +126,17 @@ export default {
       let file = fileInput.files[0];
       let fileTitle = file.name;
       fileTitle = fileTitle.replace(/\.[^/.]+$/, "");
+
       console.log(fileTitle);
       let reader = new FileReader();
       //Filereader: https://developer.mozilla.org/en-US/docs/Web/API/FileReader
       reader.onload = function(e) {
         EventBus.$emit("loadMarkdown", reader.result);
-        console.log("File loaded:", reader.result);
+        EventBus.$emit("displayStatus", "File loaded.");
       };
       reader.readAsText(file);
       this.dialog = false;
+      clearFileInput(document.getElementById("fileInput"));
     }
   },
   data() {

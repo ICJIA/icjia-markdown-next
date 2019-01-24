@@ -4,7 +4,23 @@
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title>ICJIA Markdown Editor</v-toolbar-title>
       <v-spacer></v-spacer>
-      <div class="wordCount">Word count: {{wordCount}}</div>
+      <div class="wordCount">Word count: {{wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <v-tooltip bottom open-delay="400">
+        <v-btn
+          slot="activator"
+          color="grey darken-1"
+          style="font-size: 10px"
+          dark
+          small
+          href="https://github.com/ICJIA/icjia-calendar/blob/master/CHANGELOG.md"
+          target="_blank"
+        >
+          <v-icon size="10px">fab fa-github</v-icon>
+          &nbsp;
+          Version: {{info.version}}
+        </v-btn>
+        <span>Find me on Github</span>
+      </v-tooltip>
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
@@ -14,6 +30,7 @@
 </template>
 
 <script>
+const info = require("../../package.json");
 import { EventBus } from "@/event-bus.js";
 export default {
   mounted() {
@@ -30,7 +47,8 @@ export default {
     return {
       snackbar: false,
       msg: "",
-      wordCount: 0
+      wordCount: 0,
+      info
     };
   }
 };
