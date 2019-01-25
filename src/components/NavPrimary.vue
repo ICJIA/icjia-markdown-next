@@ -2,20 +2,47 @@
   <div>
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-      <v-toolbar-title>ICJIA Markdown Editor</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" class="navTitle">ICJIA Markdown Editor</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div class="wordCount">Word count: {{wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <!-- <div class="wordCount">Word count: {{wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;</div> -->
+      <v-tooltip bottom>
+        <v-dialog v-model="statistics" persistent max-width="290" slot="activator">
+          <v-btn
+            slot="activator"
+            color="white"
+            style="font-size: 12px; font-weight: 900;"
+            flat
+            small
+          >
+            <v-icon size="28px">insert_chart</v-icon>
+            &nbsp;
+            Word count: {{wordCount}}
+          </v-btn>
+          <v-card>
+            <v-card-title class="headline">Text Statistics</v-card-title>
+            <v-card-text>Text statistics here</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="green darken-1" flat @click="statistics = false">CLOSE</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <span>Show Text Statistics</span>
+      </v-tooltip>
+
       <v-tooltip bottom open-delay="400">
         <v-btn
           slot="activator"
-          color="white"
-          style="font-size: 10px"
+          style="font-size: 12px; color: #ccc;"
           flat
           small
           href="https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md"
           target="_blank"
         >
-          <v-icon size="10px">fab fa-github</v-icon>
+          <v-icon size="16px">fab fa-github</v-icon>
           &nbsp;
           Version: {{info.version}}
         </v-btn>
@@ -47,13 +74,23 @@ export default {
       snackbar: false,
       msg: "",
       wordCount: 0,
-      info
+      info,
+      statistics: false
     };
   }
 };
 </script>
 
 <style scoped>
+a.navTitle {
+  color: #fff;
+  text-decoration: none;
+}
+
+a.navTitle:hover {
+  color: #ddd;
+  cursor: pointer;
+}
 .wordCount {
   font-weight: 900;
   text-transform: uppercase;
