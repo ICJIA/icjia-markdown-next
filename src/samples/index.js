@@ -6,7 +6,7 @@ import { boilerplate03 } from "./boilerplate03";
 import { boilerplate04 } from "./boilerplate04";
 
 // import { fontawesome } from "./fontawesome";
-import { tables } from "./tables";
+import { table } from "./table";
 // import { math } from "./math";
 import { readme } from "./readme";
 
@@ -20,7 +20,7 @@ const samples = [
   {
     title: "Welcome",
     body: welcome,
-    selectName: "What is Markdown?"
+    selectName: "Welcome"
   },
   {
     title: "ICJIA Typography",
@@ -59,9 +59,9 @@ const samples = [
   //   selectName: "Fontawesome icons"
   // },
   {
-    title: "Tables",
-    body: tables,
-    selectName: "Tables"
+    title: "Table",
+    body: table,
+    selectName: "Table"
   },
   // {
   //   title: "Math is fun",

@@ -18,6 +18,15 @@ const config = {
     { text: "Github", value: "github.css" }
     // { text: "ICJIA", value: "icjia.css" }
   ],
+  loremIpsum: {
+    count: 10, // Number of words, sentences, or paragraphs to generate.
+    units: "sentences", // Generate words, sentences, or paragraphs.
+    sentenceLowerBound: 5, // Minimum words per sentence.
+    sentenceUpperBound: 15, // Maximum words per sentence.
+    paragraphLowerBound: 3, // Minimum sentences per paragraph.
+    paragraphUpperBound: 7, // Maximum sentences per paragraph.
+    format: "plain"
+  },
 
   tools: [
     { name: "header", action: "header", icon: "title", tooltip: "Header" },
@@ -70,7 +79,7 @@ const config = {
       name: "loremipsum",
       action: "loremipsum",
       icon: "texture",
-      tooltip: "Lorem Ipsum paragraph"
+      tooltip: "Lorem Ipsum chunk"
     },
     {
       name: "mdToClipboard",
@@ -84,43 +93,7 @@ const config = {
       icon: "clear",
       tooltip: "Clear all"
     }
-  ],
-
-  templates: {
-    table: `\r\n| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |\r\n
-`,
-    loremipsum: `
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nibh mauris, porta ut lobortis a, laoreet id diam. Quisque euismod accumsan tempus. Quisque imperdiet urna ex. Sed dignissim non dolor eu mattis. Ut sed justo eu ipsum venenatis sodales. Nulla a felis sit amet quam facilisis pellentesque et id ante. Nulla ut neque orci. Cras faucibus semper nulla, nec condimentum arcu tempor ac. Integer eget congue ante.\r\n`,
-    welcome: `
-# H1 Header
-
-Paragraphs are separated by a blank line.
-
-2nd paragraph. *Italic*, **bold**, and \`monospace\`. 
-
-## H2 Header
-
-### H3 Header
-
-Itemized lists look like:
-
-* this one
-* that one
-* the other one
-    * indented four spaces
-# Footnotes
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget turpis nec justo volutpat efficitur. Sed ac sapien in magna faucibus faucibus eu sed nisl. Aenean non tristique odio, eu condimentum nisl. Suspendisse porttitor ante id lectus pharetra, id pretium odio lacinia. Vestibulum auctor volutpat pharetra. Nam rhoncus dapibus enim eget ornare.[^1] Phasellus convallis nisi a efficitur iaculis.[^2] Etiam tempus massa diam, sit amet lacinia metus suscipit sit amet. Nunc consequat ligula ac auctor mollis. Integer accumsan ornare neque, id dapibus elit. Ut accumsan lacinia metus nec luctus.[^3]
-[^1]: Here is the footnote.
-[^2]: Here is the second footnote.
-[^3]: Here's one with multiple blocks.
-    Subsequent paragraphs are indented to show that they
-belong to the previous footnote.
-`
-  }
+  ]
 };
 
 export default config;

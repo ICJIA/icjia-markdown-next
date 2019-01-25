@@ -60,11 +60,12 @@
 </template>
 
 <script>
+import { samples } from "@/samples";
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
 import { EventBus } from "@/event-bus.js";
-const FileSaver = require("file-saver");
-
+let FileSaver = require("file-saver");
+let loremIpsum = require("lorem-ipsum");
 /* Thanks to: https://github.com/musicbed/mirrormark/blob/master/src/js/mirrormark.js */
 const beautify_html = require("js-beautify").html;
 let codeMirror = require("codemirror");
@@ -112,7 +113,13 @@ export default {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
       } else {
-        this.editor.getDoc().setValue(config.templates.welcome);
+        let welcome = samples.filter(s => {
+          if (s.title === "Welcome") {
+            return s;
+          }
+        });
+
+        this.editor.getDoc().setValue(welcome[0].body);
       }
     },
     initializeComponentEventListeners() {
@@ -170,11 +177,10 @@ export default {
           this.footnote++;
           break;
         case "table":
-          this.insert(`${config.templates.table}`);
+          this.insert(this.getTableEntity());
           break;
         case "loremipsum":
-          this.insert(`${config.templates.loremipsum}`);
-          // this.generateLoremIpsum();
+          this.insert(this.getLoremIpsumEntity());
           break;
         case "mdToClipboard":
           this.copyMarkdownToClipboard();
@@ -286,7 +292,18 @@ export default {
         }
       );
     },
-    generateLoremIpsum() {}
+    getLoremIpsumEntity() {
+      return loremIpsum(this.config.loremIpsum) + " ";
+    },
+    getTableEntity() {
+      let table = samples.filter(s => {
+        if (s.title === "Table") {
+          return s;
+        }
+      });
+
+      return table[0].body;
+    }
   },
 
   computed: {
@@ -318,7 +335,8 @@ export default {
       showHtml: false,
       footnote: 1,
       editor: null,
-      isHidden: true
+      isHidden: true,
+      config
     };
   }
 };

@@ -16,6 +16,7 @@
     "file-saver": "^2.0.0",
     "github-markdown-css": "^2.10.0",
     "js-beautify": "^1.8.9",
+    "lorem-ipsum": "^1.0.6",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
     "markdown-it-attrs": "^2.3.2",
