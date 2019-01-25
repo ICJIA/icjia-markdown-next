@@ -84,13 +84,8 @@ export default {
     this.initializeEditor();
     this.initializeEditorEvents();
     this.setInitialText();
-
-    EventBus.$on("entityEvent", action => {
-      this.insertEntity(action);
-    });
-    EventBus.$on("loadMarkdown", content => {
-      this.editor.getDoc().setValue(content);
-    });
+    this.initializeComponentEventListeners();
+    this.initializeAutoSave();
 
     EventBus.$emit("updateWordCount", this.wordCount);
   },
@@ -113,7 +108,27 @@ export default {
       });
     },
     setInitialText() {
-      this.editor.getDoc().setValue(config.templates.welcome);
+      if (config.localStorageKey in localStorage) {
+        let markdown = localStorage.getItem(config.localStorageKey);
+        this.editor.getDoc().setValue(markdown);
+      } else {
+        this.editor.getDoc().setValue(config.templates.welcome);
+      }
+    },
+    initializeComponentEventListeners() {
+      EventBus.$on("entityEvent", action => {
+        this.insertEntity(action);
+      });
+      EventBus.$on("loadMarkdown", content => {
+        this.editor.getDoc().setValue(content);
+      });
+    },
+    initializeAutoSave() {
+      window.setInterval(() => {
+        let saveTime = new Date();
+        localStorage.setItem(config.localStorageKey, this.markdown);
+        console.log("Autosaved to local storage: ", saveTime);
+      }, config.autoSaveInterval);
     },
     clear() {
       this.editor.getDoc().setValue("");

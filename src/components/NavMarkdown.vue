@@ -185,10 +185,7 @@ export default {
   }
 };
 </script>
-    };
-  }
-};
-</script>
+
 
 <style>
 .v-input {

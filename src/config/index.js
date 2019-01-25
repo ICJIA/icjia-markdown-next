@@ -7,13 +7,12 @@ const config = {
     langPrefix: "language-", // CSS language prefix for fenced blocks. Can be
     // useful for external highlighters.
     linkify: true, // Autoconvert URL-like text to links
-
     // Enable some language-neutral replacement + quotes beautification
     typographer: false,
-
     quotes: "“”‘’"
   },
-
+  autoSaveInterval: 15000,
+  localStorageKey: "icjia-markdown-autosave",
   stylesheets: [
     { text: "Default", value: "default.css" },
     { text: "Github", value: "github.css" }
@@ -86,20 +85,7 @@ const config = {
       tooltip: "Clear all"
     }
   ],
-  //   renderTools: [
-  //     {
-  //       name: "showHtml",
-  //       action: "showHtml",
-  //       icon: "code",
-  //       tooltip: "Show HTML"
-  //     },
-  //     {
-  //       name: "saveHtml",
-  //       action: "saveHtml",
-  //       icon: "save_alt",
-  //       tooltip: "Save HTML"
-  //     }
-  //   ],
+
   templates: {
     table: `\r\n| Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
