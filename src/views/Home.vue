@@ -129,6 +129,9 @@ export default {
       EventBus.$on("loadMarkdown", content => {
         this.editor.getDoc().setValue(content);
       });
+      EventBus.$on("getMarkdown", () => {
+        EventBus.$emit("sendMarkdown", this.markdown);
+      });
     },
     initializeAutoSave() {
       window.setInterval(() => {

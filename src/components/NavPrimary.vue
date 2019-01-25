@@ -15,6 +15,7 @@
             style="font-size: 12px; font-weight: 900;"
             flat
             small
+            v-on:click="getMarkdown"
           >
             <v-icon size="28px">insert_chart</v-icon>
             &nbsp;
@@ -22,7 +23,7 @@
           </v-btn>
           <v-card>
             <v-card-title class="headline">Text Statistics</v-card-title>
-            <v-card-text>Text statistics here</v-card-text>
+            <v-card-text>{{markdown}}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
 
@@ -68,6 +69,14 @@ export default {
     EventBus.$on("updateWordCount", count => {
       this.wordCount = count;
     });
+    EventBus.$on("sendMarkdown", markdown => {
+      this.markdown = markdown;
+    });
+  },
+  methods: {
+    getMarkdown() {
+      EventBus.$emit("getMarkdown");
+    }
   },
   data() {
     return {
@@ -75,7 +84,8 @@ export default {
       msg: "",
       wordCount: 0,
       info,
-      statistics: false
+      statistics: false,
+      markdown: ""
     };
   }
 };
