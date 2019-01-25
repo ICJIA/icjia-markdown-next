@@ -23,7 +23,10 @@
           </v-btn>
           <v-card>
             <v-card-title class="headline">Text Statistics</v-card-title>
-            <v-card-text>{{markdown}}</v-card-text>
+            <v-card-text>
+              <h1>Text statistics here</h1>
+              {{markdown}}
+            </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
 
