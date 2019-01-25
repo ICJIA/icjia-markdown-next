@@ -31,30 +31,33 @@
           >Save
             <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
           </v-btn>
-          <span>Save As Markdown</span>
+          <span>Save as markdown</span>
         </v-tooltip>
 
-        <v-dialog v-model="dialog" persistent max-width="290">
-          <v-btn
-            small
-            slot="activator"
-            color="blue darken-4"
-            dark
-            style="font-size: 10px; font-weight: 900"
-          >Load
-            <v-icon dark right style="font-size: 14px; font-weight: 900">cloud_upload</v-icon>
-          </v-btn>
-          <v-card class="text-xs-center">
-            <v-card-title class="headline">Load Markdown File</v-card-title>
-            <v-card-text>Load a previously saved .md file</v-card-text>
-            <input type="file" class="custom-file-input" id="fileInput">
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat @click="dialog=false">Cancel</v-btn>
-              <v-btn color="green darken-1" flat @click="loadMarkdown">Load file</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-tooltip bottom>
+          <v-dialog v-model="dialog" persistent max-width="290" slot="activator">
+            <v-btn
+              small
+              slot="activator"
+              color="blue darken-4"
+              dark
+              style="font-size: 10px; font-weight: 900"
+            >Load
+              <v-icon dark right style="font-size: 14px; font-weight: 900">cloud_upload</v-icon>
+            </v-btn>
+            <v-card class="text-xs-center">
+              <v-card-title class="headline">Load Markdown File</v-card-title>
+              <v-card-text>Load a previously saved .md file</v-card-text>
+              <input type="file" class="custom-file-input" id="fileInput">
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" flat @click="dialog=false">Cancel</v-btn>
+                <v-btn color="green darken-1" flat @click="loadMarkdown">Load file</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <span>Load markdown (.md) file</span>
+        </v-tooltip>
 
         <v-tooltip bottom>
           <v-menu
