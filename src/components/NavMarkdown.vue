@@ -31,7 +31,7 @@
           >Save MD
             <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
           </v-btn>
-          <span>Save as markdown (.md) file</span>
+          <span>Save markdown (.md) file</span>
         </v-tooltip>
 
         <v-tooltip bottom>
