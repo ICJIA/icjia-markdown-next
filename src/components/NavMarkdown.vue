@@ -28,7 +28,7 @@
             slot="activator"
             @click.prevent="getEntity('saveMarkdown')"
             style="font-size: 10px; font-weight: 900"
-          >Save
+          >Save MD
             <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
           </v-btn>
           <span>Save as markdown (.md) file</span>
@@ -42,7 +42,7 @@
               color="blue darken-4"
               dark
               style="font-size: 10px; font-weight: 900"
-            >Load
+            >Load MD
               <v-icon dark right style="font-size: 14px; font-weight: 900">cloud_upload</v-icon>
             </v-btn>
             <v-card class="text-xs-center">

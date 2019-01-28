@@ -8,7 +8,7 @@
       <v-spacer></v-spacer>
       <!-- <div class="wordCount">Word count: {{wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;</div> -->
       <v-tooltip bottom>
-        <v-dialog v-model="statistics" persistent max-width="290" slot="activator">
+        <v-dialog v-model="statistics" max-width="500" slot="activator">
           <v-btn
             slot="activator"
             color="white"
@@ -25,7 +25,6 @@
             <v-card-title class="headline">Text Statistics</v-card-title>
             <v-card-text>
               <h1>Text statistics here</h1>
-              {{markdown}}
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>

@@ -129,7 +129,9 @@ export default {
       EventBus.$on("loadMarkdown", content => {
         this.editor.getDoc().setValue(content);
       });
+      // ping
       EventBus.$on("getMarkdown", () => {
+        // pong
         EventBus.$emit("sendMarkdown", this.markdown);
       });
     },
