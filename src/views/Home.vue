@@ -8,9 +8,14 @@
               <v-icon>close</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn icon @click="copyHtmlToClipboard" dark>
-              <v-icon>assignment</v-icon>
-            </v-btn>
+            <div class="text-xs-center d-flex align-center">
+              <v-tooltip bottom>
+                <v-btn icon @click="copyHtmlToClipboard" slot="activator" dark>
+                  <v-icon>assignment</v-icon>
+                </v-btn>
+                <span>Copy HTML to clipboard</span>
+              </v-tooltip>
+            </div>
           </v-toolbar>
 
           <v-layout row wrap>
@@ -283,6 +288,7 @@ export default {
           );
         }
       );
+      this.showHtml = false;
     },
     copyMarkdownToClipboard() {
       this.$copyText(this.markdown).then(
