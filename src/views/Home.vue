@@ -78,7 +78,8 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-footnote"))
   .use(require("markdown-it-named-headers"))
   .use(require("markdown-it-emoji"))
-  .use(require("markdown-it-attrs"));
+  .use(require("markdown-it-attrs"))
+  .use(require("markdown-it-container"));
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
 
