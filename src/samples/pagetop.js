@@ -1,5 +1,4 @@
-const pagetop =
-`<a id="page-top"></a>
+const pagetop = `<a id="page-top"></a>
 
 # Example of returning to page top
 
@@ -19,5 +18,5 @@ Nullam id urna et risus commodo sodales bibendum volutpat erat. Interdum et male
 
 [Back to Top](#page-top)
 
-`
-export {pagetop}
+`;
+export { pagetop };

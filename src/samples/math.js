@@ -1,4 +1,4 @@
-const math =`# Math (using KaTeX)
+const math = `# Math (using KaTeX)
 
 $\\sqrt{3x-1}+(1+x)^2$
 
@@ -10,5 +10,5 @@ $\\sqrt{3x-1}+(1+x)^2$
 
 [http://waylonflinn.github.io/markdown-it-katex/](http://waylonflinn.github.io/markdown-it-katex/)
 
-`
-export {math}
+`;
+export { math };

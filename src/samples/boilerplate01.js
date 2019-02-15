@@ -1,5 +1,4 @@
-const boilerplate01 =
-`# We respect your privacy​
+const boilerplate01 = `# We respect your privacy​
 
 This is the web site of ***AGENCY NAME***
 
@@ -32,5 +31,5 @@ We collect the domain name of users to our Web page, the e-mail addresses of tho
 
 The information we collect is used to improve our web content and services. If you want to receive e-mail from us in the future, please let us know by sending email to us at the above address or writing to us at the above address and telling us that you want to receive e-mail from our agency.
 
-Persons who supply us with their telephone numbers on-line may receive telephone contact from us with information regarding orders they have placed on-line.`
-export {boilerplate01}
+Persons who supply us with their telephone numbers on-line may receive telephone contact from us with information regarding orders they have placed on-line.`;
+export { boilerplate01 };

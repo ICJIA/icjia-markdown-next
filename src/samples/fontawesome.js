@@ -1,5 +1,4 @@
-const fontawesome =
-`# Fontawesome icons
+const fontawesome = `# Fontawesome icons
 
 Hello World! :fa-camera:
 
@@ -7,5 +6,5 @@ Hello World! :fa-camera:
 - [:fa-github: GitHub](https://github.com/)
 
 See: [http://fontawesome.io/](http://fontawesome.io/) for more icons.
-`
-export {fontawesome}
+`;
+export { fontawesome };

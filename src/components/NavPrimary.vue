@@ -8,7 +8,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;
       
 
-      <v-toolbar-title style="margin-top: -5px">
+      <v-toolbar-title style="margin-top: -5px" v-if="mode != 'standard'">
         <span class="mode">&nbsp;{{mode}} mode&nbsp;</span>
        
       </v-toolbar-title>
@@ -64,6 +64,42 @@
         </v-btn>
         <span>Find me on Github</span>
       </v-tooltip>
+
+
+       <v-tooltip bottom>
+          
+        <v-menu
+      transition="slide-y-transition"
+      bottom
+      slot="activator"
+    >
+     
+      <v-btn
+        slot="activator"
+        small
+            color="blue darken-4"
+            dark
+            style="font-size: 10px; font-weight: 900"
+      >
+        Mode: {{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
+      </v-btn>
+      <v-list>
+        <v-list-tile
+          v-for="(m, i) in modes"
+          :key="i"
+           @click="selectMode(m)"
+         >
+         
+          <v-list-tile-title>
+           
+            
+           
+            {{ m }} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+     <span>Switch Modes</span>
+        </v-tooltip>
      
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
@@ -75,10 +111,20 @@
 
 <script>
 const info = require("../../package.json");
-//import config from "@/config";
+import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 export default {
-  created() {},
+  created() {
+    this.modes = Object.keys(config.modes);
+    let modeParam = this.$route.params.modeParam;
+    let mode;
+    if (modeParam !== undefined && this.modes.includes(modeParam)) {
+      mode = modeParam;
+    } else {
+      mode = "standard";
+    }
+    this.mode = mode;
+  },
   mounted() {
     EventBus.$on("displayStatus", msg => {
       this.msg = msg;
@@ -99,14 +145,15 @@ export default {
     getMarkdown() {
       EventBus.$emit("getMarkdown");
     },
-    toggleModes() {
-      if (this.modeIndex + 1 >= this.modes.length) {
-        this.modeIndex = 0;
-      } else {
-        this.modeIndex = this.modeIndex + 1;
-      }
-
-      EventBus.$emit("setMode", this.modes[this.modeIndex]);
+    selectMode(mode) {
+      this.mode = mode;
+      EventBus.$emit("setMode", this.mode);
+    }
+  },
+  computed: {
+    getModeIcon() {
+      let icon = config.modes[this.mode]["icon"];
+      return icon;
     }
   },
   data() {

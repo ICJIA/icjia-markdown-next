@@ -133,7 +133,7 @@
         </v-tooltip>
         &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
        
-        <v-tooltip bottom>
+        <!-- <v-tooltip bottom>
           
         <v-menu
       transition="slide-y-transition"
@@ -166,7 +166,7 @@
       </v-list>
     </v-menu>
      <span>Switch Modes</span>
-        </v-tooltip>
+        </v-tooltip> -->
 
        
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -181,6 +181,7 @@ function clearFileInput(ctrl) {
   try {
     ctrl.value = null;
   } catch (e) {
+    // eslint-disable-next-line
     console.log(e);
   }
   if (ctrl.value) {
@@ -204,8 +205,6 @@ export default {
     }
     this.mode = mode;
     this.modeIndex = this.modes.findIndex(m => m === mode);
-    let test = config.modes[this.mode]["icon"];
-    console.log(test);
   },
   filters: {
     capitalize
@@ -213,6 +212,10 @@ export default {
   mounted() {
     this.loadStyleSheet("default.css");
     EventBus.$emit("setMode", this.mode);
+    EventBus.$on("setMode", mode => {
+      this.mode = mode;
+      //console.log(mode);
+    });
   },
   methods: {
     getEntity(action) {
@@ -241,6 +244,7 @@ export default {
       let fileInput = document.getElementById("fileInput");
       //let markdownDiv = document.getElementById("markdown");
       let file = fileInput.files[0];
+      // eslint-disable-next-line
       let fileTitle = file.name;
       fileTitle = fileTitle.replace(/\.[^/.]+$/, "");
 

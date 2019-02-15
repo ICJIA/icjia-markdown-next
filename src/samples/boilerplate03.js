@@ -1,5 +1,4 @@
-const boilerplate03 =
-`# H1 HEADER
+const boilerplate03 = `# H1 HEADER
 
 
 Paragraphs are separated by a blank line.
@@ -125,5 +124,5 @@ You can specify column alignment with one or two colons:
 | :------- | ----: | :---: |
 | Computer | $1600 |  5    |
 | Phone    | $12   |  12   |
-| Pipe     | $1    |  234  |`
-export {boilerplate03}
+| Pipe     | $1    |  234  |`;
+export { boilerplate03 };

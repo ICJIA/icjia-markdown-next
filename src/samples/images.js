@@ -1,5 +1,4 @@
-const images =
-`# Embedding Images
+const images = `# Embedding Images
 
 
 #### Cloning the repo to local machine:
@@ -20,6 +19,6 @@ const images =
 
 ## Screen capture
 - [Giphy](http://giphy.com/)
-`
+`;
 
-export {images}
+export { images };

@@ -1,5 +1,4 @@
-const readme =
-`# icjia-markdown
+const readme = `# icjia-markdown
 
 Markdown is a lightweight text format that allows writers to create documents, rich text, or HTML markup using any text editor. Markdown documents are easy to read, write, and convert into multiple formats.
 
@@ -61,5 +60,5 @@ https://markdown.icjia.cloud
 
 ## Direct deploy
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ICJIA/icjia-markdown)`
-export {readme}
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ICJIA/icjia-markdown)`;
+export { readme };

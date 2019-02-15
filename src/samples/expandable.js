@@ -1,5 +1,4 @@
-const expandable =
-`# Expandable details
+const expandable = `# Expandable details
 
 <p>
 <details><summary>React / Preact</summary><br>
@@ -41,6 +40,6 @@ Note: You don't need to install any dependencies, \`vue\` is already brought by 
 It's hard to upgrade your project if you're using a boilerplate since you might change the code to suit your needs. However you can easily upgrade your project to use latest version of Poi by simply updating the dependency.
 
 You can also get rid of boilerplate code in this way.
-</details>`
+</details>`;
 
-export {expandable}
+export { expandable };
