@@ -6,7 +6,7 @@
         color="grey lighten-2"
         style="padding-top: 5px; z-index: 100; position: fixed; top: 50px; margin-left: -10px"
       >
-      <span class="mode">{{this.mode}}</span>&nbsp;&nbsp;&nbsp;
+      
 
 
 
@@ -15,7 +15,7 @@
           v-for="tool in config.modes[this.mode].tools"
           :key="tool.action"
           class="hidden-sm-and-down"
-          style="margin-left: -5px"
+          style="margin-left: -7px"
         >
           <v-tooltip bottom>
             <v-btn small icon slot="activator" @click.prevent="getEntity(tool.action)">
@@ -67,6 +67,7 @@
           <span>Load markdown (.md) file</span>
         </v-tooltip>
 
+        
         <v-tooltip bottom>
           <v-menu
             offset-y
@@ -75,7 +76,7 @@
             style="z-index: 150;"
             slot="activator"
           >
-            <v-btn icon slot="activator">
+            <v-btn icon slot="activator" style="margin-left: -5px">
               <v-icon>more_vert</v-icon>
             </v-btn>
            
@@ -130,6 +131,49 @@
           </v-btn>
           <span>Save As HTML</span>
         </v-tooltip>
+        <!-- <v-tooltip bottom>
+          <v-btn
+            small
+            color="indigo darken-4"
+            dark
+            slot="activator"
+            @click.prevent="selectMode"
+            style="font-size: 10px; font-weight: 900"
+          >{{mode}}
+           
+          </v-btn>
+          <span>Switch Modes</span>
+        </v-tooltip> -->
+        <v-menu
+      transition="slide-y-transition"
+      bottom
+    >
+      <v-btn
+        slot="activator"
+        small
+            color="blue darken-4"
+            dark
+            style="font-size: 10px; font-weight: 900"
+      >
+        Mode: {{mode}}
+      </v-btn>
+      <v-list>
+        <v-list-tile
+          v-for="(m, i) in modes"
+          :key="i"
+           @click="selectMode(m)"
+         >
+         
+          <v-list-tile-title>
+           
+            
+           
+            {{ m }} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+
+       
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
       </v-toolbar>
@@ -153,11 +197,16 @@ import { capitalize } from "@/filters";
 import snippets from "@/snippets";
 export default {
   created() {
-    EventBus.$on("setMode", mode => {
-      this.mode = mode;
-      console.log(this.mode);
-      console.log(snippets[this.mode]);
-    });
+    this.modes = Object.keys(config.modes);
+    let modeParam = this.$route.params.modeParam;
+    let mode;
+    if (modeParam !== undefined && this.modes.includes(modeParam)) {
+      mode = modeParam;
+    } else {
+      mode = "standard";
+    }
+    this.mode = mode;
+    this.modeIndex = this.modes.findIndex(m => m === mode);
   },
   filters: {
     capitalize
@@ -204,19 +253,24 @@ export default {
       reader.readAsText(file);
       this.dialog = false;
       clearFileInput(document.getElementById("fileInput"));
+    },
+    selectMode(mode) {
+      this.mode = mode;
     }
   },
+  computed: {},
   data() {
     return {
       currentStyleSheet: null,
       select: { text: "Default", value: "default.css" },
-      selectMode: { text: "Standard", value: "standard" },
       config,
       samples,
       dialog: false,
-      mode: "standard",
       capitalize,
-      snippets
+      snippets,
+      modes: [],
+      mode: "",
+      modeIndex: null
     };
   }
 };

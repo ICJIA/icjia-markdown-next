@@ -38,7 +38,7 @@
 
      
 
-      <!-- <v-tooltip bottom open-delay="400">
+      <v-tooltip bottom open-delay="400">
         <v-btn
           slot="activator"
           style="font-size: 12px; color: #ccc;"
@@ -52,22 +52,8 @@
           Version: {{info.version}}
         </v-btn>
         <span>Find me on Github</span>
-      </v-tooltip> -->
-      <v-tooltip bottom open-delay="400">
-        <v-btn
-          slot="activator"
-          v-on:click="toggleModes"
-          flat
-          small
-          style="width: 150px;"
-          
-        >
-          <v-icon size="28px">text_format</v-icon>
-          &nbsp;
-          Mode:&nbsp;<span style="font-weight: 900; color: #A9B6FA">{{modes[this.modeIndex]}}</span>
-        </v-btn>
-        <span>Toggle Authoring Modes</span>
       </v-tooltip>
+      
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
@@ -93,9 +79,6 @@ export default {
     EventBus.$on("sendMarkdown", markdown => {
       this.markdown = markdown;
     });
-    this.modes = Object.keys(config.modes);
-
-    EventBus.$emit("setMode", "standard");
   },
   methods: {
     getMarkdown() {
