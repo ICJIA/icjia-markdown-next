@@ -3,7 +3,14 @@
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title>
-        <router-link to="/" class="navTitle">ICJIA Markdown Editor</router-link>
+        <router-link to="/" class="navTitle">ICJIA MARKDOWN EDITOR</router-link>
+      </v-toolbar-title>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      
+
+      <v-toolbar-title style="margin-top: -5px">
+        <span class="mode">&nbsp;{{mode}} mode&nbsp;</span>
+       
       </v-toolbar-title>
       <v-spacer></v-spacer>
       
@@ -38,13 +45,11 @@
       </v-tooltip>
 
        
-      <span class="mode">
-       
-      {{mode}} mode</span>
+     
 
      
 
-      <!-- <v-tooltip bottom open-delay="400">
+      <v-tooltip bottom open-delay="400">
         <v-btn
           slot="activator"
           style="font-size: 12px; color: #ccc;"
@@ -58,7 +63,7 @@
           Version: {{info.version}}
         </v-btn>
         <span>Find me on Github</span>
-      </v-tooltip> -->
+      </v-tooltip>
      
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
@@ -70,7 +75,7 @@
 
 <script>
 const info = require("../../package.json");
-import config from "@/config";
+//import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 export default {
   created() {},
@@ -87,7 +92,7 @@ export default {
     });
     EventBus.$on("setMode", mode => {
       this.mode = mode;
-      console.log(mode);
+      //console.log(mode);
     });
   },
   methods: {
@@ -144,5 +149,11 @@ a.navTitle:hover {
   font-size: 12px;
   width: 100px;
   text-align: center;
+  padding-bottom: -10px;
+  border: 1px solid #ccc;
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 </style>

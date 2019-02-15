@@ -148,7 +148,7 @@
             dark
             style="font-size: 10px; font-weight: 900"
       >
-        Mode: {{mode}}
+        Mode: {{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
       </v-btn>
       <v-list>
         <v-list-tile
@@ -180,7 +180,9 @@
 function clearFileInput(ctrl) {
   try {
     ctrl.value = null;
-  } catch (ex) {}
+  } catch (e) {
+    console.log(e);
+  }
   if (ctrl.value) {
     ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
   }
@@ -202,6 +204,8 @@ export default {
     }
     this.mode = mode;
     this.modeIndex = this.modes.findIndex(m => m === mode);
+    let test = config.modes[this.mode]["icon"];
+    console.log(test);
   },
   filters: {
     capitalize
@@ -255,7 +259,12 @@ export default {
       EventBus.$emit("setMode", this.mode);
     }
   },
-  computed: {},
+  computed: {
+    getModeIcon() {
+      let icon = config.modes[this.mode]["icon"];
+      return icon;
+    }
+  },
   data() {
     return {
       currentStyleSheet: null,

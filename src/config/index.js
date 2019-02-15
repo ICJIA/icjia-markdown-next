@@ -28,73 +28,6 @@ const config = {
     format: "plain"
   },
 
-  tools: [
-    { name: "header", action: "header", icon: "title", tooltip: "Header" },
-    { name: "bold", action: "bold", icon: "format_bold", tooltip: "Bold" },
-    {
-      name: "italicize",
-      action: "italicize",
-      icon: "format_italic",
-      tooltip: "Italicize"
-    },
-    {
-      name: "blockquote",
-      action: "blockquote",
-      icon: "format_quote",
-      tooltip: "Blockquote"
-    },
-    { name: "link", action: "link", icon: "link", tooltip: "Link" },
-    {
-      name: "image",
-      action: "image",
-      icon: "insert_photo",
-      tooltip: "Image"
-    },
-    {
-      name: "unorderedList",
-      action: "unorderedList",
-      icon: "format_list_bulleted",
-      tooltip: "Bulleted List"
-    },
-    // {
-    //   name: "orderedList",
-    //   action: "orderedList",
-    //   icon: "format_list_numbered",
-    //   tooltip: "Numbered List"
-    // },
-
-    {
-      name: "footnote",
-      action: "footnote",
-      icon: "short_text",
-      tooltip: "Footnote"
-    },
-    {
-      name: "table",
-      action: "table",
-      icon: "table_chart",
-      tooltip: "Table"
-    },
-    {
-      name: "loremipsum",
-      action: "loremipsum",
-      icon: "texture",
-      tooltip: "Lorem Ipsum chunk"
-    },
-    {
-      name: "mdToClipboard",
-      action: "mdToClipboard",
-      icon: "assignment",
-      tooltip: "Copy Markdown to clipboard"
-    }
-    // {
-    //   name: "clear",
-    //   action: "clear",
-    //   icon: "clear",
-    //   tooltip: "Clear all"
-    // }
-  ],
-
   modes: {
     standard: {
       tools: [
@@ -178,33 +111,80 @@ const config = {
         }
       ],
       stylesheets: [
-        { name: "standard", filename: "standard.css" },
-        { name: "github", filename: "github.css" }
+        { name: "Standard", filename: "standard.css" },
+        { name: "Github", filename: "github.css" }
       ],
-      modeColor: "green"
+      color: "green",
+      icon: "create"
     },
     research: {
       tools: [
+        { name: "header", action: "header", icon: "title", tooltip: "Header" },
+        { name: "bold", action: "bold", icon: "format_bold", tooltip: "Bold" },
         {
-          name: "header",
-          action: "header",
-          icon: "title",
-          tooltip: "Header",
-          display: "icon"
+          name: "italicize",
+          action: "italicize",
+          icon: "format_italic",
+          tooltip: "Italicize"
         },
         {
-          name: "bold",
-          action: "bold",
-          icon: "format_bold",
-          tooltip: "Bold",
-          display: "icon"
+          name: "blockquote",
+          action: "blockquote",
+          icon: "format_quote",
+          tooltip: "Blockquote"
+        },
+        { name: "link", action: "link", icon: "link", tooltip: "Link" },
+        {
+          name: "image",
+          action: "image",
+          icon: "insert_photo",
+          tooltip: "Image"
+        },
+        {
+          name: "unorderedList",
+          action: "unorderedList",
+          icon: "format_list_bulleted",
+          tooltip: "Bulleted List"
+        },
+        {
+          name: "orderedList",
+          action: "orderedList",
+          icon: "format_list_numbered",
+          tooltip: "Numbered List"
+        },
+
+        {
+          name: "footnote",
+          action: "footnote",
+          icon: "short_text",
+          tooltip: "Footnote"
+        },
+        {
+          name: "table",
+          action: "table",
+          icon: "table_chart",
+          tooltip: "Table"
+        },
+
+        {
+          name: "mdToClipboard",
+          action: "mdToClipboard",
+          icon: "assignment",
+          tooltip: "Copy Markdown to clipboard"
+        },
+        {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear all"
         }
       ],
       stylesheets: [
-        { name: "standard", filename: "standard.css" },
-        { name: "github", filename: "github.css" }
+        { name: "Research", filename: "research.css" },
+        { name: "Github", filename: "github.css" }
       ],
-      modeColor: "red"
+      color: "red",
+      icon: "insert_chart_outlined"
     }
   }
 };
