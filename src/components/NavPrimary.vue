@@ -6,6 +6,7 @@
         <router-link to="/" class="navTitle">ICJIA Markdown Editor</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      
       <!-- <div class="wordCount">Word count: {{wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;</div> -->
       <v-tooltip bottom>
         <v-dialog v-model="statistics" max-width="500" slot="activator">
@@ -36,9 +37,14 @@
         <span>Show Text Statistics</span>
       </v-tooltip>
 
+       
+      <span class="mode">
+       
+      {{mode}} mode</span>
+
      
 
-      <v-tooltip bottom open-delay="400">
+      <!-- <v-tooltip bottom open-delay="400">
         <v-btn
           slot="activator"
           style="font-size: 12px; color: #ccc;"
@@ -52,8 +58,8 @@
           Version: {{info.version}}
         </v-btn>
         <span>Find me on Github</span>
-      </v-tooltip>
-      
+      </v-tooltip> -->
+     
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
@@ -79,6 +85,10 @@ export default {
     EventBus.$on("sendMarkdown", markdown => {
       this.markdown = markdown;
     });
+    EventBus.$on("setMode", mode => {
+      this.mode = mode;
+      console.log(mode);
+    });
   },
   methods: {
     getMarkdown() {
@@ -98,12 +108,13 @@ export default {
     return {
       snackbar: false,
       msg: "",
-      mode: "standard",
+
       wordCount: 0,
       info,
       statistics: false,
       markdown: "",
       modes: [],
+      mode: "",
       modeIndex: 0
     };
   }
@@ -124,5 +135,14 @@ a.navTitle:hover {
   font-weight: 900;
   text-transform: uppercase;
   font-size: 12px;
+}
+
+.mode {
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #ccc;
+  font-size: 12px;
+  width: 100px;
+  text-align: center;
 }
 </style>

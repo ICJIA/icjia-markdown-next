@@ -131,23 +131,16 @@
           </v-btn>
           <span>Save As HTML</span>
         </v-tooltip>
-        <!-- <v-tooltip bottom>
-          <v-btn
-            small
-            color="indigo darken-4"
-            dark
-            slot="activator"
-            @click.prevent="selectMode"
-            style="font-size: 10px; font-weight: 900"
-          >{{mode}}
-           
-          </v-btn>
-          <span>Switch Modes</span>
-        </v-tooltip> -->
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+        <v-tooltip bottom>
+          
         <v-menu
       transition="slide-y-transition"
       bottom
+      slot="activator"
     >
+     
       <v-btn
         slot="activator"
         small
@@ -172,6 +165,8 @@
         </v-list-tile>
       </v-list>
     </v-menu>
+     <span>Switch Modes</span>
+        </v-tooltip>
 
        
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -213,6 +208,7 @@ export default {
   },
   mounted() {
     this.loadStyleSheet("default.css");
+    EventBus.$emit("setMode", this.mode);
   },
   methods: {
     getEntity(action) {
@@ -256,6 +252,7 @@ export default {
     },
     selectMode(mode) {
       this.mode = mode;
+      EventBus.$emit("setMode", this.mode);
     }
   },
   computed: {},
@@ -289,14 +286,5 @@ export default {
 .sampleTitle:hover {
   cursor: pointer;
   color: blue;
-}
-
-.mode {
-  text-transform: uppercase;
-  font-weight: 900;
-  color: #6c7ac7;
-  font-size: 10px;
-  width: 50px;
-  text-decoration: underline;
 }
 </style>
