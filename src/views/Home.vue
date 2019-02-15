@@ -140,6 +140,9 @@ export default {
         // pong
         EventBus.$emit("sendMarkdown", this.markdown);
       });
+      EventBus.$on("insertSnippet", snippet => {
+        this.insert("\n" + snippet + "\n");
+      });
     },
     initializeAutoSave() {
       window.setInterval(() => {

@@ -11,9 +11,9 @@
         <v-dialog v-model="statistics" max-width="500" slot="activator">
           <v-btn
             slot="activator"
-            color="white"
-            style="font-size: 12px; font-weight: 900;"
             flat
+            style="font-size: 12px; font-weight: 900;"
+            dark
             small
             v-on:click="getMarkdown"
           >
@@ -36,7 +36,9 @@
         <span>Show Text Statistics</span>
       </v-tooltip>
 
-      <v-tooltip bottom open-delay="400">
+     
+
+      <!-- <v-tooltip bottom open-delay="400">
         <v-btn
           slot="activator"
           style="font-size: 12px; color: #ccc;"
@@ -50,6 +52,21 @@
           Version: {{info.version}}
         </v-btn>
         <span>Find me on Github</span>
+      </v-tooltip> -->
+      <v-tooltip bottom open-delay="400">
+        <v-btn
+          slot="activator"
+          v-on:click="toggleModes"
+          flat
+          small
+          style="width: 150px;"
+          
+        >
+          <v-icon size="28px">text_format</v-icon>
+          &nbsp;
+          Mode:&nbsp;<span style="font-weight: 900; color: #A9B6FA">{{modes[this.modeIndex]}}</span>
+        </v-btn>
+        <span>Toggle Authoring Modes</span>
       </v-tooltip>
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
@@ -61,8 +78,10 @@
 
 <script>
 const info = require("../../package.json");
+import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 export default {
+  created() {},
   mounted() {
     EventBus.$on("displayStatus", msg => {
       this.msg = msg;
@@ -74,20 +93,35 @@ export default {
     EventBus.$on("sendMarkdown", markdown => {
       this.markdown = markdown;
     });
+    this.modes = Object.keys(config.modes);
+
+    EventBus.$emit("setMode", "standard");
   },
   methods: {
     getMarkdown() {
       EventBus.$emit("getMarkdown");
+    },
+    toggleModes() {
+      if (this.modeIndex + 1 >= this.modes.length) {
+        this.modeIndex = 0;
+      } else {
+        this.modeIndex = this.modeIndex + 1;
+      }
+
+      EventBus.$emit("setMode", this.modes[this.modeIndex]);
     }
   },
   data() {
     return {
       snackbar: false,
       msg: "",
+      mode: "standard",
       wordCount: 0,
       info,
       statistics: false,
-      markdown: ""
+      markdown: "",
+      modes: [],
+      modeIndex: 0
     };
   }
 };

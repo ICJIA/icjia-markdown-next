@@ -86,14 +86,127 @@ const config = {
       action: "mdToClipboard",
       icon: "assignment",
       tooltip: "Copy Markdown to clipboard"
-    },
-    {
-      name: "clear",
-      action: "clear",
-      icon: "clear",
-      tooltip: "Clear all"
     }
-  ]
+    // {
+    //   name: "clear",
+    //   action: "clear",
+    //   icon: "clear",
+    //   tooltip: "Clear all"
+    // }
+  ],
+
+  modes: {
+    standard: {
+      tools: [
+        {
+          name: "header",
+          action: "header",
+          icon: "title",
+          tooltip: "Header",
+          display: "icon"
+        },
+        {
+          name: "bold",
+          action: "bold",
+          icon: "format_bold",
+          tooltip: "Bold",
+          display: "icon"
+        },
+        {
+          name: "italicize",
+          action: "italicize",
+          icon: "format_italic",
+          tooltip: "Italicize",
+          display: "icon"
+        },
+        {
+          name: "blockquote",
+          action: "blockquote",
+          icon: "format_quote",
+          tooltip: "Blockquote",
+          display: "icon"
+        },
+        {
+          name: "link",
+          action: "link",
+          icon: "link",
+          tooltip: "Link",
+          display: "icon"
+        },
+        {
+          name: "image",
+          action: "image",
+          icon: "insert_photo",
+          tooltip: "Image",
+          display: "icon"
+        },
+        {
+          name: "unorderedList",
+          action: "unorderedList",
+          icon: "format_list_bulleted",
+          tooltip: "Bulleted List",
+          display: "icon"
+        },
+
+        {
+          name: "footnote",
+          action: "footnote",
+          icon: "short_text",
+          tooltip: "Footnote",
+          display: "icon"
+        },
+        {
+          name: "table",
+          action: "table",
+          icon: "table_chart",
+          tooltip: "Table",
+          display: "icon"
+        },
+        {
+          name: "loremipsum",
+          action: "loremipsum",
+          icon: "texture",
+          tooltip: "Lorem Ipsum chunk",
+          display: "icon"
+        },
+        {
+          name: "mdToClipboard",
+          action: "mdToClipboard",
+          icon: "assignment",
+          tooltip: "Copy Markdown to clipboard",
+          display: "icon"
+        }
+      ],
+      stylesheets: [
+        { name: "standard", filename: "standard.css" },
+        { name: "github", filename: "github.css" }
+      ],
+      modeColor: "green"
+    },
+    research: {
+      tools: [
+        {
+          name: "header",
+          action: "header",
+          icon: "title",
+          tooltip: "Header",
+          display: "icon"
+        },
+        {
+          name: "bold",
+          action: "bold",
+          icon: "format_bold",
+          tooltip: "Bold",
+          display: "icon"
+        }
+      ],
+      stylesheets: [
+        { name: "standard", filename: "standard.css" },
+        { name: "github", filename: "github.css" }
+      ],
+      modeColor: "red"
+    }
+  }
 };
 
 export default config;

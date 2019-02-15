@@ -4,10 +4,15 @@
       <v-toolbar
         flat
         color="grey lighten-2"
-        style="padding-top: 5px; z-index: 100; position: fixed; top: 50px;"
+        style="padding-top: 5px; z-index: 100; position: fixed; top: 50px; margin-left: -10px"
       >
+      <span class="mode">{{this.mode}}</span>&nbsp;&nbsp;&nbsp;
+
+
+
+
         <div
-          v-for="tool in config.tools"
+          v-for="tool in config.modes[this.mode].tools"
           :key="tool.action"
           class="hidden-sm-and-down"
           style="margin-left: -5px"
@@ -19,6 +24,9 @@
             <span>{{tool.tooltip}}</span>
           </v-tooltip>
         </div>
+
+
+        
 
         <v-tooltip bottom>
           <v-btn
@@ -70,13 +78,14 @@
             <v-btn icon slot="activator">
               <v-icon>more_vert</v-icon>
             </v-btn>
+           
             <v-list>
-              <v-list-tile v-for="(sample, index) in samples" :key="index" class="sampleTitle">
-                <v-list-tile-title v-on:click="loadSample(sample.body)">{{sample.title}}</v-list-tile-title>
+              <v-list-tile v-for="(snippet, index) in snippets[this.mode]" :key="index">
+                <v-list-tile-title v-on:click="insertSnippet(snippet.markdown)">{{snippet.title}}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
-          <span>Load markdown samples</span>
+          <span>{{this.mode | capitalize }} snippets</span>
         </v-tooltip>
       </v-toolbar>
     </v-flex>
@@ -92,7 +101,9 @@
           v-model="select"
           @change="loadStyleSheet"
           color="indigo"
-        ></v-select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        ></v-select>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;
         <v-tooltip bottom>
           <v-btn
             small
@@ -119,6 +130,8 @@
           </v-btn>
           <span>Save As HTML</span>
         </v-tooltip>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
       </v-toolbar>
     </v-flex>
   </v-layout>
@@ -136,7 +149,19 @@ function clearFileInput(ctrl) {
 import { samples } from "@/samples";
 import { EventBus } from "@/event-bus.js";
 import config from "@/config";
+import { capitalize } from "@/filters";
+import snippets from "@/snippets";
 export default {
+  created() {
+    EventBus.$on("setMode", mode => {
+      this.mode = mode;
+      console.log(this.mode);
+      console.log(snippets[this.mode]);
+    });
+  },
+  filters: {
+    capitalize
+  },
   mounted() {
     this.loadStyleSheet("default.css");
   },
@@ -144,6 +169,7 @@ export default {
     getEntity(action) {
       EventBus.$emit("entityEvent", action);
     },
+
     loadStyleSheet(e) {
       if (this.currentStyleSheet) {
         document
@@ -158,6 +184,9 @@ export default {
     },
     loadSample(markdown) {
       EventBus.$emit("loadMarkdown", markdown);
+    },
+    insertSnippet(markdown) {
+      EventBus.$emit("insertSnippet", markdown);
     },
     loadMarkdown() {
       let fileInput = document.getElementById("fileInput");
@@ -181,9 +210,13 @@ export default {
     return {
       currentStyleSheet: null,
       select: { text: "Default", value: "default.css" },
+      selectMode: { text: "Standard", value: "standard" },
       config,
       samples,
-      dialog: false
+      dialog: false,
+      mode: "standard",
+      capitalize,
+      snippets
     };
   }
 };
@@ -192,7 +225,7 @@ export default {
 
 <style>
 .v-input {
-  max-width: 175px;
+  max-width: 125px;
 }
 
 .v-btn--icon.v-btn--small {
@@ -202,5 +235,14 @@ export default {
 .sampleTitle:hover {
   cursor: pointer;
   color: blue;
+}
+
+.mode {
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #6c7ac7;
+  font-size: 10px;
+  width: 50px;
+  text-decoration: underline;
 }
 </style>
