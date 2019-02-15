@@ -77,7 +77,8 @@
       <v-btn
         slot="activator"
         small
-            color="blue darken-4"
+        depressed
+            color="indigo accent-2"
             dark
             style="font-size: 10px; font-weight: 900"
       >
