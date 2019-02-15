@@ -204,7 +204,6 @@ export default {
       mode = "standard";
     }
     this.mode = mode;
-    this.modeIndex = this.modes.findIndex(m => m === mode);
   },
   filters: {
     capitalize
