@@ -95,12 +95,16 @@
            
             
            
-            {{ m }} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
+            {{ m | capitalize}} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-menu>
      <span>Switch Modes</span>
         </v-tooltip>
+
+        <!-- <v-btn flat small icon >
+              <v-icon style="font-size: 16px;">help</v-icon>
+            </v-btn> -->
      
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
@@ -114,6 +118,7 @@
 const info = require("../../package.json");
 import config from "@/config";
 import { EventBus } from "@/event-bus.js";
+import { capitalize } from "@/filters";
 export default {
   created() {
     this.modes = Object.keys(config.modes);
@@ -142,6 +147,9 @@ export default {
       //console.log(mode);
     });
   },
+  filters: {
+    capitalize
+  },
   methods: {
     getMarkdown() {
       EventBus.$emit("getMarkdown");
@@ -161,7 +169,6 @@ export default {
     return {
       snackbar: false,
       msg: "",
-
       wordCount: 0,
       info,
       statistics: false,
