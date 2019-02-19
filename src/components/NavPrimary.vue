@@ -8,8 +8,8 @@
       &nbsp;&nbsp;&nbsp;&nbsp;
       
 
-      <v-toolbar-title style="margin-top: -5px" v-if="mode != 'standard'">
-        <span class="mode">&nbsp;{{mode}} mode&nbsp;</span>
+      <v-toolbar-title style="margin-top: -5px" v-if="mode != config.defaultMode">
+        <span class="mode" :style="getModeColor">&nbsp;{{mode}} mode&nbsp;</span>
        
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -82,7 +82,7 @@
             dark
             style="font-size: 10px; font-weight: 900"
       >
-        Mode: {{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
+        Mode:&nbsp;{{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
       </v-btn>
       <v-list>
         <v-list-tile
@@ -127,7 +127,7 @@ export default {
     if (modeParam !== undefined && this.modes.includes(modeParam)) {
       mode = modeParam;
     } else {
-      mode = "standard";
+      mode = config.defaultMode;
     }
     this.mode = mode;
   },
@@ -163,11 +163,16 @@ export default {
     getModeIcon() {
       let icon = config.modes[this.mode]["icon"];
       return icon;
+    },
+    getModeColor() {
+      let color = config.modes[this.mode]["color"];
+      return `color: ${color}`;
     }
   },
   data() {
     return {
       snackbar: false,
+      config,
       msg: "",
       wordCount: 0,
       info,
@@ -200,7 +205,6 @@ a.navTitle:hover {
 .mode {
   text-transform: uppercase;
   font-weight: 900;
-  color: #ccc;
   font-size: 12px;
   width: 100px;
   text-align: center;

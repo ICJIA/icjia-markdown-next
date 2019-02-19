@@ -27,9 +27,9 @@ const config = {
     paragraphUpperBound: 7, // Maximum sentences per paragraph.
     format: "plain"
   },
-
+  defaultMode: "Standard",
   modes: {
-    standard: {
+    Standard: {
       tools: [
         {
           name: "header",
@@ -110,14 +110,11 @@ const config = {
           display: "icon"
         }
       ],
-      stylesheets: [
-        { name: "Standard", filename: "standard.css" },
-        { name: "Github", filename: "github.css" }
-      ],
-      color: "green",
+
+      color: "white",
       icon: "create"
     },
-    research: {
+    Research: {
       tools: [
         { name: "header", action: "header", icon: "title", tooltip: "Header" },
         { name: "bold", action: "bold", icon: "format_bold", tooltip: "Bold" },
@@ -179,11 +176,8 @@ const config = {
           tooltip: "Clear all"
         }
       ],
-      stylesheets: [
-        { name: "Research", filename: "research.css" },
-        { name: "Github", filename: "github.css" }
-      ],
-      color: "red",
+
+      color: "#f41d56",
       icon: "insert_chart_outlined"
     }
   }

@@ -25,6 +25,27 @@
           </v-tooltip>
         </div>
 
+        <v-tooltip bottom>
+          <v-menu
+            offset-y
+            nudge-left="100"
+            transition="slide-x-transition"
+            style="z-index: 150;"
+            slot="activator"
+          >
+            <v-btn icon slot="activator" style="margin-left: -5px">
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+           
+            <v-list>
+              <v-list-tile v-for="(snippet, index) in snippets[this.mode]" :key="index">
+                <v-list-tile-title v-on:click="insertSnippet(snippet.markdown)">{{snippet.title}}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+          <span>{{this.mode | capitalize }} snippets</span>
+        </v-tooltip>
+
 
         
 
@@ -68,26 +89,7 @@
         </v-tooltip>
 
         
-        <v-tooltip bottom>
-          <v-menu
-            offset-y
-            nudge-left="100"
-            transition="slide-x-transition"
-            style="z-index: 150;"
-            slot="activator"
-          >
-            <v-btn icon slot="activator" style="margin-left: -5px">
-              <v-icon>more_vert</v-icon>
-            </v-btn>
-           
-            <v-list>
-              <v-list-tile v-for="(snippet, index) in snippets[this.mode]" :key="index">
-                <v-list-tile-title v-on:click="insertSnippet(snippet.markdown)">{{snippet.title}}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-          <span>{{this.mode | capitalize }} snippets</span>
-        </v-tooltip>
+        
       </v-toolbar>
     </v-flex>
     <v-flex xs6 class="hidden-sm-and-down">
@@ -133,41 +135,7 @@
         </v-tooltip>
         &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
        
-        <!-- <v-tooltip bottom>
-          
-        <v-menu
-      transition="slide-y-transition"
-      bottom
-      slot="activator"
-    >
-     
-      <v-btn
-        slot="activator"
-        small
-            color="blue darken-4"
-            dark
-            style="font-size: 10px; font-weight: 900"
-      >
-        Mode: {{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile
-          v-for="(m, i) in modes"
-          :key="i"
-           @click="selectMode(m)"
-         >
-         
-          <v-list-tile-title>
-           
-            
-           
-            {{ m }} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-     <span>Switch Modes</span>
-        </v-tooltip> -->
-
+       
        
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         
@@ -201,7 +169,7 @@ export default {
     if (modeParam !== undefined && this.modes.includes(modeParam)) {
       mode = modeParam;
     } else {
-      mode = "standard";
+      mode = config.defaultMode;
     }
     this.mode = mode;
   },
