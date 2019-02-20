@@ -147,8 +147,7 @@ const config = {
       ]
     },
     research: {
-      description:
-        "Includes ICJIA-specific shortcuts and snippets for Research & Analysis authors.",
+      description: "Includes shortcuts and snippets for ICJIA's researchers.",
       display: "Research",
       color: "#f41d56",
       icon: "insert_chart_outlined",

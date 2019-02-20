@@ -196,9 +196,6 @@ export default {
       mode = config.defaultMode;
     }
     this.mode = mode.toLowerCase();
-
-    // console.dir(JSON.stringify(config.defaultStylesheet));
-    // console.dir(JSON.stringify(this.stylesheetObj));
     this.stylesheetSelection = this.stylesheetObj;
     this.loadStyleSheet(this.stylesheetObj.value);
   },
@@ -252,6 +249,7 @@ export default {
 
       let reader = new FileReader();
       //Filereader: https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+      // eslint-disable-next-line
       reader.onload = function(e) {
         EventBus.$emit("loadMarkdown", reader.result);
         EventBus.$emit("displayStatus", "File loaded.");
