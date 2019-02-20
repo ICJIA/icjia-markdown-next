@@ -32,11 +32,14 @@ const config = {
    *
    */
   stylesheets: [
-    { text: "Standard", value: "standard.css" },
-    { text: "Research", value: "research.css" },
-    { text: "Github", value: "github.css" }
+    { text: "standard", value: "standard.css", display: "Standard" },
+    { text: "research", value: "research.css", display: "Research" }
   ],
-  defaultStylesheet: { text: "Standard", value: "standard.css" },
+  defaultStylesheet: {
+    text: "standard",
+    value: "standard.css",
+    display: "Standard"
+  },
   stylesheetStaticPath: "/css/",
   /**
    *
@@ -62,12 +65,13 @@ const config = {
    *
    */
   maxVisibleTools: 8,
-  defaultMode: "Standard",
+  defaultMode: "standard",
   modes: {
-    Standard: {
+    standard: {
       description: "Default Markdown mode.",
       color: "white",
       icon: "create",
+      display: "Standard",
       tools: [
         {
           name: "header",
@@ -142,9 +146,10 @@ const config = {
         }
       ]
     },
-    Research: {
+    research: {
       description:
         "Includes ICJIA-specific shortcuts and snippets for Research & Analysis authors.",
+      display: "Research",
       color: "#f41d56",
       icon: "insert_chart_outlined",
       tools: [

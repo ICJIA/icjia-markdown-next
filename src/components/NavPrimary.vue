@@ -7,25 +7,15 @@
       </v-toolbar-title>
       &nbsp;&nbsp;&nbsp;&nbsp;
       
- <!-- <v-tooltip bottom>
-      <template #activator="data">
-      <v-toolbar-title style="margin-top: -5px" v-if="mode != config.defaultMode">
-       
-        <span class="mode" :style="getModeColor">&nbsp;{{mode}} mode&nbsp;</span>
-        
-       
-      </v-toolbar-title>
-       </template>
-      <span>Bottom tooltip</span>
-    </v-tooltip> -->
-      <span v-if="mode != config.defaultMode">
-     <v-tooltip bottom>
+
+      <!-- <span v-if="mode != config.defaultMode"> -->
+     <v-tooltip bottom max-width="200">
       <template #activator="data">
         <span v-on="data.on" class="mode" :style="getModeColor">&nbsp;{{mode}} mode&nbsp;</span>
       </template>
       <span>{{config.modes[this.mode]["description"]}}</span>
     </v-tooltip>
-    </span>
+    <!-- </span> -->
       <v-spacer></v-spacer>
       
      
@@ -108,8 +98,8 @@
           <v-list-tile-title>
            
             
-           
-            {{ m | capitalize}} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
+            
+            {{ config.modes[m].display}} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-menu>
@@ -139,7 +129,7 @@ export default {
     } else {
       mode = config.defaultMode;
     }
-    this.mode = mode;
+    this.mode = mode.toLowerCase();
   },
   mounted() {
     EventBus.$on("displayStatus", msg => {
@@ -215,8 +205,8 @@ a.navTitle:hover {
 .mode {
   text-transform: uppercase;
   font-weight: 900;
-  font-size: 12px;
-  width: 100px;
+  font-size: 11px;
+  width: 140px;
   text-align: center;
   padding-bottom: -10px;
   border: 1px solid #ccc;

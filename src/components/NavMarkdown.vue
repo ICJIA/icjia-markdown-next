@@ -123,9 +123,10 @@
         <v-select
           :items="config.stylesheets"
           label="Stylesheet"
-          v-model="select"
+          v-model="stylesheetSelection"
           @change="loadStyleSheet"
           color="indigo"
+          item-text="display"
         ></v-select>
         &nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;
@@ -186,6 +187,7 @@ import snippets from "@/snippets";
 export default {
   created() {
     this.modes = Object.keys(config.modes);
+
     let modeParam = this.$route.params.modeParam;
     let mode;
     if (modeParam !== undefined && this.modes.includes(modeParam)) {
@@ -193,20 +195,23 @@ export default {
     } else {
       mode = config.defaultMode;
     }
-    this.mode = mode;
-    /**
-     * TODO: Inject proper stylesheet here based on mode.
-     */
+    this.mode = mode.toLowerCase();
+
+    // console.dir(JSON.stringify(config.defaultStylesheet));
+    // console.dir(JSON.stringify(this.stylesheetObj));
+    this.stylesheetSelection = this.stylesheetObj;
+    this.loadStyleSheet(this.stylesheetObj.value);
   },
   filters: {
     capitalize
   },
   mounted() {
-    this.loadStyleSheet(config.defaultStylesheet.value);
+    //
     EventBus.$emit("setMode", this.mode);
     EventBus.$on("setMode", mode => {
       this.mode = mode;
-      console.log(mode);
+      this.stylesheetSelection = this.stylesheetObj;
+      this.loadStyleSheet(this.stylesheetObj.value);
     });
   },
   methods: {
@@ -215,7 +220,7 @@ export default {
     },
 
     loadStyleSheet(e) {
-      console.log(e);
+      //console.log("Load style sheet: ", e);
       if (this.currentStyleSheet) {
         document
           .querySelector(
@@ -272,12 +277,19 @@ export default {
       return config.modes[this.mode].tools.slice(
         config.modes[this.mode].tools.length - 3
       );
+    },
+    stylesheetObj() {
+      const stylesheet = config.stylesheets.filter(s => {
+        if (s.text === this.mode) return s;
+      });
+
+      return stylesheet[0];
     }
   },
   data() {
     return {
       currentStyleSheet: null,
-      select: config.defaultStylesheet,
+      stylesheetSelection: null,
       config,
       samples,
       dialog: false,
@@ -285,7 +297,8 @@ export default {
       snippets,
       modes: [],
       mode: "",
-      modeIndex: null
+      modeIndex: null,
+      test: []
     };
   }
 };
