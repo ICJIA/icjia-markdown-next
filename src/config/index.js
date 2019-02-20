@@ -1,18 +1,36 @@
 const config = {
+  /**
+   *
+   *
+   * Markdown defaults
+   *
+   *
+   */
   markdownItOptions: {
-    html: true, // Enable HTML tags in source
-    xhtmlOut: false, // Use '/' to close single tags (<br />).
-    // This is only for full CommonMark compatibility.
-    breaks: true, // Convert '\n' in paragraphs into <br>
-    langPrefix: "language-", // CSS language prefix for fenced blocks. Can be
-    // useful for external highlighters.
-    linkify: true, // Autoconvert URL-like text to links
-    // Enable some language-neutral replacement + quotes beautification
+    html: true,
+    xhtmlOut: false,
+
+    breaks: true,
+    langPrefix: "language-",
+    linkify: true,
     typographer: false,
     quotes: "“”‘’"
   },
+  /**
+   *
+   * Local storage defaults
+   *
+   *
+   */
   autoSaveInterval: 15000,
   localStorageKey: "icjia-markdown-autosave",
+  /**
+   *
+   *
+   * Stylesheet defaults
+   *
+   *
+   */
   stylesheets: [
     { text: "Standard", value: "standard.css" },
     { text: "Research", value: "research.css" },
@@ -20,15 +38,29 @@ const config = {
   ],
   defaultStylesheet: { text: "Standard", value: "standard.css" },
   stylesheetStaticPath: "/css/",
+  /**
+   *
+   *
+   * Lorem Ipsum generator defaults
+   *
+   *
+   */
   loremIpsum: {
-    count: 10, // Number of words, sentences, or paragraphs to generate.
-    units: "sentences", // Generate words, sentences, or paragraphs.
-    sentenceLowerBound: 5, // Minimum words per sentence.
-    sentenceUpperBound: 15, // Maximum words per sentence.
-    paragraphLowerBound: 3, // Minimum sentences per paragraph.
-    paragraphUpperBound: 7, // Maximum sentences per paragraph.
+    count: 10,
+    units: "sentences",
+    sentenceLowerBound: 5,
+    sentenceUpperBound: 15,
+    paragraphLowerBound: 3,
+    paragraphUpperBound: 7,
     format: "plain"
   },
+  /**
+   *
+   *
+   * Mode defaults
+   *
+   *
+   */
   maxVisibleTools: 8,
   defaultMode: "Standard",
   modes: {

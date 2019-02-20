@@ -7,14 +7,28 @@
       </v-toolbar-title>
       &nbsp;&nbsp;&nbsp;&nbsp;
       
-
+ <!-- <v-tooltip bottom>
+      <template #activator="data">
       <v-toolbar-title style="margin-top: -5px" v-if="mode != config.defaultMode">
+       
         <span class="mode" :style="getModeColor">&nbsp;{{mode}} mode&nbsp;</span>
+        
        
       </v-toolbar-title>
+       </template>
+      <span>Bottom tooltip</span>
+    </v-tooltip> -->
+      <span v-if="mode != config.defaultMode">
+     <v-tooltip bottom>
+      <template #activator="data">
+        <span v-on="data.on" class="mode" :style="getModeColor">&nbsp;{{mode}} mode&nbsp;</span>
+      </template>
+      <span>{{config.modes[this.mode]["description"]}}</span>
+    </v-tooltip>
+    </span>
       <v-spacer></v-spacer>
       
-      <!-- <div class="wordCount">Word count: {{wordCount}}&nbsp;&nbsp;&nbsp;&nbsp;</div> -->
+     
       <v-tooltip bottom>
         <v-dialog v-model="statistics" max-width="500" slot="activator">
           <v-btn
@@ -102,10 +116,6 @@
      <span>Switch Modes</span>
         </v-tooltip>
 
-        <!-- <v-btn flat small icon >
-              <v-icon style="font-size: 16px;">help</v-icon>
-            </v-btn> -->
-     
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}

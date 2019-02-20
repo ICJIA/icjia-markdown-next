@@ -194,6 +194,9 @@ export default {
       mode = config.defaultMode;
     }
     this.mode = mode;
+    /**
+     * TODO: Inject proper stylesheet here based on mode.
+     */
   },
   filters: {
     capitalize
@@ -203,7 +206,7 @@ export default {
     EventBus.$emit("setMode", this.mode);
     EventBus.$on("setMode", mode => {
       this.mode = mode;
-      //console.log(mode);
+      console.log(mode);
     });
   },
   methods: {
@@ -212,6 +215,7 @@ export default {
     },
 
     loadStyleSheet(e) {
+      console.log(e);
       if (this.currentStyleSheet) {
         document
           .querySelector(
