@@ -7,16 +7,14 @@
         style="padding-top: 5px; z-index: 100; position: fixed; top: 50px; margin-left: -10px"
       >
       
-
-
-
-
-        <div
-          v-for="tool in config.modes[this.mode].tools"
+          <div
+          v-for="tool in visibleTools"
           :key="tool.action"
           class="hidden-sm-and-down"
-          style="margin-left: -7px"
+          style="margin-left: -3px"
+         
         >
+
           <v-tooltip bottom>
             <v-btn small icon slot="activator" @click.prevent="getEntity(tool.action)">
               <v-icon size="20px">{{tool.icon}}</v-icon>
@@ -25,6 +23,7 @@
           </v-tooltip>
         </div>
 
+       
         <v-tooltip bottom>
           <v-menu
             offset-y
@@ -36,18 +35,27 @@
             <v-btn icon slot="activator" style="margin-left: -5px">
               <v-icon>more_vert</v-icon>
             </v-btn>
-           
             <v-list>
-              <v-list-tile v-for="(snippet, index) in snippets[this.mode]" :key="index">
-                <v-list-tile-title v-on:click="insertSnippet(snippet.markdown)">{{snippet.title}}</v-list-tile-title>
+
+               <v-list-tile v-for="(tool, index) in remainingTools" :key="index">
+                <v-list-tile-title>
+                  
+                  <v-icon style="width: 35px;">{{tool.icon}}</v-icon>
+                  &nbsp;&nbsp;{{tool.tooltip}}</v-list-tile-title>
+               
               </v-list-tile>
+
             </v-list>
+           
+           
           </v-menu>
-          <span>{{this.mode | capitalize }} snippets</span>
+          <span>Additional {{this.mode | capitalize }} Tools</span>
         </v-tooltip>
+        <!-- </span> -->
 
 
         
+      
 
         <v-tooltip bottom>
           <v-btn
@@ -86,6 +94,20 @@
             </v-card>
           </v-dialog>
           <span>Load markdown (.md) file</span>
+        </v-tooltip>
+
+          <v-tooltip bottom>
+          <v-btn
+            small
+            dark
+            color="blue darken-4"
+            slot="activator"
+             @click.prevent="getEntity('mdToClipboard')"
+            style="font-size: 10px; font-weight: 900"
+          >Copy MD
+            <v-icon dark right style="font-size: 14px; font-weight: 900">assignment</v-icon>
+          </v-btn>
+          <span>Copy Markdown to Clipboard</span>
         </v-tooltip>
 
         
@@ -177,7 +199,7 @@ export default {
     capitalize
   },
   mounted() {
-    this.loadStyleSheet("default.css");
+    this.loadStyleSheet(config.defaultStylesheet.value);
     EventBus.$emit("setMode", this.mode);
     EventBus.$on("setMode", mode => {
       this.mode = mode;
@@ -192,12 +214,16 @@ export default {
     loadStyleSheet(e) {
       if (this.currentStyleSheet) {
         document
-          .querySelector(`link[href$="/css/${this.currentStyleSheet}"]`)
+          .querySelector(
+            `link[href$="${config.stylesheetStaticPath}${
+              this.currentStyleSheet
+            }"]`
+          )
           .remove();
       }
       let file = document.createElement("link");
       file.rel = "stylesheet";
-      file.href = `/css/${e}`;
+      file.href = `${config.stylesheetStaticPath}${e}`;
       document.head.appendChild(file);
       this.currentStyleSheet = e;
     },
@@ -234,12 +260,20 @@ export default {
     getModeIcon() {
       let icon = config.modes[this.mode]["icon"];
       return icon;
+    },
+    visibleTools() {
+      return config.modes[this.mode].tools.slice(0, config.maxVisibleTools);
+    },
+    remainingTools() {
+      return config.modes[this.mode].tools.slice(
+        config.modes[this.mode].tools.length - 3
+      );
     }
   },
   data() {
     return {
       currentStyleSheet: null,
-      select: { text: "Default", value: "default.css" },
+      select: config.defaultStylesheet,
       config,
       samples,
       dialog: false,

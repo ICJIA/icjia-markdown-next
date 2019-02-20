@@ -14,10 +14,12 @@ const config = {
   autoSaveInterval: 15000,
   localStorageKey: "icjia-markdown-autosave",
   stylesheets: [
-    { text: "Default", value: "default.css" },
+    { text: "Standard", value: "standard.css" },
+    { text: "Research", value: "research.css" },
     { text: "Github", value: "github.css" }
-    // { text: "ICJIA", value: "icjia.css" }
   ],
+  defaultStylesheet: { text: "Standard", value: "standard.css" },
+  stylesheetStaticPath: "/css/",
   loremIpsum: {
     count: 10, // Number of words, sentences, or paragraphs to generate.
     units: "sentences", // Generate words, sentences, or paragraphs.
@@ -27,9 +29,13 @@ const config = {
     paragraphUpperBound: 7, // Maximum sentences per paragraph.
     format: "plain"
   },
+  maxVisibleTools: 8,
   defaultMode: "Standard",
   modes: {
     Standard: {
+      description: "Default Markdown mode.",
+      color: "white",
+      icon: "create",
       tools: [
         {
           name: "header",
@@ -98,23 +104,17 @@ const config = {
         {
           name: "loremipsum",
           action: "loremipsum",
-          icon: "texture",
+
           tooltip: "Lorem Ipsum chunk",
           display: "icon"
-        },
-        {
-          name: "mdToClipboard",
-          action: "mdToClipboard",
-          icon: "assignment",
-          tooltip: "Copy Markdown to clipboard",
-          display: "icon"
         }
-      ],
-
-      color: "white",
-      icon: "create"
+      ]
     },
     Research: {
+      description:
+        "Includes ICJIA-specific shortcuts and snippets for Research & Analysis authors.",
+      color: "#f41d56",
+      icon: "insert_chart_outlined",
       tools: [
         { name: "header", action: "header", icon: "title", tooltip: "Header" },
         { name: "bold", action: "bold", icon: "format_bold", tooltip: "Bold" },
@@ -149,6 +149,12 @@ const config = {
           icon: "format_list_numbered",
           tooltip: "Numbered List"
         },
+        {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear all"
+        },
 
         {
           name: "footnote",
@@ -161,24 +167,8 @@ const config = {
           action: "table",
           icon: "table_chart",
           tooltip: "Table"
-        },
-
-        {
-          name: "mdToClipboard",
-          action: "mdToClipboard",
-          icon: "assignment",
-          tooltip: "Copy Markdown to clipboard"
-        },
-        {
-          name: "clear",
-          action: "clear",
-          icon: "clear",
-          tooltip: "Clear all"
         }
-      ],
-
-      color: "#f41d56",
-      icon: "insert_chart_outlined"
+      ]
     }
   }
 };
