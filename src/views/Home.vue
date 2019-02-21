@@ -109,11 +109,8 @@ export default {
       });
       let editorScroll = document.querySelector(".CodeMirror-scroll");
       let viewerScroll = document.querySelector("#viewer-scroll");
-      editorScroll.addEventListener("scroll", function(event) {
-        event.preventDefault();
-        //console.log(event);
-      });
-      viewerScroll.addEventListener("scroll", function(event) {
+      editorScroll.addEventListener("scroll", this.updateScroll);
+      viewerScroll.addEventListener("scroll", event => {
         event.preventDefault();
         //console.log(event);
       });
@@ -165,6 +162,9 @@ export default {
     },
     clear() {
       this.editor.getDoc().setValue("");
+    },
+    updateScroll(e) {
+      console.dir("Top: ", this.editor.getScrollInfo().top);
     },
     insertEntity(action) {
       switch (action) {

@@ -3,7 +3,7 @@
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title>
-        <router-link to="/" class="navTitle">ICJIA MARKDOWN EDITOR</router-link>
+        <router-link to="/" class="navTitle"><span style="font-weight: 400;">ICJIA</span>&nbsp;<span style="font-weight: 900;">MARKDOWN EDITOR</span></router-link>
       </v-toolbar-title>
       &nbsp;&nbsp;&nbsp;&nbsp;
       
