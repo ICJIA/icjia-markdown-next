@@ -54,8 +54,9 @@
             <div
               class="markdown-body"
               style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
+              id="viewer-scroll"
             >
-              <div v-html="model"></div>
+              <div v-html="model" ></div>
             </div>
           </v-flex>
         </v-layout>
@@ -103,7 +104,18 @@ export default {
         mode: "markdown",
         tabSize: "2",
         indentWithTabs: true,
-        lineWrapping: true
+        lineWrapping: true,
+        onScroll: "test()"
+      });
+      let editorScroll = document.querySelector(".CodeMirror-scroll");
+      let viewerScroll = document.querySelector("#viewer-scroll");
+      editorScroll.addEventListener("scroll", function(event) {
+        event.preventDefault();
+        //console.log(event);
+      });
+      viewerScroll.addEventListener("scroll", function(event) {
+        event.preventDefault();
+        //console.log(event);
       });
     },
     initializeEditorEvents: function() {
@@ -318,6 +330,9 @@ export default {
       });
 
       return table[0].body;
+    },
+    onScroll(e) {
+      console.log("here");
     }
   },
 
@@ -351,7 +366,9 @@ export default {
       footnote: 1,
       editor: null,
       isHidden: true,
-      config
+      config,
+      offsetTop: 0,
+      scrollElement: null
     };
   }
 };
