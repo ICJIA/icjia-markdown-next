@@ -164,7 +164,7 @@ export default {
       this.editor.getDoc().setValue("");
     },
     updateScroll(e) {
-      console.dir("Top: ", this.editor.getScrollInfo().top);
+      console.dir(this.editor.getScrollInfo().top);
     },
     insertEntity(action) {
       switch (action) {
