@@ -97,7 +97,6 @@ export default {
     this.setInitialText();
     this.initializeComponentEventListeners();
     this.initializeAutoSave();
-    EventBus.$emit("updateWordCount", this.wordCount);
   },
   methods: {
     initializeEditor: function() {
@@ -107,13 +106,14 @@ export default {
       );
     },
     initializeEditorEvents: function() {
+      EventBus.$emit("updateWordCount", this.wordCount);
+      this.editorScroll = document.querySelector(".CodeMirror-scroll");
+      this.viewerScroll = document.querySelector("#viewer-scroll");
+      this.editorScroll.addEventListener("scroll", this.updateViewerScroll);
+      this.viewerScroll.addEventListener("scroll", this.updateEditorScroll);
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
-        this.editorScroll = document.querySelector(".CodeMirror-scroll");
-        this.viewerScroll = document.querySelector("#viewer-scroll");
-        this.editorScroll.addEventListener("scroll", this.updateViewerScroll);
-        this.viewerScroll.addEventListener("scroll", this.updateEditorScroll);
       });
     },
     setInitialText() {
@@ -147,7 +147,8 @@ export default {
 
       EventBus.$on("scrollSync", isScrollSynced => {
         this.isScrollSynced = isScrollSynced;
-        console.log("From home: ", isScrollSynced);
+        let status = this.isScrollSynced ? "ON" : "OFF";
+        EventBus.$emit("displayStatus", `Scroll sync turned ${status}`);
       });
     },
     initializeAutoSave() {

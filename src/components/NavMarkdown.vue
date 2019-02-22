@@ -175,7 +175,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <v-switch
               v-model="isScrollSynced"
-              label="Sync scroll"
+              label="Scroll Sync"
               class="scrollSync"
               hide-details
             ></v-switch>
@@ -306,7 +306,7 @@ export default {
   },
   watch: {
     isScrollSynced() {
-      console.log(this.isScrollSynced);
+      //console.log(this.isScrollSynced);
       EventBus.$emit("scrollSync", this.isScrollSynced);
     }
   },
@@ -345,8 +345,9 @@ export default {
 }
 
 .scrollSync .v-label {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 900;
   text-transform: uppercase;
+  color: #222;
 }
 </style>
