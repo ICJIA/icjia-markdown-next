@@ -173,12 +173,17 @@
           <span>Copy HTML to Clipboard</span>
         </v-tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+         <v-tooltip bottom max-width="150">
            <v-switch
               v-model="isScrollSynced"
+              slot="activator"
               label="Scroll Sync"
               class="scrollSync"
               hide-details
             ></v-switch>
+             <span>{{config.scrollSyncDescription}}</span>
+        </v-tooltip>
 
         
      

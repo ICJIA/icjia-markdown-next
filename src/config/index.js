@@ -65,6 +65,8 @@ const config = {
     paragraphUpperBound: 7,
     format: "plain"
   },
+  scrollSyncDescription:
+    "Synchronize the scrolling of the markdown and markdown result windows.",
   /**
    *
    *
