@@ -168,11 +168,14 @@ export default {
       }
     },
     updateEditorScroll(e) {
-      if (this.isScrollSynced) {
-        let viewerScrollTop = e.target.scrollTop;
-        //console.log("Viewer: ", viewerScrollTop);
-        this.editor.scrollTo(null, viewerScrollTop);
-      }
+      /**
+       * TODO: Determine proper offset for scrolling CodeMirror window
+       */
+      // if (this.isScrollSynced) {
+      //   let viewerScrollTop = e.target.scrollTop;
+      //   this.editor.scrollTo(null, viewerScrollTop);
+      // }
+      return null;
     },
     insertEntity(action) {
       switch (action) {
