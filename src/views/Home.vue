@@ -59,7 +59,7 @@
               id="viewer-scroll"
             >
            
-              <div v-html="model" ></div>
+              <div v-html="model" style="padding-bottom: 100px;"></div>
             </div>
           </v-flex>
         </v-layout>
