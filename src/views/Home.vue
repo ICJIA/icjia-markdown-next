@@ -47,7 +47,7 @@
         </h1>
       </div>
       
-      <div style="margin-top: 75px;">
+      <div style="margin-top: 75px;" class="master">
         <v-layout row wrap>
           <v-flex xs12 sm6>
             <textarea id="editor" style="margin-top: -5px;"></textarea>
@@ -392,17 +392,16 @@ export default {
 @import url("../../node_modules/codemirror/lib/codemirror.css");
 
 .CodeMirror {
-  height: 100vh !important;
+  /* height: 100vh !important; */
   background: #fff;
-}
-
-.markdown-container {
+  height: 87vh !important;
 }
 
 .markdown-body {
-  height: 100vh;
+  /* height: 100vh; */
   background: #fff;
   overflow-y: auto;
+  height: 87vh !important;
 }
 
 #showHtml {

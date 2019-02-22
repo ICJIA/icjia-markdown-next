@@ -8,14 +8,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;
       
 
-      <!-- <span v-if="mode != config.defaultMode"> -->
-     <!-- <v-tooltip bottom max-width="200">
-      <template #activator="data">
-        <span v-on="data.on" class="mode" :style="getModeColor">&nbsp;{{mode}} mode&nbsp;</span>
-      </template>
-      <span>{{config.modes[this.mode]["description"]}}</span>
-    </v-tooltip> -->
-    <!-- </span> -->
+    
      <v-tooltip bottom max-width="200">
           
         <v-menu

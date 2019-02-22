@@ -37,8 +37,8 @@
             </v-btn>
             <v-list>
 
-               <v-list-tile v-for="(tool, index) in remainingTools" :key="index">
-                <v-list-tile-title>
+               <v-list-tile v-for="(tool, index) in remainingTools" :key="index" class="moreEntitites">
+                <v-list-tile-title v-on:click="getEntity(tool.action)">
                   
                   <v-icon style="width: 35px;">{{tool.icon}}</v-icon>
                   &nbsp;&nbsp;{{tool.tooltip}}</v-list-tile-title>
@@ -354,5 +354,10 @@ export default {
   font-weight: 900;
   text-transform: uppercase;
   color: #222;
+}
+
+.moreEntitites:hover {
+  cursor: pointer;
+  color: blue;
 }
 </style>

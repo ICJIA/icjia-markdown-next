@@ -66,7 +66,7 @@ const config = {
     format: "plain"
   },
   scrollSyncDescription:
-    "Synchronize the scrolling of the markdown and markdown result windows.",
+    "Synchronize the scrolling between the markdown and result windows.",
   /**
    *
    *
