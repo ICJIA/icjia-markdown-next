@@ -109,7 +109,7 @@
           <v-icon right size="16px">launch</v-icon>
          
         </v-btn>
-        <span>Access the legacy ICJIA Markdown Editor</span>
+        <span>Access the original ICJIA Markdown Editor</span>
       </v-tooltip>
 
 
