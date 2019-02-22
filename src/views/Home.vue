@@ -28,6 +28,7 @@
       </v-dialog>
 
       <nav-markdown></nav-markdown>
+      
       <div
         v-if="$browserDetect.isIE"
         class="text-xs-center pt-5 pb-5"
@@ -45,6 +46,7 @@
           >Microsoft Edge</a>.
         </h1>
       </div>
+      
       <div style="margin-top: 75px;">
         <v-layout row wrap>
           <v-flex xs12 sm6>
@@ -56,6 +58,7 @@
               style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
               id="viewer-scroll"
             >
+           
               <div v-html="model" ></div>
             </div>
           </v-flex>
@@ -94,33 +97,23 @@ export default {
     this.setInitialText();
     this.initializeComponentEventListeners();
     this.initializeAutoSave();
-
     EventBus.$emit("updateWordCount", this.wordCount);
   },
   methods: {
     initializeEditor: function() {
-      this.editor = codeMirror.fromTextArea(document.getElementById("editor"), {
-        lineNumbers: true,
-        mode: "markdown",
-        tabSize: "2",
-        indentWithTabs: true,
-        lineWrapping: true,
-        onScroll: "test()"
-      });
-      let editorScroll = document.querySelector(".CodeMirror-scroll");
-      let viewerScroll = document.querySelector("#viewer-scroll");
-      editorScroll.addEventListener("scroll", this.updateScroll);
-      viewerScroll.addEventListener("scroll", event => {
-        event.preventDefault();
-        //console.log(event);
-      });
+      this.editor = codeMirror.fromTextArea(
+        document.getElementById("editor"),
+        config.codeMirrorOptions
+      );
     },
     initializeEditorEvents: function() {
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
-        //let doc = cm.getDoc();
-        //let cursor = doc.getCursor();
+        this.editorScroll = document.querySelector(".CodeMirror-scroll");
+        this.viewerScroll = document.querySelector("#viewer-scroll");
+        this.editorScroll.addEventListener("scroll", this.updateViewerScroll);
+        this.viewerScroll.addEventListener("scroll", this.updateEditorScroll);
       });
     },
     setInitialText() {
@@ -133,7 +126,6 @@ export default {
             return s;
           }
         });
-
         this.editor.getDoc().setValue(welcome[0].body);
       }
     },
@@ -152,6 +144,11 @@ export default {
       EventBus.$on("insertSnippet", snippet => {
         this.insert("\n" + snippet + "\n");
       });
+
+      EventBus.$on("scrollSync", isScrollSynced => {
+        this.isScrollSynced = isScrollSynced;
+        console.log("From home: ", isScrollSynced);
+      });
     },
     initializeAutoSave() {
       window.setInterval(() => {
@@ -163,8 +160,18 @@ export default {
     clear() {
       this.editor.getDoc().setValue("");
     },
-    updateScroll(e) {
-      console.dir(this.editor.getScrollInfo().top);
+    updateViewerScroll(e) {
+      if (this.isScrollSynced) {
+        let editorScrollTop = this.editor.getScrollInfo().top;
+        this.viewerScroll.scrollTop = editorScrollTop;
+      }
+    },
+    updateEditorScroll(e) {
+      if (this.isScrollSynced) {
+        let viewerScrollTop = e.target.scrollTop;
+        //console.log("Viewer: ", viewerScrollTop);
+        this.editor.scrollTo(null, viewerScrollTop);
+      }
     },
     insertEntity(action) {
       switch (action) {
@@ -216,6 +223,9 @@ export default {
           break;
         case "saveHtml":
           this.saveHtml();
+          break;
+        case "copyHtml":
+          this.copyHtmlToClipboard();
           break;
         case "saveMarkdown":
           this.saveMarkdown();
@@ -332,7 +342,7 @@ export default {
       return table[0].body;
     },
     onScroll(e) {
-      console.log("here");
+      console.log("onScroll");
     }
   },
 
@@ -368,7 +378,10 @@ export default {
       isHidden: true,
       config,
       offsetTop: 0,
-      scrollElement: null
+      scrollElement: null,
+      editorScroll: null,
+      viewerScroll: null,
+      isScrollSynced: true
     };
   }
 };

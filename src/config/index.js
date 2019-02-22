@@ -1,4 +1,12 @@
 const config = {
+  codeMirrorOptions: {
+    lineNumbers: true,
+    mode: "markdown",
+    tabSize: "2",
+    indentWithTabs: true,
+    lineWrapping: true,
+    onScroll: "test()"
+  },
   /**
    *
    *
@@ -147,7 +155,8 @@ const config = {
       ]
     },
     research: {
-      description: "Includes shortcuts and snippets for ICJIA's researchers.",
+      description:
+        "<strong>Research mode is still in development.</strong><br><br>Includes shortcuts and markdown snippets for ICJIA's researchers.",
       display: "Research",
       color: "#f41d56",
       icon: "insert_chart_outlined",

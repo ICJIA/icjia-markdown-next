@@ -9,13 +9,48 @@
       
 
       <!-- <span v-if="mode != config.defaultMode"> -->
-     <v-tooltip bottom max-width="200">
+     <!-- <v-tooltip bottom max-width="200">
       <template #activator="data">
         <span v-on="data.on" class="mode" :style="getModeColor">&nbsp;{{mode}} mode&nbsp;</span>
       </template>
       <span>{{config.modes[this.mode]["description"]}}</span>
-    </v-tooltip>
+    </v-tooltip> -->
     <!-- </span> -->
+     <v-tooltip bottom max-width="200">
+          
+        <v-menu
+      transition="slide-y-transition"
+      bottom
+      slot="activator"
+    >
+     
+      <v-btn
+        slot="activator"
+        small
+        depressed
+            color="indigo accent-2"
+            dark
+            style="font-size: 10px; font-weight: 900"
+      >
+        Mode:&nbsp;{{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
+      </v-btn>
+      <v-list>
+        <v-list-tile
+          v-for="(m, i) in modes"
+          :key="i"
+           @click="selectMode(m)"
+         >
+         
+          <v-list-tile-title>
+           
+            
+            
+            {{ config.modes[m].display}} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+     <span v-html='config.modes[this.mode]["description"]'></span>
+        </v-tooltip>
       <v-spacer></v-spacer>
       
      
@@ -64,47 +99,13 @@
         >
           <v-icon size="16px">fab fa-github</v-icon>
           &nbsp;
-          Version: {{info.version}}
+          {{info.version}}
         </v-btn>
         <span>Find me on Github</span>
       </v-tooltip>
 
 
-       <v-tooltip bottom>
-          
-        <v-menu
-      transition="slide-y-transition"
-      bottom
-      slot="activator"
-    >
-     
-      <v-btn
-        slot="activator"
-        small
-        depressed
-            color="indigo accent-2"
-            dark
-            style="font-size: 10px; font-weight: 900"
-      >
-        Mode:&nbsp;{{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile
-          v-for="(m, i) in modes"
-          :key="i"
-           @click="selectMode(m)"
-         >
-         
-          <v-list-tile-title>
-           
-            
-            
-            {{ config.modes[m].display}} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-     <span>Switch Modes</span>
-        </v-tooltip>
+      
 
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>

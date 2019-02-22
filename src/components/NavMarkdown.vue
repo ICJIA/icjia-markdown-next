@@ -104,11 +104,13 @@
             slot="activator"
              @click.prevent="getEntity('mdToClipboard')"
             style="font-size: 10px; font-weight: 900"
-          >Copy MD
+          >Copy
             <v-icon dark right style="font-size: 14px; font-weight: 900">assignment</v-icon>
           </v-btn>
           <span>Copy Markdown to Clipboard</span>
         </v-tooltip>
+
+       
 
         
         
@@ -120,6 +122,7 @@
         color="grey lighten-2"
         style="padding-top: 5px; z-index: 100; position: fixed; top: 50px;"
       >
+    
         <v-select
           :items="config.stylesheets"
           label="Stylesheet"
@@ -130,20 +133,7 @@
         ></v-select>
         &nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;
-        <v-tooltip bottom>
-          <v-btn
-            small
-            color="blue darken-4"
-            dark
-            slot="activator"
-            @click.prevent="getEntity('showHtml')"
-            style="font-size: 10px; font-weight: 900"
-          >Show HTML
-            <v-icon dark right style="font-size: 14px;font-weight: 900">code</v-icon>
-          </v-btn>
-          <span>Show HTML</span>
-        </v-tooltip>
-        <v-tooltip bottom>
+         <v-tooltip bottom>
           <v-btn
             small
             color="blue darken-4"
@@ -156,12 +146,42 @@
           </v-btn>
           <span>Save As HTML</span>
         </v-tooltip>
-        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       
-       
-       
+        <v-tooltip bottom>
+          <v-btn
+            small
+            color="blue darken-4"
+            dark
+            slot="activator"
+            @click.prevent="getEntity('showHtml')"
+            style="font-size: 10px; font-weight: 900"
+          >Show
+            <v-icon dark right style="font-size: 14px;font-weight: 900">code</v-icon>
+          </v-btn>
+          <span>Show HTML</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <v-btn
+            small
+            dark
+            color="blue darken-4"
+            slot="activator"
+             @click.prevent="getEntity('copyHtml')"
+            style="font-size: 10px; font-weight: 900"
+          >Copy
+            <v-icon dark right style="font-size: 14px; font-weight: 900">assignment</v-icon>
+          </v-btn>
+          <span>Copy HTML to Clipboard</span>
+        </v-tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <v-switch
+              v-model="isScrollSynced"
+              label="Sync scroll"
+              class="scrollSync"
+              hide-details
+            ></v-switch>
+
         
+     
       </v-toolbar>
     </v-flex>
   </v-layout>
@@ -284,6 +304,12 @@ export default {
       return stylesheet[0];
     }
   },
+  watch: {
+    isScrollSynced() {
+      console.log(this.isScrollSynced);
+      EventBus.$emit("scrollSync", this.isScrollSynced);
+    }
+  },
   data() {
     return {
       currentStyleSheet: null,
@@ -296,7 +322,8 @@ export default {
       modes: [],
       mode: "",
       modeIndex: null,
-      test: []
+      test: [],
+      isScrollSynced: true
     };
   }
 };
@@ -315,5 +342,11 @@ export default {
 .sampleTitle:hover {
   cursor: pointer;
   color: blue;
+}
+
+.scrollSync .v-label {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 </style>
