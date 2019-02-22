@@ -112,7 +112,7 @@
           small
           href="https://legacy-markdown.icjia.cloud/"
           target="_blank"
-        >Legacy Editor
+        >Launch Legacy Editor
           <v-icon right size="16px">launch</v-icon>
          
         </v-btn>
