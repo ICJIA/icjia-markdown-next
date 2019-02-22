@@ -104,6 +104,21 @@
         <span>Find me on Github</span>
       </v-tooltip>
 
+      <v-tooltip bottom open-delay="400">
+        <v-btn
+          slot="activator"
+          style="font-size: 12px; color: #ccc;"
+          flat
+          small
+          href="https://legacy-markdown.icjia.cloud/"
+          target="_blank"
+        >Legacy Editor
+          <v-icon right size="16px">launch</v-icon>
+         
+        </v-btn>
+        <span>Access the legacy ICJIA Markdown Editor</span>
+      </v-tooltip>
+
 
       
 
