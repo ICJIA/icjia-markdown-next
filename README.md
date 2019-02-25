@@ -26,7 +26,7 @@ npm run build
 
 https://markdown.icjia.cloud
 
-## Changlog
+## Changelog
 
 https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md
 
