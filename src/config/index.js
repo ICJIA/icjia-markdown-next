@@ -4,8 +4,7 @@ const config = {
     mode: "markdown",
     tabSize: "2",
     indentWithTabs: true,
-    lineWrapping: true,
-    onScroll: "test()"
+    lineWrapping: true
   },
   /**
    *
@@ -17,7 +16,6 @@ const config = {
   markdownItOptions: {
     html: true,
     xhtmlOut: false,
-
     breaks: true,
     langPrefix: "language-",
     linkify: true,

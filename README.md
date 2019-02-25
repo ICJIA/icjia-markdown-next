@@ -22,12 +22,12 @@ npm run serve
 npm run build
 ```
 
-## Demo:
-
-https://markdown.icjia.cloud
-
 ## Changelog
+
+https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md
 
 `auto-changelog --commit-limit false -p`
 
-https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md
+## Demo:
+
+https://markdown.icjia.cloud
