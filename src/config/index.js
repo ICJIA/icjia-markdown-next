@@ -65,8 +65,17 @@ const config = {
     paragraphUpperBound: 7,
     format: "plain"
   },
+  /**
+   *
+   *
+   * Scroll sync options
+   *
+   *
+   */
   scrollSyncDescription:
     "Synchronize the scrolling between the markdown and result windows.",
+  scrollOffset: 500,
+  viewerBottomPadding: 150,
   /**
    *
    *

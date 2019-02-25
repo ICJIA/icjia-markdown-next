@@ -59,7 +59,7 @@
               id="viewer-scroll"
             >
            
-              <div v-html="model" style="padding-bottom: 100px;"></div>
+              <div v-html="model" :style="getBottomPadding"></div>
             </div>
           </v-flex>
         </v-layout>
@@ -163,8 +163,19 @@ export default {
     },
     updateViewerScroll(e) {
       if (this.isScrollSynced) {
-        let editorScrollTop = this.editor.getScrollInfo().top;
-        this.viewerScroll.scrollTop = editorScrollTop;
+        this.editorScrollTop = this.editor.getScrollInfo().top;
+        // console.log(
+        //   "Editor ",
+        //   this.editorScrollTop,
+        //   " Offset: ",
+        //   this.scrollOffset
+        // );
+        if (this.editorScrollTop > config.scrollOffset) {
+          this.viewerScroll.scrollTop =
+            this.editorScrollTop + config.scrollOffset;
+        } else {
+          this.viewerScroll.scrollTop = this.editorScrollTop;
+        }
       }
     },
     updateEditorScroll(e) {
@@ -172,7 +183,13 @@ export default {
        * TODO: Determine proper offset for scrolling CodeMirror window
        */
       // if (this.isScrollSynced) {
-      //   let viewerScrollTop = e.target.scrollTop;
+      this.viewerScrollTop = e.target.scrollTop;
+      // console.log(
+      //   "Viewer ",
+      //   this.viewerScrollTop,
+      //   " Offset: ",
+      //   this.scrollOffset
+      // );
       //   this.editor.scrollTo(null, viewerScrollTop);
       // }
       return null;
@@ -364,6 +381,13 @@ export default {
       } else {
         return 0;
       }
+    },
+    scrollOffset: function() {
+      let scrollOffset = this.editorScrollTop - this.viewerScrollTop;
+      return scrollOffset;
+    },
+    getBottomPadding: function() {
+      return `padding-bottom: ${config.viewerBottomPadding}px`;
     }
   },
   watch: {
@@ -385,7 +409,9 @@ export default {
       scrollElement: null,
       editorScroll: null,
       viewerScroll: null,
-      isScrollSynced: true
+      isScrollSynced: true,
+      editorScrollTop: null,
+      viewerScrollTop: null
     };
   }
 };
@@ -397,14 +423,14 @@ export default {
 .CodeMirror {
   /* height: 100vh !important; */
   background: #fff;
-  height: 87vh !important;
+  height: 86vh !important;
 }
 
 .markdown-body {
   /* height: 100vh; */
   background: #fff;
   overflow-y: auto;
-  height: 87vh !important;
+  height: 86vh !important;
 }
 
 #showHtml {
