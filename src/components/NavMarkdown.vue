@@ -297,9 +297,7 @@ export default {
       return config.modes[this.mode].tools.slice(0, config.maxVisibleTools);
     },
     remainingTools() {
-      return config.modes[this.mode].tools.slice(
-        config.modes[this.mode].tools.length - 3
-      );
+      return config.modes[this.mode].tools.slice(config.maxVisibleTools);
     },
     stylesheetObj() {
       const stylesheet = config.stylesheets.filter(s => {
