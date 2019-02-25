@@ -28,6 +28,6 @@ https://markdown.icjia.cloud
 
 ## Changelog
 
-https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md
-
 `auto-changelog --commit-limit false -p`
+
+https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md
