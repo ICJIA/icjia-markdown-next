@@ -92,74 +92,62 @@ const config = {
       icon: "create",
       display: "Standard",
       tools: [
-        {
-          name: "header",
-          action: "header",
-          icon: "title",
-          tooltip: "Header",
-          display: "icon"
-        },
-        {
-          name: "bold",
-          action: "bold",
-          icon: "format_bold",
-          tooltip: "Bold",
-          display: "icon"
-        },
+        { name: "header", action: "header", icon: "title", tooltip: "Header" },
+        { name: "bold", action: "bold", icon: "format_bold", tooltip: "Bold" },
         {
           name: "italicize",
           action: "italicize",
           icon: "format_italic",
-          tooltip: "Italicize",
-          display: "icon"
+          tooltip: "Italicize"
         },
         {
           name: "blockquote",
           action: "blockquote",
           icon: "format_quote",
-          tooltip: "Blockquote",
-          display: "icon"
+          tooltip: "Blockquote"
         },
-        {
-          name: "link",
-          action: "link",
-          icon: "link",
-          tooltip: "Link",
-          display: "icon"
-        },
+        { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
           name: "image",
           action: "image",
           icon: "insert_photo",
-          tooltip: "Image",
-          display: "icon"
+          tooltip: "Image"
         },
         {
           name: "unorderedList",
           action: "unorderedList",
           icon: "format_list_bulleted",
-          tooltip: "Bulleted List",
-          display: "icon"
+          tooltip: "Bulleted List"
+        },
+        {
+          name: "orderedList",
+          action: "orderedList",
+          icon: "format_list_numbered",
+          tooltip: "Numbered List"
+        },
+        {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear all"
         },
 
         {
           name: "footnote",
           action: "footnote",
           icon: "short_text",
-          tooltip: "Footnote",
-          display: "icon"
+          tooltip: "Footnote"
         },
         {
           name: "table",
           action: "table",
           icon: "table_chart",
-          tooltip: "Table",
-          display: "icon"
+          tooltip: "Table"
         },
         {
           name: "loremipsum",
           action: "loremipsum",
-
+          icon: "line_style",
           tooltip: "Lorem Ipsum chunk",
           display: "icon"
         }
@@ -223,6 +211,13 @@ const config = {
           action: "table",
           icon: "table_chart",
           tooltip: "Table"
+        },
+        {
+          name: "loremipsum",
+          action: "loremipsum",
+          icon: "line_style",
+          tooltip: "Lorem Ipsum chunk",
+          display: "icon"
         }
       ]
     }
