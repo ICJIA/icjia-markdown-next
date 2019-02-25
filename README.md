@@ -25,3 +25,9 @@ npm run build
 ## Demo:
 
 https://markdown.icjia.cloud
+
+## Changlog
+
+https://github.com/ICJIA/icjia-markdown-next/blob/master/CHANGELOG.md
+
+`auto-changelog --commit-limit false -p`
