@@ -24,6 +24,48 @@ const config = {
   },
   /**
    *
+   *
+   * Misc. tooltips
+   *
+   *
+   */
+  tooltips: {
+    icjia: {
+      text: "Illinois Criminal Justice Information Authority"
+    },
+    saveMd: {
+      text: "Save to markdown (.md) file"
+    },
+    loadMd: {
+      text: "Load markdown (.md) file"
+    },
+    copyMd: {
+      text: "Copy markdown to clipboard"
+    },
+    saveHtml: {
+      text: "Save as HTML"
+    },
+    showHtml: {
+      text: "Show HTML"
+    },
+    copyHtml: {
+      text: "Copy HTML to clipboard."
+    },
+    scrollSync: {
+      text: "Synchronize the scrollng between the markdown and result windows"
+    },
+    wordCount: {
+      text: "Show text statistics"
+    },
+    github: {
+      text: "Github"
+    },
+    launchLegacyEditor: {
+      text: "Access the original ICJIA markdown editor"
+    }
+  },
+  /**
+   *
    * Local storage defaults
    *
    *
@@ -70,10 +112,17 @@ const config = {
    *
    *
    */
-  scrollSyncDescription:
-    "Synchronize the scrolling between the markdown and result windows.",
+
   scrollOffset: 500,
   viewerBottomPadding: 150,
+  /**
+   *
+   *
+   * Snippets
+   *
+   *
+   */
+  displaySnippets: true,
   /**
    *
    *
@@ -83,10 +132,9 @@ const config = {
    */
   maxVisibleTools: 8,
   defaultMode: "standard",
-  displaySnippets: true,
   modes: {
     standard: {
-      description: "Default Markdown mode.",
+      tooltip: "Default Markdown mode.",
       color: "white",
       icon: "create",
       display: "Standard",
@@ -153,7 +201,7 @@ const config = {
       ]
     },
     research: {
-      description:
+      tooltip:
         "<strong>Research mode is still in development.</strong><br><br>Includes shortcuts and markdown snippets for ICJIA's researchers.<br><br>For now, Research and Standard modes are identical.",
       display: "Research",
       color: "#f41d56",

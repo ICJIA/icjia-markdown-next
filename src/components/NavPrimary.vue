@@ -42,7 +42,7 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-     <span v-html='config.modes[this.mode]["description"]'></span>
+     <span v-html='config.modes[this.mode]["tooltip"]'></span>
         </v-tooltip>
       <v-spacer></v-spacer>
       
@@ -94,7 +94,7 @@
           &nbsp;
           {{info.version}}
         </v-btn>
-        <span>Find me on Github</span>
+        <span>Github</span>
       </v-tooltip>
 
       <v-tooltip bottom open-delay="400">

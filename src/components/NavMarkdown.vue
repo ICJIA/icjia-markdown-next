@@ -80,7 +80,7 @@
           >Save MD
             <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
           </v-btn>
-          <span>Save markdown (.md) file</span>
+          <span>{{config.tooltips['saveMd'].text}}</span>
         </v-tooltip>
 
         <v-tooltip bottom>
@@ -105,7 +105,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <span>Load markdown (.md) file</span>
+          <span>{{config.tooltips['loadMd'].text}}</span>
         </v-tooltip>
 
           <v-tooltip bottom>
@@ -119,7 +119,7 @@
           >Copy
             <v-icon dark right style="font-size: 14px; font-weight: 900">assignment</v-icon>
           </v-btn>
-          <span>Copy Markdown to Clipboard</span>
+          <span>{{config.tooltips['copyMd'].text}}</span>
         </v-tooltip>
 
        
@@ -156,7 +156,7 @@
           >Save HTML
             <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
           </v-btn>
-          <span>Save As HTML</span>
+          <span>{{config.tooltips['saveHtml'].text}}</span>
         </v-tooltip>
         <v-tooltip bottom>
           <v-btn
@@ -169,7 +169,7 @@
           >Show
             <v-icon dark right style="font-size: 14px;font-weight: 900">code</v-icon>
           </v-btn>
-          <span>Show HTML</span>
+          <span>{{config.tooltips['showHtml'].text}}</span>
         </v-tooltip>
         <v-tooltip bottom>
           <v-btn
@@ -182,7 +182,7 @@
           >Copy
             <v-icon dark right style="font-size: 14px; font-weight: 900">assignment</v-icon>
           </v-btn>
-          <span>Copy HTML to Clipboard</span>
+          <span>{{config.tooltips['copyHtml'].text}}</span>
         </v-tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -194,7 +194,7 @@
               class="scrollSync"
               hide-details
             ></v-switch>
-             <span>{{config.scrollSyncDescription}}</span>
+             <span>{{config.tooltips['scrollSync'].text}}</span>
         </v-tooltip>
 
         
@@ -221,6 +221,7 @@ import { EventBus } from "@/event-bus.js";
 import config from "@/config";
 import { capitalize } from "@/filters";
 import snippets from "@/snippets";
+
 export default {
   created() {
     this.modes = Object.keys(config.modes);
