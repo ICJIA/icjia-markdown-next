@@ -234,9 +234,7 @@ export default {
           this.insert(`[^1] `);
           this.footnote++;
           break;
-        case "table":
-          this.insert(this.getTableEntity());
-          break;
+
         case "loremipsum":
           this.insert(this.getLoremIpsumEntity());
           break;
@@ -356,13 +354,6 @@ export default {
     },
     getLoremIpsumEntity() {
       return loremIpsum(this.config.loremIpsum) + " ";
-    },
-    getTableEntity() {
-      let tableSnippet = require(`@/snippets/table.md`);
-      return tableSnippet;
-    },
-    onScroll(e) {
-      console.log("onScroll");
     }
   },
 

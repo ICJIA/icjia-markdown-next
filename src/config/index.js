@@ -123,7 +123,10 @@ const config = {
    *
    */
   displaySnippets: true,
-  snippets: [{ name: "Welcome", filename: "welcome.md" }],
+  snippets: [
+    { name: "Welcome", filename: "welcome.md" },
+    { name: "Sample Table", filename: "table.md" }
+  ],
   /**
    *
    *
@@ -186,12 +189,7 @@ const config = {
           icon: "short_text",
           tooltip: "Footnote"
         },
-        {
-          name: "table",
-          action: "table",
-          icon: "table_chart",
-          tooltip: "Table"
-        },
+
         {
           name: "loremipsum",
           action: "loremipsum",
@@ -254,12 +252,7 @@ const config = {
           icon: "short_text",
           tooltip: "Footnote"
         },
-        {
-          name: "table",
-          action: "table",
-          icon: "table_chart",
-          tooltip: "Table"
-        },
+
         {
           name: "loremipsum",
           action: "loremipsum",
