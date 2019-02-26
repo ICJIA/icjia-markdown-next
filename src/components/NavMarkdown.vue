@@ -47,11 +47,13 @@
                 <div v-if="config.displaySnippets">
               <v-divider></v-divider>
               <v-subheader class="grey--text text--darken-1" style="font-size: 14px;">Markdown Snippets</v-subheader>
-              <v-list-tile v-for="snippet in snippets" :key="snippet.name" class="moreEntitites">
-                <v-list-tile-title v-on:click="getSnippet(snippet.markdown)" style="font-size: 14px;">
+             
+
+              <v-list-tile v-for="snippet in config.snippets" :key="snippet.filename" class="moreEntitites">
+                <v-list-tile-title v-on:click="getSnippet(snippet.filename)" style="font-size: 14px;">
                   
                   <v-icon style="width: 35px; font-size: 16px;">subject</v-icon>
-                  &nbsp;&nbsp;{{snippet.display}}</v-list-tile-title>
+                  &nbsp;&nbsp;{{snippet.name}}</v-list-tile-title>
                
               </v-list-tile>
               </div>
@@ -220,7 +222,6 @@ import { samples } from "@/samples";
 import { EventBus } from "@/event-bus.js";
 import config from "@/config";
 import { capitalize } from "@/filters";
-import snippets from "@/snippets";
 
 export default {
   created() {
@@ -248,6 +249,10 @@ export default {
       this.stylesheetSelection = this.stylesheetObj;
       this.loadStyleSheet(this.stylesheetObj.value);
     });
+
+    // let filename = "welcome";
+    // var test = require(`raw-loader!@/snippets/${filename}.md`);
+    // console.log(test);
   },
   methods: {
     getEntity(action) {
@@ -274,7 +279,9 @@ export default {
     loadSample(markdown) {
       EventBus.$emit("loadMarkdown", markdown);
     },
-    getSnippet(markdown) {
+    getSnippet(filename) {
+      let markdown = require(`raw-loader!@/snippets/${filename}`);
+
       EventBus.$emit("getSnippet", markdown);
     },
     loadMarkdown() {
@@ -334,7 +341,7 @@ export default {
       samples,
       dialog: false,
       capitalize,
-      snippets,
+
       modes: [],
       mode: "",
       modeIndex: null,

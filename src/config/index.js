@@ -123,6 +123,7 @@ const config = {
    *
    */
   displaySnippets: true,
+  snippets: [{ name: "Welcome", filename: "welcome.md" }],
   /**
    *
    *

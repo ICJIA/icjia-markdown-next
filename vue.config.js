@@ -1,7 +1,10 @@
 module.exports = {
   chainWebpack: config => {
+    /**
+     * Import/Require file as string
+     */
     config.module
-      .rule("raw-loader")
+      .rule("raw")
       .test(/\.md$/i)
       .use("raw-loader")
       .loader("raw-loader")

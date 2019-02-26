@@ -73,7 +73,7 @@ import { samples } from "@/samples";
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
 import { EventBus } from "@/event-bus.js";
-import snippets from "@/snippets";
+
 let FileSaver = require("file-saver");
 let loremIpsum = require("lorem-ipsum");
 
@@ -123,7 +123,7 @@ export default {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
       } else {
-        let welcomeMarkdown = snippets[0].markdown;
+        let welcomeMarkdown = require(`raw-loader!@/snippets/welcome.md`);
         this.editor.getDoc().setValue(welcomeMarkdown);
       }
     },
