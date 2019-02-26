@@ -358,7 +358,8 @@ export default {
       return loremIpsum(this.config.loremIpsum) + " ";
     },
     getTableEntity() {
-      return "insert table here";
+      let tableSnippet = require(`@/snippets/table.md`);
+      return tableSnippet;
     },
     onScroll(e) {
       console.log("onScroll");
