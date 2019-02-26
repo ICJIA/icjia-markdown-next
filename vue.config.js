@@ -1,7 +1,7 @@
 module.exports = {
   chainWebpack: config => {
     /**
-     * Import/Require file as string
+     * Import markdown file as string
      */
     config.module
       .rule("raw")

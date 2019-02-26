@@ -2,7 +2,7 @@
   <v-app id="markdown-app">
     <nav-primary></nav-primary>
 
-    <router-view/>
+    <router-view />
   </v-app>
 </template>
 

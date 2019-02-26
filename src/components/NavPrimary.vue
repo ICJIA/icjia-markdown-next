@@ -3,50 +3,49 @@
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
       <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title>
-        <router-link to="/" class="navTitle"><span style="font-weight: 400;">ICJIA</span>&nbsp;<span style="font-weight: 900;">MARKDOWN EDITOR</span></router-link>
+        <router-link to="/" class="navTitle"
+          ><span style="font-weight: 400;">ICJIA</span>&nbsp;<span
+            style="font-weight: 900;"
+            >MARKDOWN EDITOR</span
+          ></router-link
+        >
       </v-toolbar-title>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      
 
-    
-     <v-tooltip bottom max-width="200">
-          
-        <v-menu
-      transition="slide-y-transition"
-      bottom
-      slot="activator"
-    >
-     
-      <v-btn
-        slot="activator"
-        small
-        depressed
+      <v-tooltip bottom max-width="200">
+        <v-menu transition="slide-y-transition" bottom slot="activator">
+          <v-btn
+            slot="activator"
+            small
+            depressed
             color="indigo accent-2"
             dark
             style="font-size: 10px; font-weight: 900"
-      >
-        Mode:&nbsp;{{mode}}<v-icon dark right style="font-size: 14px; font-weight: 900">{{getModeIcon}}</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile
-          v-for="(m, i) in modes"
-          :key="i"
-           @click="selectMode(m)"
-         >
-         
-          <v-list-tile-title>
-           
-            
-            
-            {{ config.modes[m].display}} <span v-if="m === mode"> <v-icon right>check_circle</v-icon> </span></v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-     <span v-html='config.modes[this.mode]["tooltip"]'></span>
-        </v-tooltip>
+          >
+            Mode:&nbsp;{{ mode
+            }}<v-icon dark right style="font-size: 14px; font-weight: 900">{{
+              getModeIcon
+            }}</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile
+              v-for="(m, i) in modes"
+              :key="i"
+              @click="selectMode(m)"
+            >
+              <v-list-tile-title>
+                {{ config.modes[m].display }}
+                <span v-if="m === mode">
+                  <v-icon right>check_circle</v-icon>
+                </span></v-list-tile-title
+              >
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+        <span v-html="config.modes[this.mode]['tooltip']"></span>
+      </v-tooltip>
       <v-spacer></v-spacer>
-      
-     
+
       <v-tooltip bottom>
         <v-dialog v-model="statistics" max-width="500" slot="activator">
           <v-btn
@@ -58,8 +57,7 @@
             v-on:click="getMarkdown"
           >
             <v-icon size="28px">insert_chart</v-icon>
-            &nbsp;
-            Word count: {{wordCount}}
+            &nbsp; Word count: {{ wordCount }}
           </v-btn>
           <v-card>
             <v-card-title class="headline">Text Statistics</v-card-title>
@@ -69,17 +67,14 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn color="green darken-1" flat @click="statistics = false">CLOSE</v-btn>
+              <v-btn color="green darken-1" flat @click="statistics = false"
+                >CLOSE</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-dialog>
         <span>Show Text Statistics</span>
       </v-tooltip>
-
-       
-     
-
-     
 
       <v-tooltip bottom open-delay="400">
         <v-btn
@@ -92,7 +87,7 @@
         >
           <v-icon size="16px">fab fa-github</v-icon>
           &nbsp;
-          {{info.version}}
+          {{ info.version }}
         </v-btn>
         <span>Github</span>
       </v-tooltip>
@@ -105,16 +100,11 @@
           small
           href="https://legacy-markdown.icjia.cloud/"
           target="_blank"
-        >Launch Legacy Editor
+          >Launch Legacy Editor
           <v-icon right size="16px">launch</v-icon>
-         
         </v-btn>
         <span>Access the original ICJIA Markdown Editor</span>
       </v-tooltip>
-
-
-      
-
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}

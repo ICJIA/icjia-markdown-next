@@ -6,24 +6,25 @@
         color="grey lighten-2"
         style="padding-top: 5px; z-index: 100; position: fixed; top: 50px; margin-left: -10px"
       >
-      
-          <div
+        <div
           v-for="tool in visibleTools"
           :key="tool.action"
           class="hidden-sm-and-down"
           style="margin-left: -3px"
-         
         >
-
           <v-tooltip bottom>
-            <v-btn small icon slot="activator" @click.prevent="getEntity(tool.action)">
-              <v-icon size="20px">{{tool.icon}}</v-icon>
+            <v-btn
+              small
+              icon
+              slot="activator"
+              @click.prevent="getEntity(tool.action)"
+            >
+              <v-icon size="20px">{{ tool.icon }}</v-icon>
             </v-btn>
-            <span>{{tool.tooltip}}</span>
+            <span>{{ tool.tooltip }}</span>
           </v-tooltip>
         </div>
 
-       
         <v-tooltip bottom>
           <v-menu
             offset-y
@@ -35,41 +36,49 @@
             <v-btn icon slot="activator" style="margin-left: -5px">
               <v-icon>more_vert</v-icon>
             </v-btn>
-            <v-list >
-
-               <v-list-tile v-for="(tool, index) in remainingTools" :key="index" class="moreEntitites">
-                <v-list-tile-title v-on:click="getEntity(tool.action)" style="font-size: 14px;">
-                  
-                  <v-icon style="width: 35px;">{{tool.icon}}</v-icon>
-                  &nbsp;&nbsp;{{tool.tooltip}}</v-list-tile-title>
-               
+            <v-list>
+              <v-list-tile
+                v-for="(tool, index) in remainingTools"
+                :key="index"
+                class="moreEntitites"
+              >
+                <v-list-tile-title
+                  v-on:click="getEntity(tool.action)"
+                  style="font-size: 14px;"
+                >
+                  <v-icon style="width: 35px;">{{ tool.icon }}</v-icon>
+                  &nbsp;&nbsp;{{ tool.tooltip }}</v-list-tile-title
+                >
               </v-list-tile>
-                <div v-if="config.displaySnippets">
-              <v-divider></v-divider>
-              <v-subheader class="grey--text text--darken-1" style="font-size: 14px;">Markdown Snippets</v-subheader>
-             
+              <div v-if="config.displaySnippets">
+                <v-divider></v-divider>
+                <v-subheader
+                  class="grey--text text--darken-1"
+                  style="font-size: 14px;"
+                  >Markdown Snippets</v-subheader
+                >
 
-              <v-list-tile v-for="snippet in config.snippets" :key="snippet.filename" class="moreEntitites">
-                <v-list-tile-title v-on:click="getSnippet(snippet.filename)" style="font-size: 14px;">
-                  
-                  <v-icon style="width: 35px; font-size: 16px;">subject</v-icon>
-                  &nbsp;&nbsp;{{snippet.name}}</v-list-tile-title>
-               
-              </v-list-tile>
+                <v-list-tile
+                  v-for="snippet in config.snippets"
+                  :key="snippet.filename"
+                  class="moreEntitites"
+                >
+                  <v-list-tile-title
+                    v-on:click="getSnippet(snippet.filename)"
+                    style="font-size: 14px;"
+                  >
+                    <v-icon style="width: 35px; font-size: 16px;"
+                      >subject</v-icon
+                    >
+                    &nbsp;&nbsp;{{ snippet.name }}</v-list-tile-title
+                  >
+                </v-list-tile>
               </div>
-
-            </v-list> 
-      
-           
-           
+            </v-list>
           </v-menu>
-          <span>Additional {{this.mode | capitalize }} Tools</span>
+          <span>Additional {{ this.mode | capitalize }} Tools</span>
         </v-tooltip>
         <!-- </span> -->
-
-
-        
-      
 
         <v-tooltip bottom>
           <v-btn
@@ -79,55 +88,65 @@
             slot="activator"
             @click.prevent="getEntity('saveMarkdown')"
             style="font-size: 10px; font-weight: 900"
-          >Save MD
-            <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
+            >Save MD
+            <v-icon dark right style="font-size: 14px; font-weight: 900"
+              >save_alt</v-icon
+            >
           </v-btn>
-          <span>{{config.tooltips['saveMd'].text}}</span>
+          <span>{{ config.tooltips["saveMd"].text }}</span>
         </v-tooltip>
 
         <v-tooltip bottom>
-          <v-dialog v-model="dialog" persistent max-width="290" slot="activator">
+          <v-dialog
+            v-model="dialog"
+            persistent
+            max-width="290"
+            slot="activator"
+          >
             <v-btn
               small
               slot="activator"
               color="blue darken-4"
               dark
               style="font-size: 10px; font-weight: 900"
-            >Load MD
-              <v-icon dark right style="font-size: 14px; font-weight: 900">cloud_upload</v-icon>
+              >Load MD
+              <v-icon dark right style="font-size: 14px; font-weight: 900"
+                >cloud_upload</v-icon
+              >
             </v-btn>
             <v-card class="text-xs-center">
               <v-card-title class="headline">Load Markdown File</v-card-title>
               <v-card-text>Load a previously saved .md file</v-card-text>
-              <input type="file" class="custom-file-input" id="fileInput">
+              <input type="file" class="custom-file-input" id="fileInput" />
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green darken-1" flat @click="dialog=false">Cancel</v-btn>
-                <v-btn color="green darken-1" flat @click="loadMarkdown">Load file</v-btn>
+                <v-btn color="green darken-1" flat @click="dialog = false"
+                  >Cancel</v-btn
+                >
+                <v-btn color="green darken-1" flat @click="loadMarkdown"
+                  >Load file</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <span>{{config.tooltips['loadMd'].text}}</span>
+          <span>{{ config.tooltips["loadMd"].text }}</span>
         </v-tooltip>
 
-          <v-tooltip bottom>
+        <v-tooltip bottom>
           <v-btn
             small
             dark
             color="blue darken-4"
             slot="activator"
-             @click.prevent="getEntity('mdToClipboard')"
+            @click.prevent="getEntity('mdToClipboard')"
             style="font-size: 10px; font-weight: 900"
-          >Copy
-            <v-icon dark right style="font-size: 14px; font-weight: 900">assignment</v-icon>
+            >Copy
+            <v-icon dark right style="font-size: 14px; font-weight: 900"
+              >assignment</v-icon
+            >
           </v-btn>
-          <span>{{config.tooltips['copyMd'].text}}</span>
+          <span>{{ config.tooltips["copyMd"].text }}</span>
         </v-tooltip>
-
-       
-
-        
-        
       </v-toolbar>
     </v-flex>
     <v-flex xs6 class="hidden-sm-and-down">
@@ -136,7 +155,6 @@
         color="grey lighten-2"
         style="padding-top: 5px; z-index: 100; position: fixed; top: 50px;"
       >
-    
         <v-select
           :items="config.stylesheets"
           label="Stylesheet"
@@ -145,9 +163,8 @@
           color="indigo"
           item-text="display"
         ></v-select>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;
-         <v-tooltip bottom>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+        <v-tooltip bottom>
           <v-btn
             small
             color="blue darken-4"
@@ -155,10 +172,12 @@
             slot="activator"
             @click.prevent="getEntity('saveHtml')"
             style="font-size: 10px; font-weight: 900"
-          >Save HTML
-            <v-icon dark right style="font-size: 14px; font-weight: 900">save_alt</v-icon>
+            >Save HTML
+            <v-icon dark right style="font-size: 14px; font-weight: 900"
+              >save_alt</v-icon
+            >
           </v-btn>
-          <span>{{config.tooltips['saveHtml'].text}}</span>
+          <span>{{ config.tooltips["saveHtml"].text }}</span>
         </v-tooltip>
         <v-tooltip bottom>
           <v-btn
@@ -168,10 +187,12 @@
             slot="activator"
             @click.prevent="getEntity('showHtml')"
             style="font-size: 10px; font-weight: 900"
-          >Show
-            <v-icon dark right style="font-size: 14px;font-weight: 900">code</v-icon>
+            >Show
+            <v-icon dark right style="font-size: 14px;font-weight: 900"
+              >code</v-icon
+            >
           </v-btn>
-          <span>{{config.tooltips['showHtml'].text}}</span>
+          <span>{{ config.tooltips["showHtml"].text }}</span>
         </v-tooltip>
         <v-tooltip bottom>
           <v-btn
@@ -179,28 +200,27 @@
             dark
             color="blue darken-4"
             slot="activator"
-             @click.prevent="getEntity('copyHtml')"
+            @click.prevent="getEntity('copyHtml')"
             style="font-size: 10px; font-weight: 900"
-          >Copy
-            <v-icon dark right style="font-size: 14px; font-weight: 900">assignment</v-icon>
+            >Copy
+            <v-icon dark right style="font-size: 14px; font-weight: 900"
+              >assignment</v-icon
+            >
           </v-btn>
-          <span>{{config.tooltips['copyHtml'].text}}</span>
+          <span>{{ config.tooltips["copyHtml"].text }}</span>
         </v-tooltip>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-         <v-tooltip bottom max-width="150">
-           <v-switch
-              v-model="isScrollSynced"
-              slot="activator"
-              label="Scroll Sync"
-              class="scrollSync"
-              hide-details
-            ></v-switch>
-             <span>{{config.tooltips['scrollSync'].text}}</span>
+        <v-tooltip bottom max-width="150">
+          <v-switch
+            v-model="isScrollSynced"
+            slot="activator"
+            label="Scroll Sync"
+            class="scrollSync"
+            hide-details
+          ></v-switch>
+          <span>{{ config.tooltips["scrollSync"].text }}</span>
         </v-tooltip>
-
-        
-     
       </v-toolbar>
     </v-flex>
   </v-layout>
@@ -218,7 +238,7 @@ function clearFileInput(ctrl) {
     ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
   }
 }
-import { samples } from "@/samples";
+
 import { EventBus } from "@/event-bus.js";
 import config from "@/config";
 import { capitalize } from "@/filters";
@@ -251,7 +271,7 @@ export default {
     });
 
     // let filename = "welcome";
-    // var test = require(`raw-loader!@/snippets/${filename}.md`);
+    // var test = require(`@/snippets/${filename}.md`);
     // console.log(test);
   },
   methods: {
@@ -280,7 +300,7 @@ export default {
       EventBus.$emit("loadMarkdown", markdown);
     },
     getSnippet(filename) {
-      let markdown = require(`raw-loader!@/snippets/${filename}`);
+      let markdown = require(`@/snippets/${filename}`);
 
       EventBus.$emit("getSnippet", markdown);
     },
@@ -338,7 +358,7 @@ export default {
       currentStyleSheet: null,
       stylesheetSelection: null,
       config,
-      samples,
+
       dialog: false,
       capitalize,
 
@@ -351,7 +371,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 .v-input {

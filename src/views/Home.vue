@@ -28,7 +28,7 @@
       </v-dialog>
 
       <nav-markdown></nav-markdown>
-      
+
       <div
         v-if="$browserDetect.isIE"
         class="text-xs-center pt-5 pb-5"
@@ -36,29 +36,39 @@
       >
         <h1 style="color: white">
           Your browser is out of date.
-          <br>In order to use this application, please update to the latest
-          <br>
-          <a href="https://www.google.com/chrome/" class="browserDetect">Chrome</a>,
-          <a href="https://www.mozilla.org/en-US/firefox/new/" class="browserDetect">Firefox</a>, or
+          <br />In order to use this application, please update to the latest
+          <br />
+          <a href="https://www.google.com/chrome/" class="browserDetect"
+            >Chrome</a
+          >,
+          <a
+            href="https://www.mozilla.org/en-US/firefox/new/"
+            class="browserDetect"
+            >Firefox</a
+          >, or
           <a
             href="https://www.microsoft.com/en-us/windows/microsoft-edge"
             class="browserDetect"
-          >Microsoft Edge</a>.
+            >Microsoft Edge</a
+          >.
         </h1>
       </div>
-      
+
       <div style="margin-top: 75px;" class="master">
         <v-layout row wrap>
           <v-flex xs12 sm6>
             <textarea id="editor" style="margin-top: -5px;"></textarea>
           </v-flex>
-          <v-flex xs12 sm6 style="margin-top: -0px; padding-right: 0px; padding-left: 5px; ">
+          <v-flex
+            xs12
+            sm6
+            style="margin-top: -0px; padding-right: 0px; padding-left: 5px; "
+          >
             <div
               class="markdown-body"
               style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
               id="viewer-scroll"
             >
-           
               <div v-html="model" :style="getBottomPadding"></div>
             </div>
           </v-flex>
@@ -69,7 +79,6 @@
 </template>
 
 <script>
-import { samples } from "@/samples";
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
 import { EventBus } from "@/event-bus.js";
@@ -123,7 +132,7 @@ export default {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
       } else {
-        let welcomeMarkdown = require(`raw-loader!@/snippets/welcome.md`);
+        let welcomeMarkdown = require(`@/snippets/welcome.md`);
         this.editor.getDoc().setValue(welcomeMarkdown);
       }
     },
@@ -349,13 +358,7 @@ export default {
       return loremIpsum(this.config.loremIpsum) + " ";
     },
     getTableEntity() {
-      let table = samples.filter(s => {
-        if (s.title === "Table") {
-          return s;
-        }
-      });
-
-      return table[0].body;
+      return "insert table here";
     },
     onScroll(e) {
       console.log("onScroll");
