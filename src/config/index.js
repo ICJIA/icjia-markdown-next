@@ -83,6 +83,7 @@ const config = {
    */
   maxVisibleTools: 8,
   defaultMode: "standard",
+  displaySnippets: true,
   modes: {
     standard: {
       description: "Default Markdown mode.",

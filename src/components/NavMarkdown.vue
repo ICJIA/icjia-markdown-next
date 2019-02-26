@@ -35,17 +35,29 @@
             <v-btn icon slot="activator" style="margin-left: -5px">
               <v-icon>more_vert</v-icon>
             </v-btn>
-            <v-list>
+            <v-list >
 
                <v-list-tile v-for="(tool, index) in remainingTools" :key="index" class="moreEntitites">
-                <v-list-tile-title v-on:click="getEntity(tool.action)">
+                <v-list-tile-title v-on:click="getEntity(tool.action)" style="font-size: 14px;">
                   
                   <v-icon style="width: 35px;">{{tool.icon}}</v-icon>
                   &nbsp;&nbsp;{{tool.tooltip}}</v-list-tile-title>
                
               </v-list-tile>
+                <div v-if="config.displaySnippets">
+              <v-divider></v-divider>
+              <v-subheader class="grey--text text--darken-1" style="font-size: 14px;">Markdown Snippets</v-subheader>
+              <v-list-tile v-for="snippet in snippets" :key="snippet.name" class="moreEntitites">
+                <v-list-tile-title v-on:click="getSnippet(snippet.markdown)" style="font-size: 14px;">
+                  
+                  <v-icon style="width: 35px; font-size: 16px;">subject</v-icon>
+                  &nbsp;&nbsp;{{snippet.display}}</v-list-tile-title>
+               
+              </v-list-tile>
+              </div>
 
-            </v-list>
+            </v-list> 
+      
            
            
           </v-menu>
@@ -261,8 +273,8 @@ export default {
     loadSample(markdown) {
       EventBus.$emit("loadMarkdown", markdown);
     },
-    insertSnippet(markdown) {
-      EventBus.$emit("insertSnippet", markdown);
+    getSnippet(markdown) {
+      EventBus.$emit("getSnippet", markdown);
     },
     loadMarkdown() {
       let fileInput = document.getElementById("fileInput");

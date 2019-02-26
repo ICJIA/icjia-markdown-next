@@ -73,8 +73,10 @@ import { samples } from "@/samples";
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
 import { EventBus } from "@/event-bus.js";
+import snippets from "@/snippets";
 let FileSaver = require("file-saver");
 let loremIpsum = require("lorem-ipsum");
+
 /* Thanks to: https://github.com/musicbed/mirrormark/blob/master/src/js/mirrormark.js */
 const beautify_html = require("js-beautify").html;
 let codeMirror = require("codemirror");
@@ -121,12 +123,8 @@ export default {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
       } else {
-        let welcome = samples.filter(s => {
-          if (s.title === "Welcome") {
-            return s;
-          }
-        });
-        this.editor.getDoc().setValue(welcome[0].body);
+        let welcomeMarkdown = snippets[0].markdown;
+        this.editor.getDoc().setValue(welcomeMarkdown);
       }
     },
     initializeComponentEventListeners() {
@@ -141,7 +139,7 @@ export default {
         // pong
         EventBus.$emit("sendMarkdown", this.markdown);
       });
-      EventBus.$on("insertSnippet", snippet => {
+      EventBus.$on("getSnippet", snippet => {
         this.insert("\n" + snippet + "\n");
       });
 
@@ -179,11 +177,8 @@ export default {
       }
     },
     updateEditorScroll(e) {
-      /**
-       * TODO: Determine proper offset for scrolling CodeMirror window
-       */
-      // if (this.isScrollSynced) {
       this.viewerScrollTop = e.target.scrollTop;
+      // if (this.isScrollSynced) {
       // console.log(
       //   "Viewer ",
       //   this.viewerScrollTop,
@@ -218,7 +213,7 @@ export default {
           this.insertBefore("* ", 2);
           break;
         case "orderedList":
-          this.insertBefore("1 ", 2);
+          this.insertBefore("1. ", 2);
           break;
         case "code":
           this.insertAround("```\r\n", "\r\n```");
