@@ -229,7 +229,7 @@ const config = {
           name: "clear",
           action: "clear",
           icon: "clear",
-          tooltip: "Clear all"
+          tooltip: "Clear document and metadata"
         },
         {
           name: "image",
