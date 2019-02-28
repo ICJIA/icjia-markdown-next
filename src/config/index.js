@@ -163,6 +163,12 @@ const config = {
         },
         { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear document and metadata"
+        },
+        {
           name: "image",
           action: "image",
           icon: "insert_photo",
@@ -179,12 +185,6 @@ const config = {
           action: "orderedList",
           icon: "format_list_numbered",
           tooltip: "Numbered List"
-        },
-        {
-          name: "clear",
-          action: "clear",
-          icon: "clear",
-          tooltip: "Clear all"
         },
 
         {
@@ -226,6 +226,12 @@ const config = {
         },
         { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear all"
+        },
+        {
           name: "image",
           action: "image",
           icon: "insert_photo",
@@ -242,12 +248,6 @@ const config = {
           action: "orderedList",
           icon: "format_list_numbered",
           tooltip: "Numbered List"
-        },
-        {
-          name: "clear",
-          action: "clear",
-          icon: "clear",
-          tooltip: "Clear all"
         },
 
         {

@@ -41,7 +41,7 @@
             <v-flex xs12>
               <div style="padding: 20px 20px;">
                 <tree-view
-                  :data="meta"
+                  :data="yaml"
                   :options="{ maxDepth: 5 }"
                   class="mt-3"
                 ></tree-view>
@@ -151,7 +151,7 @@ export default {
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
-        this.meta = md.meta;
+        this.yaml = md.meta;
       });
     },
     setInitialText() {
@@ -195,7 +195,8 @@ export default {
     clear() {
       this.editor.getDoc().setValue("");
       this.model = "";
-      this.meta = {};
+      this.yaml = {};
+      EventBus.$emit("displayStatus", "Document content and metadata cleared.");
     },
     updateViewerScroll(e) {
       if (this.isScrollSynced) {
@@ -399,9 +400,30 @@ export default {
       return this.editor.getValue();
     },
     wordCount: function() {
+      /**
+       * Regex to ignore words in YAML
+       *
+       * /(?<=---)([\s\S]*?)(?=---)/gi
+       *
+       */
+
       if (this.editor) {
+        let str = this.editor.getValue();
+        let yamlWordCount;
+        if (str.length > 0) {
+          let yaml = /(?<=---)([\s\S]*?)(?=---)/gi.exec(str);
+          console.log(yaml);
+          if (yaml != null) {
+            yamlWordCount = yaml[0].split(" ").length - 1;
+            //console.log(yamlWordCount);
+          } else {
+            yamlWordCount = 0;
+          }
+        }
+
         let wordCount = this.editor.getValue().split(" ").length - 1;
-        return wordCount;
+
+        return wordCount - yamlWordCount;
       } else {
         return 0;
       }
@@ -437,7 +459,7 @@ export default {
       isScrollSynced: true,
       editorScrollTop: null,
       viewerScrollTop: null,
-      meta: {}
+      yaml: {}
     };
   }
 };
