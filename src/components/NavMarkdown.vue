@@ -148,7 +148,7 @@
           <span>{{ config.tooltips["copyMd"].text }}</span>
         </v-tooltip>
 
-        <v-tooltip bottom>
+        <v-tooltip bottom max-width="200">
           <v-btn
             small
             dark
@@ -156,12 +156,12 @@
             slot="activator"
             @click.prevent="getEntity('showYaml')"
             style="font-size: 10px; font-weight: 900"
-            >Show YAML
+            >YAML
             <v-icon dark right style="font-size: 14px; font-weight: 900"
               >assignment</v-icon
             >
           </v-btn>
-          <span>{{ config.tooltips["showYaml"].text }}</span>
+          <span v-html="config.tooltips['showYaml'].text"></span>
         </v-tooltip>
       </v-toolbar>
     </v-flex>

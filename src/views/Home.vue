@@ -27,6 +27,26 @@
         </v-card>
       </v-dialog>
 
+      <v-dialog v-model="showYaml" width="80%" class="htmlDialog">
+        <v-card>
+          <v-toolbar dark color="indigo">
+            <v-btn icon @click.native="toggleYaml" dark>
+              <v-icon>close</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+
+          <v-layout row wrap>
+            <v-flex xs12>
+              <div style="padding: 20px 20px;">
+                <h3>YAML:</h3>
+                <div class="mt-3">{{ meta }}</div>
+              </div>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-dialog>
+
       <nav-markdown></nav-markdown>
 
       <div
@@ -89,12 +109,13 @@ let loremIpsum = require("lorem-ipsum");
 /* Thanks to: https://github.com/musicbed/mirrormark/blob/master/src/js/mirrormark.js */
 const beautify_html = require("js-beautify").html;
 let codeMirror = require("codemirror");
+
 let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-footnote"))
   .use(require("markdown-it-named-headers"))
   .use(require("markdown-it-emoji"))
   .use(require("markdown-it-attrs"))
-  .use(require("markdown-it-meta"))
+  .use(require("@/markdown-it-meta-fork"))
   .use(require("markdown-it-container"));
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
@@ -238,7 +259,6 @@ export default {
           this.insert(`[^1] `);
           this.footnote++;
           break;
-
         case "loremipsum":
           this.insert(this.getLoremIpsumEntity());
           break;
@@ -247,6 +267,9 @@ export default {
           break;
         case "showHtml":
           this.toggleHtml();
+          break;
+        case "showYaml":
+          this.toggleYaml();
           break;
         case "saveHtml":
           this.saveHtml();
@@ -305,6 +328,9 @@ export default {
     },
     toggleHtml: function() {
       this.showHtml = !this.showHtml;
+    },
+    toggleYaml: function() {
+      this.showYaml = !this.showYaml;
     },
     saveHtml: function() {
       try {
@@ -395,6 +421,7 @@ export default {
       dialog: false,
       notifications: false,
       showHtml: false,
+      showYaml: false,
       footnote: 1,
       editor: null,
       isHidden: true,

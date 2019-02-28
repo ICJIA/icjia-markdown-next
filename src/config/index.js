@@ -43,7 +43,8 @@ const config = {
       text: "Copy markdown to clipboard"
     },
     showYaml: {
-      text: "Display YAML header as object."
+      text:
+        "Display YAML info.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard."
     },
     saveHtml: {
       text: "Save as HTML"
@@ -137,7 +138,7 @@ const config = {
    *
    *
    */
-  maxVisibleTools: 5,
+  maxVisibleTools: 6,
   defaultMode: "standard",
   modes: {
     standard: {
