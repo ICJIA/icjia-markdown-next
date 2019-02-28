@@ -44,7 +44,11 @@ function meta(md, state, start, end, silent) {
     md.meta = YAML.safeLoadAll(data.join("\n\r"), { json: true }) || {};
   } catch (e) {
     /**
-     * TODO: Figure out this 'block mapping' error. For now, fail silently.
+     * TODO: Figure out the 'block mapping' error below. For now, fail silently.
+     *
+     *  {name: "YAMLException", reason: "can not read a block mapping entry; a multiline key may not be an implicit key", mark: Mark, message: "can not read a block mapping entry; a multiline ke…1, column 13:↵    demographics:↵                ^", stack: "YAMLException: can not read a block mapping entry;…de_modules/markdown-it/lib/parser_block.js:79:20)"}
+     *
+     *
      */
     //console.log(e);
   }
