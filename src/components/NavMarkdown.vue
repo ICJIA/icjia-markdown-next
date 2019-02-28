@@ -151,7 +151,8 @@
         <v-tooltip bottom max-width="200">
           <v-btn
             small
-            dark
+            :dark="isYaml"
+            :disabled="!isYaml"
             color="blue darken-4"
             slot="activator"
             @click.prevent="getEntity('showYaml')"
@@ -280,6 +281,11 @@ export default {
   mounted() {
     //
     EventBus.$emit("setMode", this.mode);
+    EventBus.$on("yamlStatus", isYaml => {
+      this.isYaml = !!parseInt(isYaml);
+      // console.log(this.isYaml);
+    });
+
     EventBus.$on("setMode", mode => {
       this.mode = mode;
       this.stylesheetSelection = this.stylesheetObj;
@@ -376,7 +382,7 @@ export default {
 
       dialog: false,
       capitalize,
-
+      isYaml: false,
       modes: [],
       mode: "",
       modeIndex: null,

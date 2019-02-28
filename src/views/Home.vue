@@ -415,14 +415,14 @@ export default {
           //console.log(yaml);
           if (yaml != null) {
             yamlWordCount = yaml[0].trim().split(" ").length;
-            console.log("YAML word count ", yamlWordCount);
+            //console.log("YAML word count ", yamlWordCount);
           } else {
             yamlWordCount = 0;
           }
         }
 
         let wordCount = this.editor.getValue().split(" ").length;
-        console.log(wordCount);
+        //console.log(wordCount);
         if (wordCount <= 1) {
           return 0;
         } else {
@@ -438,11 +438,17 @@ export default {
     },
     getBottomPadding: function() {
       return `padding-bottom: ${config.viewerBottomPadding}px`;
+    },
+    isYaml: function() {
+      return Object.keys(this.yaml).length;
     }
   },
   watch: {
     wordCount() {
       EventBus.$emit("updateWordCount", this.wordCount);
+    },
+    isYaml() {
+      EventBus.$emit("yamlStatus", this.isYaml);
     }
   },
   data() {

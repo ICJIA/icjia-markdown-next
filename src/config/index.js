@@ -44,7 +44,7 @@ const config = {
     },
     showYaml: {
       text:
-        "Display YAML info.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard. YAML is frequently used at the beginning of a markdown file to insert metadata and other information."
+        "Display YAML info.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard. YAML is frequently used at the beginning of a markdown file to insert metadata and other information.<br><br>If YAML info exists, this button is active."
     },
     saveHtml: {
       text: "Save as HTML"
@@ -166,7 +166,7 @@ const config = {
           name: "clear",
           action: "clear",
           icon: "clear",
-          tooltip: "Clear document and metadata"
+          tooltip: "Clear YAML metadata and reset document."
         },
         {
           name: "image",
@@ -229,7 +229,7 @@ const config = {
           name: "clear",
           action: "clear",
           icon: "clear",
-          tooltip: "Clear document and metadata"
+          tooltip: "Clear YAML metadata and reset document."
         },
         {
           name: "image",
