@@ -412,7 +412,11 @@ export default {
       /**
        * Regex to ignore words in YAML
        *
+       * Version 1:
        * /(?<=---)([\s\S]*?)(?=---)/gi
+       *
+       * Version 2:
+       * ---([\s\S]*?)---
        *
        */
 
@@ -425,8 +429,6 @@ export default {
           if (yaml != null) {
             yamlWordCount = yaml[0].trim().split(" ").length;
             //console.log("YAML word count ", yamlWordCount);
-          } else {
-            yamlWordCount = 0;
           }
         }
 
