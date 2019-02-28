@@ -44,7 +44,7 @@ const config = {
     },
     showYaml: {
       text:
-        "Display YAML metadata.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard. YAML is frequently used at the beginning of a markdown file to insert metadata and other information.<br><br>If YAML metadata does not exist, this button is disabled."
+        "Display YAML metadata.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard.<br><br>YAML is frequently used at the beginning of a markdown file to insert document-specific metadata.<br><br>If no YAML exists, this button is disabled."
     },
     saveHtml: {
       text: "Save as HTML"
