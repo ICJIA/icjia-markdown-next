@@ -151,7 +151,15 @@ export default {
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
-        this.yaml = md.meta;
+        /**
+         * Check if YAML delimter ('---') is present. If not, clear YAML.
+         */
+        let yamlCheck = this.editor.doc.getLine(0);
+        if (yamlCheck === "---") {
+          this.yaml = md.meta;
+        } else {
+          this.yaml = "";
+        }
       });
     },
     setInitialText() {
@@ -449,7 +457,8 @@ export default {
     },
     isYaml() {
       EventBus.$emit("yamlStatus", this.isYaml);
-    }
+    },
+    editor() {}
   },
   data() {
     return {
