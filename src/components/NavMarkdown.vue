@@ -147,6 +147,22 @@
           </v-btn>
           <span>{{ config.tooltips["copyMd"].text }}</span>
         </v-tooltip>
+
+        <v-tooltip bottom>
+          <v-btn
+            small
+            dark
+            color="blue darken-4"
+            slot="activator"
+            @click.prevent="getEntity('showYaml')"
+            style="font-size: 10px; font-weight: 900"
+            >Show YAML
+            <v-icon dark right style="font-size: 14px; font-weight: 900"
+              >assignment</v-icon
+            >
+          </v-btn>
+          <span>{{ config.tooltips["showYaml"].text }}</span>
+        </v-tooltip>
       </v-toolbar>
     </v-flex>
     <v-flex xs6 class="hidden-sm-and-down">
@@ -301,7 +317,6 @@ export default {
     },
     getSnippet(filename) {
       let markdown = require(`@/snippets/${filename}`);
-
       EventBus.$emit("getSnippet", markdown);
     },
     loadMarkdown() {

@@ -94,6 +94,7 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-named-headers"))
   .use(require("markdown-it-emoji"))
   .use(require("markdown-it-attrs"))
+  .use(require("markdown-it-meta"))
   .use(require("markdown-it-container"));
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
@@ -125,6 +126,7 @@ export default {
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
+        this.meta = md.meta;
       });
     },
     setInitialText() {
@@ -149,7 +151,7 @@ export default {
         EventBus.$emit("sendMarkdown", this.markdown);
       });
       EventBus.$on("getSnippet", snippet => {
-        this.insert("\n" + snippet + "\n");
+        this.insert(snippet + "\n");
       });
 
       EventBus.$on("scrollSync", isScrollSynced => {
@@ -167,6 +169,8 @@ export default {
     },
     clear() {
       this.editor.getDoc().setValue("");
+      this.model = "";
+      this.meta = {};
     },
     updateViewerScroll(e) {
       if (this.isScrollSynced) {
@@ -401,7 +405,8 @@ export default {
       viewerScroll: null,
       isScrollSynced: true,
       editorScrollTop: null,
-      viewerScrollTop: null
+      viewerScrollTop: null,
+      meta: {}
     };
   }
 };

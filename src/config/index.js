@@ -42,6 +42,9 @@ const config = {
     copyMd: {
       text: "Copy markdown to clipboard"
     },
+    showYaml: {
+      text: "Display YAML header as object."
+    },
     saveHtml: {
       text: "Save as HTML"
     },
@@ -134,7 +137,7 @@ const config = {
    *
    *
    */
-  maxVisibleTools: 8,
+  maxVisibleTools: 5,
   defaultMode: "standard",
   modes: {
     standard: {
