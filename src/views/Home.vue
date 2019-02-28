@@ -33,14 +33,18 @@
             <v-btn icon @click.native="toggleYaml" dark>
               <v-icon>close</v-icon>
             </v-btn>
+            <h1>DOCUMENT YAML</h1>
             <v-spacer></v-spacer>
           </v-toolbar>
 
           <v-layout row wrap>
             <v-flex xs12>
               <div style="padding: 20px 20px;">
-                <h3>YAML:</h3>
-                <div class="mt-3">{{ meta }}</div>
+                <tree-view
+                  :data="meta"
+                  :options="{ maxDepth: 5 }"
+                  class="mt-3"
+                ></tree-view>
               </div>
             </v-flex>
           </v-layout>

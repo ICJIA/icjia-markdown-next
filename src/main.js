@@ -14,6 +14,9 @@ Vue.use(VueClipboard);
 import browserDetect from "vue-browser-detect-plugin";
 Vue.use(browserDetect);
 
+import TreeView from "vue-json-tree-view";
+Vue.use(TreeView);
+
 new Vue({
   router,
   store,
