@@ -158,7 +158,7 @@
             style="font-size: 10px; font-weight: 900"
             >YAML
             <v-icon dark right style="font-size: 14px; font-weight: 900"
-              >assignment</v-icon
+              >power</v-icon
             >
           </v-btn>
           <span v-html="config.tooltips['showYaml'].text"></span>
