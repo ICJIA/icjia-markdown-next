@@ -449,7 +449,10 @@ export default {
       return `padding-bottom: ${config.viewerBottomPadding}px`;
     },
     isYaml: function() {
-      return Object.keys(this.yaml).length;
+      /**
+       * Convert YAML object to boolean
+       */
+      return !!parseInt(Object.keys(this.yaml).length);
     }
   },
   watch: {

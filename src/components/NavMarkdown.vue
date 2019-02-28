@@ -282,7 +282,7 @@ export default {
     //
     EventBus.$emit("setMode", this.mode);
     EventBus.$on("yamlStatus", isYaml => {
-      this.isYaml = !!parseInt(isYaml);
+      this.isYaml = isYaml;
       // console.log(this.isYaml);
     });
 
@@ -291,10 +291,6 @@ export default {
       this.stylesheetSelection = this.stylesheetObj;
       this.loadStyleSheet(this.stylesheetObj.value);
     });
-
-    // let filename = "welcome";
-    // var test = require(`@/snippets/${filename}.md`);
-    // console.log(test);
   },
   methods: {
     getEntity(action) {
