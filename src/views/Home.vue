@@ -418,17 +418,17 @@ export default {
 
       if (this.editor) {
         let str = this.editor.getValue();
-        let yamlWordCount;
-        if (str.length > 0) {
-          let yaml = /(?<=---)([\s\S]*?)(?=---)/gi.exec(str);
-          //console.log(yaml);
-          if (yaml != null) {
-            yamlWordCount = yaml[0].trim().split(" ").length;
-            //console.log("YAML word count ", yamlWordCount);
-          } else {
-            yamlWordCount = 0;
-          }
-        }
+        let yamlWordCount = 0;
+        // if (str.length > 0) {
+        //   let yaml = /(?<=---)([\s\S]*?)(?=---)/gi.exec(str);
+        //   //console.log(yaml);
+        //   if (yaml != null) {
+        //     yamlWordCount = yaml[0].trim().split(" ").length;
+        //     //console.log("YAML word count ", yamlWordCount);
+        //   } else {
+        //     yamlWordCount = 0;
+        //   }
+        // }
 
         let wordCount = this.editor.getValue().split(" ").length;
         //console.log(wordCount);
