@@ -412,18 +412,22 @@ export default {
         let yamlWordCount;
         if (str.length > 0) {
           let yaml = /(?<=---)([\s\S]*?)(?=---)/gi.exec(str);
-          console.log(yaml);
+          //console.log(yaml);
           if (yaml != null) {
-            yamlWordCount = yaml[0].split(" ").length - 1;
-            //console.log(yamlWordCount);
+            yamlWordCount = yaml[0].trim().split(" ").length;
+            console.log("YAML word count ", yamlWordCount);
           } else {
             yamlWordCount = 0;
           }
         }
 
-        let wordCount = this.editor.getValue().split(" ").length - 1;
-
-        return wordCount - yamlWordCount;
+        let wordCount = this.editor.getValue().split(" ").length;
+        console.log(wordCount);
+        if (wordCount <= 1) {
+          return 0;
+        } else {
+          return wordCount - yamlWordCount;
+        }
       } else {
         return 0;
       }
