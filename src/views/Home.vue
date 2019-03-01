@@ -153,7 +153,7 @@ export default {
         this.line = cm.getCursor(true);
         /**
          * Check if YAML delimter ('---') is present. If not, clear YAML.
-         * This is necessary since deleting YAML delimiters doesn't delete YAML.
+         * This is necessary since deleting YAML delimiters doesn't delete the rendered YAML from markdown-it-meta.
          */
         let yamlCheck = this.editor.doc.getLine(0);
         if (yamlCheck === "---") {
