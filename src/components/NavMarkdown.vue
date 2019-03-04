@@ -181,6 +181,7 @@
           @change="loadStyleSheet"
           color="indigo"
           item-text="display"
+          v-if="config.allowManualStyleSelection"
         ></v-select>
         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
         <v-tooltip bottom>

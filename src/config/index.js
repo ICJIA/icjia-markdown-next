@@ -93,6 +93,7 @@ const config = {
     display: "Standard"
   },
   stylesheetStaticPath: "/css/",
+  allowManualStyleSelection: false,
   /**
    *
    *
