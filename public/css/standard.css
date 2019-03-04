@@ -700,3 +700,17 @@
 .markdown-body hr {
   border-bottom-color: #eee;
 }
+
+/* Markdown editor specific */
+
+.text-center {
+  text-align: center;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}

@@ -276,6 +276,12 @@ export default {
         case "loremipsum":
           this.insert(this.getLoremIpsumEntity());
           break;
+        case "centerText":
+          this.insertAfter(config.centerText);
+          break;
+        case "centerImage":
+          this.insertAfter(config.centerImage);
+          break;
         case "mdToClipboard":
           this.copyMarkdownToClipboard();
           break;
@@ -317,6 +323,17 @@ export default {
         // If no selection then insert start and end args and set cursor position between the two.
         doc.replaceRange(start + end, { line: cursor.line, ch: cursor.ch });
         doc.setCursor({ line: cursor.line, ch: cursor.ch + start.length });
+      }
+    },
+    insertAfter: function(end) {
+      let doc = this.editor.getDoc();
+      let cursor = doc.getCursor();
+
+      if (doc.somethingSelected()) {
+        let selection = doc.getSelection();
+        doc.replaceSelection(selection + end);
+      } else {
+        doc.replaceRange(end, { line: cursor.line, ch: cursor.ch });
       }
     },
 

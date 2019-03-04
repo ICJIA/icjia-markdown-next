@@ -129,8 +129,19 @@ const config = {
   displaySnippets: true,
   snippets: [
     { name: "Welcome", filename: "welcome.md" },
-    { name: "Sample Table", filename: "table.md" }
+    { name: "Sample Table", filename: "table.md" },
+    { name: "Filler Image", filename: "fillerImage.md" }
   ],
+  /**
+   *
+   *
+   * Styles for rendered HTML
+   *
+   *
+   */
+  centerText: "{.text-center}",
+  centerImage: "{.img-center}",
+
   /**
    *
    *
@@ -185,6 +196,18 @@ const config = {
           action: "orderedList",
           icon: "format_list_numbered",
           tooltip: "Numbered List"
+        },
+        {
+          name: "centerText",
+          action: "centerText",
+          icon: "format_align_center",
+          tooltip: "Center Text"
+        },
+        {
+          name: "centerImage",
+          action: "centerImage",
+          icon: "crop_original",
+          tooltip: "Center Image"
         },
 
         {
@@ -248,6 +271,18 @@ const config = {
           action: "orderedList",
           icon: "format_list_numbered",
           tooltip: "Numbered List"
+        },
+        {
+          name: "centerText",
+          action: "centerText",
+          icon: "format_align_center",
+          tooltip: "Center Text"
+        },
+        {
+          name: "centerImage",
+          action: "centerImage",
+          icon: "crop_original",
+          tooltip: "Center Image"
         },
 
         {

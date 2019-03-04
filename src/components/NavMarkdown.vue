@@ -36,7 +36,7 @@
             <v-btn icon slot="activator" style="margin-left: -5px">
               <v-icon>more_vert</v-icon>
             </v-btn>
-            <v-list>
+            <v-list dense>
               <v-list-tile
                 v-for="(tool, index) in remainingTools"
                 :key="index"
@@ -44,9 +44,11 @@
               >
                 <v-list-tile-title
                   v-on:click="getEntity(tool.action)"
-                  style="font-size: 14px;"
+                  style="font-size: 12px;"
                 >
-                  <v-icon style="width: 35px;">{{ tool.icon }}</v-icon>
+                  <v-icon style="width: 35px; font-size: 16px; color: #111">{{
+                    tool.icon
+                  }}</v-icon>
                   &nbsp;&nbsp;{{ tool.tooltip }}</v-list-tile-title
                 >
               </v-list-tile>
@@ -54,7 +56,7 @@
                 <v-divider></v-divider>
                 <v-subheader
                   class="grey--text text--darken-1"
-                  style="font-size: 14px;"
+                  style="font-size: 12px;"
                   >Markdown Snippets</v-subheader
                 >
 
@@ -65,7 +67,7 @@
                 >
                   <v-list-tile-title
                     v-on:click="getSnippet(snippet.filename)"
-                    style="font-size: 14px;"
+                    style="font-size: 12px;"
                   >
                     <v-icon style="width: 35px; font-size: 16px;"
                       >subject</v-icon
