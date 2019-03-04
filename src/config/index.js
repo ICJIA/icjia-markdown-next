@@ -230,7 +230,7 @@ const config = {
     },
     research: {
       tooltip:
-        "<strong>Research mode is still in development.</strong><br><br>Includes shortcuts and markdown snippets for ICJIA's researchers.<br><br>For now, Research and Standard modes are identical.",
+        "<strong>Research mode is still in development.</strong><br><br>Includes shortcuts, styles, and markdown snippets for ICJIA's researchers.<br><br>",
       display: "Research",
       color: "#f41d56",
       icon: "insert_chart_outlined",
