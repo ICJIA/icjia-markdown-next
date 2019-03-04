@@ -129,9 +129,9 @@ const config = {
   displaySnippets: true,
   snippets: [
     { name: "Welcome", filename: "welcome.md" },
-    { name: "Sample Table", filename: "table.md" },
-    { name: "Filler Image", filename: "fillerImage.md" },
-    { name: "Sample Article", filename: "article.md" }
+    { name: "Table", filename: "table.md" },
+    { name: "Image", filename: "fillerImage.md" },
+    { name: "Article", filename: "article.md" }
   ],
   /**
    *
@@ -190,7 +190,7 @@ const config = {
           name: "clear",
           action: "clear",
           icon: "clear",
-          tooltip: "Clear YAML metadata and reset document."
+          tooltip: "Clear all content"
         },
         {
           name: "image",
@@ -265,7 +265,7 @@ const config = {
           name: "clear",
           action: "clear",
           icon: "clear",
-          tooltip: "Clear YAML metadata and reset document."
+          tooltip: "Clear all content"
         },
         {
           name: "image",

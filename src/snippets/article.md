@@ -217,5 +217,3 @@ Future research should consider different outcomes to assess juvenile behavioral
 [^17]: Makarios, M., Sperber, K. G., & Latessa, E. J. (2014). Treatment dosage and the risk principle: A refinement and extension. _Journal of Offender Rehabilitation, 53_(5), 334–350. https://doi.org/10.1080/10509674.2014.922157
 [^18]: Laub, J. H., & Sampson, R. J. (2001). Understanding desistance from crime. _Crime and Justice, 28_, 1-69.
 [^19]: The National Reentry Resource Center. (2014)._ Measuring and using juvenile recidivism data to inform policy, practice, and resource allocation._ Washington, DC: Council on State Governments Justice Center. https://bit.ly/2IRmjnO.
-
-)
