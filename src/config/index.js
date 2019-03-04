@@ -130,7 +130,8 @@ const config = {
   snippets: [
     { name: "Welcome", filename: "welcome.md" },
     { name: "Sample Table", filename: "table.md" },
-    { name: "Filler Image", filename: "fillerImage.md" }
+    { name: "Filler Image", filename: "fillerImage.md" },
+    { name: "Sample Article", filename: "article.md" }
   ],
   /**
    *
@@ -174,6 +175,18 @@ const config = {
         },
         { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
+          name: "centerText",
+          action: "centerText",
+          icon: "format_align_center",
+          tooltip: "Center Text"
+        },
+        {
+          name: "centerImage",
+          action: "centerImage",
+          icon: "crop_original",
+          tooltip: "Center Image"
+        },
+        {
           name: "clear",
           action: "clear",
           icon: "clear",
@@ -196,18 +209,6 @@ const config = {
           action: "orderedList",
           icon: "format_list_numbered",
           tooltip: "Numbered List"
-        },
-        {
-          name: "centerText",
-          action: "centerText",
-          icon: "format_align_center",
-          tooltip: "Center Text"
-        },
-        {
-          name: "centerImage",
-          action: "centerImage",
-          icon: "crop_original",
-          tooltip: "Center Image"
         },
 
         {
@@ -247,6 +248,18 @@ const config = {
           icon: "format_quote",
           tooltip: "Blockquote"
         },
+        {
+          name: "centerText",
+          action: "centerText",
+          icon: "format_align_center",
+          tooltip: "Center Text"
+        },
+        {
+          name: "centerImage",
+          action: "centerImage",
+          icon: "crop_original",
+          tooltip: "Center Image"
+        },
         { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
           name: "clear",
@@ -271,18 +284,6 @@ const config = {
           action: "orderedList",
           icon: "format_list_numbered",
           tooltip: "Numbered List"
-        },
-        {
-          name: "centerText",
-          action: "centerText",
-          icon: "format_align_center",
-          tooltip: "Center Text"
-        },
-        {
-          name: "centerImage",
-          action: "centerImage",
-          icon: "crop_original",
-          tooltip: "Center Image"
         },
 
         {
