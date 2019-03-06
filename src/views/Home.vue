@@ -209,13 +209,17 @@ export default {
         strings: {
           content
         },
-        config: require("@/config/markdownlint/relaxed.json")
+        config: require(`@/${this.config.lintingRulePath}${
+          this.config.lintingDefault
+        }`)
       };
       window.markdownlint(options, function callback(err, result) {
         if (!err) {
           if (result.toString().length) {
             console.error("Linting error");
             console.log(result.toString());
+          } else {
+            console.log("No linting errors");
           }
         }
       });
