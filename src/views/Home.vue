@@ -121,6 +121,7 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-attrs"))
   .use(require("@/markdown-it-meta-fork"))
   .use(require("markdown-it-container"));
+
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
 
@@ -151,6 +152,8 @@ export default {
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
+        this.lintMarkdown(cm.getValue());
+
         /**
          * Check if YAML delimter ('---') is present. If not, clear YAML.
          * This is necessary since deleting YAML delimiters doesn't delete the rendered YAML from markdown-it-meta.
@@ -200,6 +203,22 @@ export default {
         localStorage.setItem(config.localStorageKey, this.markdown);
         console.log("Autosaved to local storage: ", saveTime);
       }, config.autoSaveInterval);
+    },
+    lintMarkdown(content) {
+      const options = {
+        strings: {
+          content
+        },
+        config: require("@/config/markdownlint/relaxed.json")
+      };
+      window.markdownlint(options, function callback(err, result) {
+        if (!err) {
+          if (result.toString().length) {
+            console.error("Linting error");
+            console.log(result.toString());
+          }
+        }
+      });
     },
     clear() {
       this.editor.getDoc().setValue("");
