@@ -99,12 +99,14 @@
         </v-layout>
       </div>
     </v-content>
+    <lint-window></lint-window>
   </div>
 </template>
 
 <script>
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
+import LintWindow from "@/components/LintWindow";
 import { EventBus } from "@/event-bus.js";
 
 let FileSaver = require("file-saver");
@@ -127,7 +129,8 @@ require("codemirror/addon/edit/closebrackets");
 
 export default {
   components: {
-    NavMarkdown
+    NavMarkdown,
+    LintWindow
   },
   mounted() {
     this.initializeEditor();
@@ -213,14 +216,20 @@ export default {
           this.config.lintingDefault
         }`)
       };
-      window.markdownlint(options, function callback(err, result) {
+      window.markdownlint(options, (err, result) => {
+        let lintStatus = {};
         if (!err) {
           if (result.toString().length) {
             console.error("Linting error");
             console.log(result.toString());
+            lintStatus.isError = true;
+            lintStatus.result = result;
           } else {
             console.log("No linting errors");
+            lintStatus.isError = false;
+            lintStatus.result = {};
           }
+          EventBus.$emit("lintStatus", lintStatus);
         }
       });
     },
@@ -524,7 +533,9 @@ export default {
       isScrollSynced: true,
       editorScrollTop: null,
       viewerScrollTop: null,
-      yaml: {}
+      yaml: {},
+      isLintingError: false,
+      vm: this
     };
   }
 };

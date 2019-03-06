@@ -44,6 +44,18 @@
         </v-menu>
         <span v-html="config.modes[this.mode]['tooltip']"></span>
       </v-tooltip>
+      <v-btn
+            v-if="this.lintStatus.isError"
+           dark
+            small
+            depressed
+            color="red accent-2"
+            dark
+            style="font-size: 10px; font-weight: 900"
+            v-on:click="toggleLintWindow"
+          >
+          ERROR<v-icon dark right style="font-size: 16px; color: #fff">report_problem</v-icon>
+          </v-btn>
       <v-spacer></v-spacer>
 
       <v-tooltip bottom>
@@ -92,7 +104,7 @@
         <span>Github</span>
       </v-tooltip>
 
-      <v-tooltip bottom open-delay="400">
+      <!-- <v-tooltip bottom open-delay="400">
         <v-btn
           slot="activator"
           style="font-size: 12px; color: #ccc;"
@@ -104,7 +116,7 @@
           <v-icon right size="16px">launch</v-icon>
         </v-btn>
         <span>Access the original ICJIA Markdown Editor</span>
-      </v-tooltip>
+      </v-tooltip> -->
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
@@ -145,6 +157,9 @@ export default {
       this.mode = mode;
       //console.log(mode);
     });
+    EventBus.$on("lintStatus", lintStatus => {
+      this.lintStatus = lintStatus;
+    });
   },
   filters: {
     capitalize
@@ -156,6 +171,9 @@ export default {
     selectMode(mode) {
       this.mode = mode;
       EventBus.$emit("setMode", this.mode);
+    },
+    toggleLintWindow() {
+      EventBus.$emit("toggleLintWindow");
     }
   },
   computed: {
@@ -179,7 +197,8 @@ export default {
       markdown: "",
       modes: [],
       mode: "",
-      modeIndex: 0
+      modeIndex: 0,
+      lintStatus: {}
     };
   }
 };
