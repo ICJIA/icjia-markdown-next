@@ -27,7 +27,11 @@
         
         </v-toolbar>
 
-      
+       <div v-if="!lintStatus.isError">
+           <div class="text-center mt-3" style="font-size: 28px; font-weight: 900; color: green">
+              No errors. Woohoo!
+           </div>
+           </div>
            <!-- <v-switch v-model="autoAlert" label="Auto Alert"></v-switch> -->
           
         <div v-for="(error,index) in lintResults" :key="index" class="mt-3 pl-2 pr-2">
