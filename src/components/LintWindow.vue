@@ -1,23 +1,77 @@
 <template>
-  <div class="text-xs-center">
-    <v-bottom-sheet v-model="lintWindow">
+  <div>
+    
+   <v-navigation-drawer
+      v-model="lintWindow"
+      absolute
+      fixed
+      :clipped="true"
+      right
+      width="320"
+      style="z-index: 1000; background: #eee"
+      disable-resize-watcher
+    >
+    
+ 
+    
+    <v-layout row >
+    <v-flex xs12>
+      
+        <v-toolbar dense color="indigo darken-4" dark>
+          <v-toolbar-side-icon @click="toggleLintWindow"></v-toolbar-side-icon>
+
+          <v-toolbar-title style="font-size: 18px">LINTING ALERTS</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+        
+        </v-toolbar>
+
+      
+           <!-- <v-switch v-model="autoAlert" label="Auto Alert"></v-switch> -->
+          
+        <div v-for="(error,index) in lintResults" :key="index" class="mt-3 pl-2 pr-2">
+        <v-card >
+          <v-card-title style="font-weight: 900; font-size: 18px; color: #fff;" class="red">LINE: {{error.lineNumber}}</v-card-title>
+          <v-card-text style="margin-top: -10px;">
+             <div class="lint heading">Description:</div>
+            <div class="lint text">{{error.ruleDescription}}</div>
+            <div class="lint heading">Rule:</div>
+            <div class="lint text">{{error.ruleNames}}</div>
+            <div class="lint heading" v-if="error.errorContext">Context:</div>
+            <div class="lint text">{{error.errorContext}}</div>
+            
+           
+            </v-card-text>
+        </v-card>
+        </div>
+       
+        
+
+      
      
-      <v-list>
-        {{lintStatus}}
-      </v-list>
-    </v-bottom-sheet>
+    </v-flex>
+  </v-layout>
+  
+
+   
+    </v-navigation-drawer>
   </div>
 </template>
 
 <script>
+import config from "@/config";
 import { EventBus } from "@/event-bus.js";
+import { store, mutations } from "@/store";
 // import config from "@/config";
 // import { capitalize } from "@/filters";
 export default {
   data() {
     return {
       lintWindow: false,
-      lintStatus: {}
+      lintStatus: {},
+      config: store.config,
+      autoAlert: store.config.lintingAutoAlert
     };
   },
   mounted() {
@@ -27,6 +81,53 @@ export default {
     EventBus.$on("toggleLintWindow", () => {
       this.lintWindow = !this.lintWindow;
     });
+  },
+  methods: {
+    toggleLintWindow() {
+      EventBus.$emit("toggleLintWindow");
+    }
+  },
+  computed: {
+    lintResults() {
+      if (this.lintStatus.result) {
+        return this.lintStatus.result.content;
+      } else {
+        return {};
+      }
+    }
+  },
+  watch: {
+    lintStatus() {
+      if (store.config.lintingAutoAlert) {
+        if (!this.lintStatus.isError) {
+          this.lintWindow = false;
+        } else {
+          this.lintWindow = true;
+        }
+      }
+    },
+    autoAlert() {
+      let status;
+      this.autoAlert ? (status = "ON") : (status = "OFF");
+      let msg = `Linting Auto Alert turned ${status}`;
+      EventBus.$emit("displayStatus", msg);
+      mutations.toggleLintingAutoAlert(this.autoAlert);
+    }
   }
 };
 </script>
+
+<style>
+.lint.heading {
+  color: #555;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.lint.text {
+  margin-left: 10px;
+  color: #666;
+}
+</style>

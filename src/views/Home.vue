@@ -96,10 +96,13 @@
               <div v-html="model" :style="getBottomPadding"></div>
             </div>
           </v-flex>
+        
         </v-layout>
+       
       </div>
     </v-content>
-    <lint-window></lint-window>
+    <!-- <lint-window></lint-window> -->
+
   </div>
 </template>
 
@@ -108,6 +111,7 @@ import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
 import LintWindow from "@/components/LintWindow";
 import { EventBus } from "@/event-bus.js";
+import { store, mutations } from "@/store";
 
 let FileSaver = require("file-saver");
 let loremIpsum = require("lorem-ipsum");
@@ -173,9 +177,11 @@ export default {
       if (config.localStorageKey in localStorage) {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
+        this.lintMarkdown(this.editor.getValue());
       } else {
         let welcomeMarkdown = require(`@/snippets/welcome.md`);
         this.editor.getDoc().setValue(welcomeMarkdown);
+        this.lintMarkdown(this.editor.getValue());
       }
     },
     initializeComponentEventListeners() {
@@ -199,6 +205,12 @@ export default {
         let status = this.isScrollSynced ? "ON" : "OFF";
         EventBus.$emit("displayStatus", `Scroll sync turned ${status}`);
       });
+      EventBus.$on("markdownFocus", () => {
+        // console.log("put focus on markdown panel");
+        // console.log(this.editor.hasFocus());
+        // let editor = document.getElementById("editor");
+        // editor.focus();
+      });
     },
     initializeAutoSave() {
       window.setInterval(() => {
@@ -208,6 +220,7 @@ export default {
       }, config.autoSaveInterval);
     },
     lintMarkdown(content) {
+      console.log("linting");
       const options = {
         strings: {
           content
@@ -228,8 +241,11 @@ export default {
             console.log("No linting errors");
             lintStatus.isError = false;
             lintStatus.result = {};
+            lintStatus.result.content = "";
           }
-          EventBus.$emit("lintStatus", lintStatus);
+          this.$nextTick(() => {
+            EventBus.$emit("lintStatus", lintStatus);
+          });
         }
       });
     },
@@ -525,7 +541,7 @@ export default {
       footnote: 1,
       editor: null,
       isHidden: true,
-      config,
+      config: store.config,
       offsetTop: 0,
       scrollElement: null,
       editorScroll: null,
@@ -545,16 +561,14 @@ export default {
 @import url("../../node_modules/codemirror/lib/codemirror.css");
 
 .CodeMirror {
-  /* height: 100vh !important; */
   background: #fff;
-  height: 86vh !important;
+  height: 100vh !important;
 }
 
 .markdown-body {
-  /* height: 100vh; */
   background: #fff;
   overflow-y: auto;
-  height: 86vh !important;
+  height: 100vh !important;
 }
 
 #showHtml {
@@ -590,5 +604,8 @@ code.html {
 
 a.browserDetect {
   color: #333 !important;
+}
+.lint-error {
+  color: #ccc;
 }
 </style>

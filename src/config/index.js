@@ -150,8 +150,10 @@ const config = {
    *
    *
    */
+  lintingEnabled: true,
   lintingDefault: "relaxed.json",
   lintingRulePath: "config/markdownlint/",
+  lintingAutoAlert: true,
 
   /**
    *

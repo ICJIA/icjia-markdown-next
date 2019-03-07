@@ -1,12 +1,12 @@
 # Welcome to the ICJIA Markdown Editor
 
 Paragraphs are separated by a blank line.
-  
+
 2nd paragraph. _Italic_, **bold**
 
 ## H2 Header
 
-### Itemized lists look like:
+### Itemized lists look like
 
 - this one
 - that one
@@ -22,7 +22,7 @@ Paragraphs are separated by a blank line.
    1. Ordered sub-list
 4. And another item.
 
-# Footnotes
+## Footnotes
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget turpis nec justo volutpat efficitur. Sed ac sapien in magna faucibus faucibus eu sed nisl. Aenean non tristique odio, eu condimentum nisl. Suspendisse porttitor ante id lectus pharetra, id pretium odio lacinia. Vestibulum auctor volutpat pharetra. Nam rhoncus dapibus enim eget ornare.[^1] Phasellus convallis nisi a efficitur iaculis.[^2] Etiam tempus massa diam, sit amet lacinia metus suscipit sit amet. Nunc consequat ligula ac auctor mollis. Integer accumsan ornare neque, id dapibus elit. Ut accumsan lacinia metus nec luctus.[^3]
 [^1]: Here is the footnote.

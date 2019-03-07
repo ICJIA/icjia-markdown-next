@@ -3,14 +3,17 @@
     <nav-primary></nav-primary>
 
     <router-view />
+    <lint-window></lint-window>
   </v-app>
 </template>
 
 <script>
+import LintWindow from "@/components/LintWindow";
 import NavPrimary from "@/components/NavPrimary";
 export default {
   components: {
-    NavPrimary
+    NavPrimary,
+    LintWindow
   },
   data() {
     return {};

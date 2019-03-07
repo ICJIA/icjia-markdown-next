@@ -260,19 +260,20 @@ function clearFileInput(ctrl) {
 }
 
 import { EventBus } from "@/event-bus.js";
-import config from "@/config";
+// import config from "@/config";
 import { capitalize } from "@/filters";
+import { store, mutations } from "@/store";
 
 export default {
   created() {
-    this.modes = Object.keys(config.modes);
+    this.modes = Object.keys(this.config.modes);
 
     let modeParam = this.$route.params.modeParam;
     let mode;
     if (modeParam !== undefined && this.modes.includes(modeParam)) {
       mode = modeParam;
     } else {
-      mode = config.defaultMode;
+      mode = this.config.defaultMode;
     }
     this.mode = mode.toLowerCase();
     this.stylesheetSelection = this.stylesheetObj;
@@ -305,7 +306,7 @@ export default {
       if (this.currentStyleSheet) {
         document
           .querySelector(
-            `link[href$="${config.stylesheetStaticPath}${
+            `link[href$="${this.config.stylesheetStaticPath}${
               this.currentStyleSheet
             }"]`
           )
@@ -313,7 +314,7 @@ export default {
       }
       let file = document.createElement("link");
       file.rel = "stylesheet";
-      file.href = `${config.stylesheetStaticPath}${e}`;
+      file.href = `${this.config.stylesheetStaticPath}${e}`;
       document.head.appendChild(file);
       this.currentStyleSheet = e;
     },
@@ -350,17 +351,22 @@ export default {
   },
   computed: {
     getModeIcon() {
-      let icon = config.modes[this.mode]["icon"];
+      let icon = this.config.modes[this.mode]["icon"];
       return icon;
     },
     visibleTools() {
-      return config.modes[this.mode].tools.slice(0, config.maxVisibleTools);
+      return this.config.modes[this.mode].tools.slice(
+        0,
+        this.config.maxVisibleTools
+      );
     },
     remainingTools() {
-      return config.modes[this.mode].tools.slice(config.maxVisibleTools);
+      return this.config.modes[this.mode].tools.slice(
+        this.config.maxVisibleTools
+      );
     },
     stylesheetObj() {
-      const stylesheet = config.stylesheets.filter(s => {
+      const stylesheet = this.config.stylesheets.filter(s => {
         if (s.text === this.mode) return s;
       });
 
@@ -377,8 +383,7 @@ export default {
     return {
       currentStyleSheet: null,
       stylesheetSelection: null,
-      config,
-
+      config: store.config,
       dialog: false,
       capitalize,
       isYaml: false,
