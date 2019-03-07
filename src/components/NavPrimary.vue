@@ -44,8 +44,24 @@
         </v-menu>
         <span v-html="config.modes[this.mode]['tooltip']"></span>
       </v-tooltip>
-      <v-spacer></v-spacer>
+     
+     
+      <v-btn
+            v-if="this.lintStatus.isError"
+           dark
+            small
+            depressed
+            color="red accent-2"
+            
+            style="font-size: 10px; font-weight: 900"
+            v-on:click="toggleLintWindow"
+          >
+          LINTING ALERT<v-icon dark right style="font-size: 16px; color: #fff">report_problem</v-icon>
+          </v-btn>
 
+      <v-spacer></v-spacer>
+       &nbsp;&nbsp;
+      
       <v-tooltip bottom>
         <v-dialog v-model="statistics" max-width="500" slot="activator">
           <v-btn
@@ -92,19 +108,7 @@
         <span>Github</span>
       </v-tooltip>
 
-      <v-tooltip bottom open-delay="400">
-        <v-btn
-          slot="activator"
-          style="font-size: 12px; color: #ccc;"
-          flat
-          small
-          href="https://legacy-markdown.icjia.cloud/"
-          target="_blank"
-          >Launch Legacy Editor
-          <v-icon right size="16px">launch</v-icon>
-        </v-btn>
-        <span>Access the original ICJIA Markdown Editor</span>
-      </v-tooltip>
+    <v-toolbar-side-icon @click="toggleLintWindow"></v-toolbar-side-icon>
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
@@ -115,18 +119,19 @@
 
 <script>
 const info = require("../../package.json");
-import config from "@/config";
+// import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 import { capitalize } from "@/filters";
+import { store, mutations } from "@/store";
 export default {
   created() {
-    this.modes = Object.keys(config.modes);
+    this.modes = Object.keys(this.config.modes);
     let modeParam = this.$route.params.modeParam;
     let mode;
     if (modeParam !== undefined && this.modes.includes(modeParam)) {
       mode = modeParam;
     } else {
-      mode = config.defaultMode;
+      mode = this.config.defaultMode;
     }
     this.mode = mode.toLowerCase();
   },
@@ -145,6 +150,9 @@ export default {
       this.mode = mode;
       //console.log(mode);
     });
+    EventBus.$on("lintStatus", lintStatus => {
+      this.lintStatus = lintStatus;
+    });
   },
   filters: {
     capitalize
@@ -156,22 +164,26 @@ export default {
     selectMode(mode) {
       this.mode = mode;
       EventBus.$emit("setMode", this.mode);
+    },
+
+    toggleLintWindow() {
+      EventBus.$emit("toggleLintWindow");
     }
   },
   computed: {
     getModeIcon() {
-      let icon = config.modes[this.mode]["icon"];
+      let icon = this.config.modes[this.mode]["icon"];
       return icon;
     },
     getModeColor() {
-      let color = config.modes[this.mode]["color"];
+      let color = this.config.modes[this.mode]["color"];
       return `color: ${color}`;
     }
   },
   data() {
     return {
       snackbar: false,
-      config,
+      config: store.config,
       msg: "",
       wordCount: 0,
       info,
@@ -179,7 +191,9 @@ export default {
       markdown: "",
       modes: [],
       mode: "",
-      modeIndex: 0
+      modeIndex: 0,
+      lintStatus: {},
+      isLintingEnabled: true
     };
   }
 };

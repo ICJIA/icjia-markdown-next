@@ -143,6 +143,17 @@ const config = {
    */
   centerText: "{.text-center}",
   centerImage: "{.img-center}",
+  /**
+   *
+   *
+   * Markdown linting
+   *
+   *
+   */
+  lintingEnabled: true,
+  lintingDefault: "relaxed.json",
+  lintingRulePath: "config/markdownlint/",
+  lintingAutoAlert: true,
 
   /**
    *

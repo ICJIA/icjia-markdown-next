@@ -96,16 +96,22 @@
               <div v-html="model" :style="getBottomPadding"></div>
             </div>
           </v-flex>
+        
         </v-layout>
+       
       </div>
     </v-content>
+    <!-- <lint-window></lint-window> -->
+
   </div>
 </template>
 
 <script>
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
+import LintWindow from "@/components/LintWindow";
 import { EventBus } from "@/event-bus.js";
+import { store, mutations } from "@/store";
 
 let FileSaver = require("file-saver");
 let loremIpsum = require("lorem-ipsum");
@@ -121,12 +127,14 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-attrs"))
   .use(require("@/markdown-it-meta-fork"))
   .use(require("markdown-it-container"));
+
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
 
 export default {
   components: {
-    NavMarkdown
+    NavMarkdown,
+    LintWindow
   },
   mounted() {
     this.initializeEditor();
@@ -151,6 +159,8 @@ export default {
       this.editor.on("change", cm => {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
+        this.lintMarkdown(cm.getValue());
+
         /**
          * Check if YAML delimter ('---') is present. If not, clear YAML.
          * This is necessary since deleting YAML delimiters doesn't delete the rendered YAML from markdown-it-meta.
@@ -167,9 +177,11 @@ export default {
       if (config.localStorageKey in localStorage) {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
+        this.lintMarkdown(this.editor.getValue());
       } else {
         let welcomeMarkdown = require(`@/snippets/welcome.md`);
         this.editor.getDoc().setValue(welcomeMarkdown);
+        this.lintMarkdown(this.editor.getValue());
       }
     },
     initializeComponentEventListeners() {
@@ -193,6 +205,12 @@ export default {
         let status = this.isScrollSynced ? "ON" : "OFF";
         EventBus.$emit("displayStatus", `Scroll sync turned ${status}`);
       });
+      EventBus.$on("markdownFocus", () => {
+        // console.log("put focus on markdown panel");
+        // console.log(this.editor.hasFocus());
+        // let editor = document.getElementById("editor");
+        // editor.focus();
+      });
     },
     initializeAutoSave() {
       window.setInterval(() => {
@@ -200,6 +218,36 @@ export default {
         localStorage.setItem(config.localStorageKey, this.markdown);
         console.log("Autosaved to local storage: ", saveTime);
       }, config.autoSaveInterval);
+    },
+    lintMarkdown(content) {
+      console.log("linting");
+      const options = {
+        strings: {
+          content
+        },
+        config: require(`@/${this.config.lintingRulePath}${
+          this.config.lintingDefault
+        }`)
+      };
+      window.markdownlint(options, (err, result) => {
+        let lintStatus = {};
+        if (!err) {
+          if (result.toString().length) {
+            console.error("Linting error");
+            console.log(result.toString());
+            lintStatus.isError = true;
+            lintStatus.result = result;
+          } else {
+            console.log("No linting errors");
+            lintStatus.isError = false;
+            lintStatus.result = {};
+            lintStatus.result.content = "";
+          }
+          this.$nextTick(() => {
+            EventBus.$emit("lintStatus", lintStatus);
+          });
+        }
+      });
     },
     clear() {
       this.editor.getDoc().setValue("");
@@ -493,7 +541,7 @@ export default {
       footnote: 1,
       editor: null,
       isHidden: true,
-      config,
+      config: store.config,
       offsetTop: 0,
       scrollElement: null,
       editorScroll: null,
@@ -501,7 +549,9 @@ export default {
       isScrollSynced: true,
       editorScrollTop: null,
       viewerScrollTop: null,
-      yaml: {}
+      yaml: {},
+      isLintingError: false,
+      vm: this
     };
   }
 };
@@ -511,16 +561,14 @@ export default {
 @import url("../../node_modules/codemirror/lib/codemirror.css");
 
 .CodeMirror {
-  /* height: 100vh !important; */
   background: #fff;
-  height: 86vh !important;
+  height: 100vh !important;
 }
 
 .markdown-body {
-  /* height: 100vh; */
   background: #fff;
   overflow-y: auto;
-  height: 86vh !important;
+  height: 100vh !important;
 }
 
 #showHtml {
@@ -556,5 +604,8 @@ code.html {
 
 a.browserDetect {
   color: #333 !important;
+}
+.lint-error {
+  color: #ccc;
 }
 </style>
