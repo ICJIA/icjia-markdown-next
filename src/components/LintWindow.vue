@@ -27,6 +27,13 @@
         
         </v-toolbar>
 
+          <div v-if="!lintStatus.isError">
+           <div class="text-center mt-3" style="font-size: 28px; font-weight: 900; color: green">
+              No errors. Woohoo!
+           </div>
+           
+           
+          </div>
       
            <!-- <v-switch v-model="autoAlert" label="Auto Alert"></v-switch> -->
           
@@ -60,7 +67,7 @@
 </template>
 
 <script>
-import config from "@/config";
+// import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 import { store, mutations } from "@/store";
 // import config from "@/config";
