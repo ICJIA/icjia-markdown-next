@@ -46,8 +46,10 @@
       </v-tooltip>
      
      
+     <v-tooltip bottom max-width="200">
       <v-btn
             v-if="this.lintStatus.isError"
+            slot="activator"
            dark
             small
             depressed
@@ -58,6 +60,8 @@
           >
           LINTING ALERT<v-icon dark right style="font-size: 16px; color: #fff">report_problem</v-icon>
           </v-btn>
+            <span>{{config.tooltips["linting"].text}}</span>
+      </v-tooltip>
 
       <v-spacer></v-spacer>
        &nbsp;&nbsp;

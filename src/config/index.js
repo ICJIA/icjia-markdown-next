@@ -66,6 +66,9 @@ const config = {
     },
     launchLegacyEditor: {
       text: "Access the original ICJIA markdown editor"
+    },
+    linting: {
+      text: "What is linting explanation here"
     }
   },
   /**

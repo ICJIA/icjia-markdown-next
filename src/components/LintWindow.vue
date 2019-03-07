@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import config from "@/config";
+// import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 import { store, mutations } from "@/store";
 // import config from "@/config";
