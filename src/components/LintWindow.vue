@@ -17,7 +17,7 @@
     <v-layout row >
     <v-flex xs12>
       
-        <v-toolbar dense color="indigo darken-4" dark>
+        <v-toolbar dense :class="{red: lintStatus.isError, 'darken-2': lintStatus.isError, green: !lintStatus.isError}" dark>
         
               <v-btn icon @click="toggleLintWindow">
               <v-icon>chevron_right</v-icon>
@@ -34,22 +34,24 @@
               No errors. Woohoo!
            </div>
            </div>
-           <!-- <v-switch v-model="autoAlert" label="Auto Alert"></v-switch> -->
+          
           
         <div v-for="(error,index) in lintResults" :key="index" class="mt-3 pl-2 pr-2">
         <v-card >
-          <v-card-title style="font-weight: 900; font-size: 18px; color: #fff;" class="red">LINE: {{error.lineNumber}}</v-card-title>
+          <v-card-title style="font-weight: 900; font-size: 18px; color: #fff;" class="red lighten-2">LINE: {{error.lineNumber}}</v-card-title>
           <v-card-text style="margin-top: -10px;">
              <div class="lint heading">Description:</div>
             <div class="lint text">{{error.ruleDescription}}</div>
-            <div class="lint heading">Rule:</div>
-            <div class="lint text">{{error.ruleNames}}</div>
+            <!-- <div class="lint heading">Rule:</div>
+            <div class="lint text">{{error.ruleNames}}</div> -->
             <div class="lint heading" v-if="error.errorContext">Context:</div>
             <div class="lint text">{{error.errorContext}}</div>
+             <div class="lint heading" v-if="error.errorDetail">Error detail:</div>
+            <div class="lint text">{{error.errorDetail}}</div>
             
-           
             </v-card-text>
         </v-card>
+       
         </div>
        
         
@@ -91,6 +93,13 @@ export default {
   methods: {
     toggleLintWindow() {
       EventBus.$emit("toggleLintWindow");
+    },
+    getToolbarColor() {
+      if (this.lintStatus.isError) {
+        return "red darken-2";
+      } else {
+        return "green";
+      }
     }
   },
   computed: {

@@ -16,7 +16,7 @@
     <v-layout row >
     <v-flex xs12>
       
-        <v-toolbar dense color="indigo darken-4" dark>
+        <v-toolbar dense color="teal darken-2" dark>
          
              <!-- <v-icon class="close-icon" @click="toggleSettingsWindow">close</v-icon> -->
           <v-toolbar-title style="font-size: 18px">SETTINGS</v-toolbar-title>

@@ -51,7 +51,7 @@
            dark
             small
             depressed
-            color="red accent-2"
+            color="red darken-2"
             
             style="font-size: 10px; font-weight: 900"
             v-on:click="toggleLintWindow"
