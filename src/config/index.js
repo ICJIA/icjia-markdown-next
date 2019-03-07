@@ -53,7 +53,7 @@ const config = {
       text: "Show HTML"
     },
     copyHtml: {
-      text: "Copy HTML to clipboard."
+      text: "Copy HTML to clipboard"
     },
     scrollSync: {
       text: "Synchronize the scrollng between the markdown and result windows"
@@ -68,7 +68,17 @@ const config = {
       text: "Access the original ICJIA markdown editor"
     },
     linting: {
-      text: "What is linting explanation here"
+      text:
+        "A linter is a tool that analyzes code to indicate programming errors, bugs, or stylistic discrepencies.<br><br>To turn off real-time linting, click the settings menu in the upper left."
+    },
+    lintWindow: {
+      text: "Show linting alerts"
+    },
+    settingsWindow: {
+      text: "Configure application settings"
+    },
+    close: {
+      text: "Close"
     }
   },
   /**

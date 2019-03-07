@@ -1,7 +1,11 @@
 <template>
   <div>
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
-      <v-toolbar-side-icon @click="toggleSettingsWindow"></v-toolbar-side-icon>
+       <v-tooltip bottom max-width="200">
+      <v-toolbar-side-icon @click="toggleSettingsWindow" slot="activator"></v-toolbar-side-icon>
+       <span>{{config.tooltips.settingsWindow.text}}</span>
+      </v-tooltip>
+
       <v-toolbar-title>
         <router-link to="/" class="navTitle"
           ><span style="font-weight: 400;">ICJIA</span>&nbsp;<span
@@ -60,7 +64,7 @@
           >
           LINTING ALERT<v-icon dark right style="font-size: 16px; color: #fff">report_problem</v-icon>
           </v-btn>
-            <span>{{config.tooltips["linting"].text}}</span>
+            <span v-html="config.tooltips.linting.text"></span>
       </v-tooltip>
 
       <v-spacer></v-spacer>
@@ -111,8 +115,10 @@
         </v-btn>
         <span>Github</span>
       </v-tooltip>
-
-    <v-toolbar-side-icon @click="toggleLintWindow"></v-toolbar-side-icon>
+      <v-tooltip bottom open-delay="400">
+    <v-toolbar-side-icon @click="toggleLintWindow" slot="activator"></v-toolbar-side-icon>
+     <span>{{config.tooltips.lintWindow.text}}</span>
+      </v-tooltip>
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>
       {{ msg }}
