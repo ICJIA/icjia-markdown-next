@@ -69,7 +69,7 @@ const config = {
     },
     linting: {
       text:
-        "A linter is a tool that analyzes code to indicate programming errors, bugs, or stylistic discrepencies.<br><br>To turn off real-time linting, click the settings menu in the upper left."
+        "<strong>LINTING ALERT</strong><br><br>To turn off real-time linting, click the settings menu in the upper left.<br><br>A linter is a tool that analyzes code to indicate programming errors, bugs, or stylistic discrepencies.<br><br>"
     },
     lintWindow: {
       text: "Show linting alerts"

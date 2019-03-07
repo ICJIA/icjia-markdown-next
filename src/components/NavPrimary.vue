@@ -62,7 +62,7 @@
             style="font-size: 10px; font-weight: 900"
             v-on:click="toggleLintWindow"
           >
-          LINTING ALERT<v-icon dark right style="font-size: 16px; color: #fff">report_problem</v-icon>
+         <v-icon dark icon style="font-size: 16px; color: #fff">report_problem</v-icon>
           </v-btn>
             <span v-html="config.tooltips.linting.text"></span>
       </v-tooltip>
