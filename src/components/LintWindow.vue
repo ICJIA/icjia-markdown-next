@@ -18,12 +18,14 @@
     <v-flex xs12>
       
         <v-toolbar dense color="indigo darken-4" dark>
-          <v-toolbar-side-icon @click="toggleLintWindow"></v-toolbar-side-icon>
-
-          <v-toolbar-title style="font-size: 18px">LINTING ALERTS</v-toolbar-title>
-
+        
+              <v-btn icon @click="toggleLintWindow">
+              <v-icon>chevron_right</v-icon>
+            </v-btn>
+         
+           <v-toolbar-title style="font-size: 18px">LINTING ALERTS</v-toolbar-title>
           <v-spacer></v-spacer>
-
+          
         
         </v-toolbar>
 
@@ -133,5 +135,9 @@ export default {
 .lint.text {
   margin-left: 10px;
   color: #666;
+}
+
+.close-icon:hover {
+  color: #aaa;
 }
 </style>

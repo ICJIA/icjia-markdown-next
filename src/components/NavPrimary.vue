@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
-      <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+      <v-toolbar-side-icon @click="toggleSettingsWindow"></v-toolbar-side-icon>
       <v-toolbar-title>
         <router-link to="/" class="navTitle"
           ><span style="font-weight: 400;">ICJIA</span>&nbsp;<span
@@ -168,6 +168,9 @@ export default {
 
     toggleLintWindow() {
       EventBus.$emit("toggleLintWindow");
+    },
+    toggleSettingsWindow() {
+      EventBus.$emit("toggleSettingsWindow");
     }
   },
   computed: {
