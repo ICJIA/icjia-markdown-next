@@ -36,7 +36,7 @@ A total of 12,299 juvenile exits from an IDJJ facility occurred between SFY08 to
 
 Recidivism for this study was measured three ways: rearrests, recommitment to the Illinois IDJJ for a new sentence or a technical violation, and admission to the Illinois Department of Corrections (IDOC). These three measures provided a more complete picture of juveniles’ contact with the juvenile and criminal justice systems; however, this data did not capture reoffending that was not reported or identified by law enforcement, convictions that did not result in confinement, or arrests where charges were dropped. These recidivism measures also do not capture possible increases in youths’ quality of life, including academic achievement, increased prosocial peer relationships, and other enhanced psychosocial functioning.
 
-#### Data sources.
+#### Data sources
 
 The data extracted for this study included:
 
@@ -50,7 +50,7 @@ Because youth retain the same Youth Identification Number (YIN) over time in IDJ
 
 The ICJIA researcher categorized arrests found in the CHRI system by first finding the most severe arrest charge using the offense class, and then giving priority to the more severe offense category—homicide, sex offense (violent), person offense, property offense, weapons offense, sex offense (non-violent), drug offense, and “other” (driving while intoxicated, disorderly conduct, obstructing justice, traffic and driving offenses, etc.). Violent arrests were considered if the most serious arrest charge for an arrest fell under the Right of Crime Victims and Witnesses Act ([725 ILCS 120/](http://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=1970)). Some arrests did not have the class specified and were coded as other-unknown.
 
-#### Data limitations.
+#### Data limitations
 
 There were several limitations that are detailed in the full report. These limitations include:
 
@@ -99,7 +99,7 @@ The majority of youth were admitted to IDJJ for person or property offenses, fol
 
 Between SFY08 and SFY13, the overall average length of stay (LOS) was approximately eight months, with a median of five months. The average and median LOS has slightly decreased from SFY08 to SFY13. The longest LOS was just over 95 months.
 
-#### Prior criminal history of the sample.
+#### Prior criminal history of the sample
 
 Discussion of priors includes the committing offense arrest, unless otherwise specified.[^8] Approximately 94 percent of youth exiting IDJJ had at least one arrest dated prior to the admit date (including their committing offense). About 49 percent of youth exiting IDJJ had served at least one prior additional IDJJ commitment, not including their exit commitment. On average, youth sampled had about eight arrests (a median of six prior arrests) including the committing offense (_Figure 4_).
 
@@ -128,7 +128,7 @@ The median and average days to first rearrest were greatest for youth released i
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 _Source_: ICJIA analysis of CHRI data.
 
-#### Characteristics of youth rearrested post-release.
+#### Characteristics of youth rearrested post-release
 
 Of the 10,685 youths rearrested within three-years post-release, 64 percent were Black, 93 percent were male, and 47 percent were between the ages of 15 and 16 years old. On average, youth had 4.06 rearrests (median=3.00) within the three-year follow-up period. Of those rearrests, an average of 2.99 were for non-violent offenses (median=2.00), 1.07 were for violent offenses (median=1.00), 1.33 were for felony offenses (median=1.00), 1.79 were for misdemeanor offenses (median=1.00), and .95 were for unknown/other offense class (median=0.00).
 

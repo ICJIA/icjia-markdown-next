@@ -303,7 +303,7 @@ export default {
           this.insertAround("[", "](http://)");
           break;
         case "image":
-          this.insertBefore("![](http://)", 2);
+          this.insertBefore("![alt-text-here](http://)", 2);
           break;
         case "unorderedList":
           this.insertBefore("* ", 2);

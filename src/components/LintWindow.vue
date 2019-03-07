@@ -31,7 +31,7 @@
 
        <div v-if="!lintStatus.isError">
            <div class="text-center mt-3" style="font-size: 28px; font-weight: 900; color: green">
-              No errors. Woohoo!
+              No alerts. Woohoo!
            </div>
            </div>
           
