@@ -472,14 +472,17 @@ export default {
     },
 
     async shortenLink() {
+      EventBus.$emit("isProcessing", true);
       let doc = this.editor.getDoc();
       let selection = doc.getSelection();
       let result;
       try {
         result = await bitly.shorten(selection);
         doc.replaceSelection(result.url);
+        EventBus.$emit("isProcessing", false);
         EventBus.$emit("displayStatus", "Short URL successfully generated");
       } catch (e) {
+        EventBus.$emit("isProcessing", false);
         EventBus.$emit("displayStatus", "ERROR: Not a valid URL");
         console.log(e);
       }

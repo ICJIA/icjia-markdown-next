@@ -70,6 +70,15 @@
         <span v-html="config.tooltips.linting.text"></span>
       </v-tooltip>
 
+      <v-progress-circular
+        v-if="isProcessing"
+        indeterminate
+        color="red lighten-1"
+        width="2"
+        size="25"
+        class="ml-3"
+      ></v-progress-circular>
+
       <v-spacer></v-spacer>
       &nbsp;&nbsp;
 
@@ -169,6 +178,9 @@ export default {
     EventBus.$on("lintStatus", lintStatus => {
       this.lintStatus = lintStatus;
     });
+    EventBus.$on("isProcessing", boolean => {
+      this.isProcessing = boolean;
+    });
   },
   filters: {
     capitalize
@@ -212,7 +224,8 @@ export default {
       mode: "",
       modeIndex: 0,
       lintStatus: {},
-      isLintingEnabled: true
+      isLintingEnabled: true,
+      isProcessing: false
     };
   }
 };
