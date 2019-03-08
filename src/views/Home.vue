@@ -473,13 +473,10 @@ export default {
 
     async shortenLink() {
       let doc = this.editor.getDoc();
-      let cursor = doc.getCursor();
       let selection = doc.getSelection();
-
       let result;
       try {
         result = await bitly.shorten(selection);
-        console.log(result);
         doc.replaceSelection(result.url);
         EventBus.$emit("displayStatus", "Short URL successfully generated");
       } catch (e) {
