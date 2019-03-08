@@ -96,13 +96,10 @@
               <div v-html="model" :style="getBottomPadding"></div>
             </div>
           </v-flex>
-        
         </v-layout>
-       
       </div>
     </v-content>
     <!-- <lint-window></lint-window> -->
-
   </div>
 </template>
 
@@ -112,6 +109,9 @@ import NavMarkdown from "@/components/NavMarkdown";
 import LintWindow from "@/components/LintWindow";
 import { EventBus } from "@/event-bus.js";
 import { store, mutations } from "@/store";
+
+const { BitlyClient } = require("bitly");
+const bitly = new BitlyClient(process.env.VUE_APP_BITLY, {});
 
 let FileSaver = require("file-saver");
 let loremIpsum = require("lorem-ipsum");
@@ -141,7 +141,12 @@ export default {
     this.initializeEditorEvents();
     this.setInitialText();
     this.initializeComponentEventListeners();
-    this.initializeAutoSave();
+    /**
+     * Turn off autosave in dev mopde
+     */
+    if (process.env.NODE_ENV != "development") {
+      this.initializeAutoSave();
+    }
   },
   methods: {
     initializeEditor: function() {

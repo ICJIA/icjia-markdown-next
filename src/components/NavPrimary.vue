@@ -1,9 +1,12 @@
 <template>
   <div>
     <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
-       <v-tooltip bottom max-width="200">
-      <v-toolbar-side-icon @click="toggleSettingsWindow" slot="activator"></v-toolbar-side-icon>
-       <span>{{config.tooltips.settingsWindow.text}}</span>
+      <v-tooltip bottom max-width="200">
+        <v-toolbar-side-icon
+          @click="toggleSettingsWindow"
+          slot="activator"
+        ></v-toolbar-side-icon>
+        <span>{{ config.tooltips.settingsWindow.text }}</span>
       </v-tooltip>
 
       <v-toolbar-title>
@@ -48,28 +51,28 @@
         </v-menu>
         <span v-html="config.modes[this.mode]['tooltip']"></span>
       </v-tooltip>
-     
-     
-     <v-tooltip bottom max-width="200">
-      <v-btn
-            v-if="this.lintStatus.isError"
-            slot="activator"
-           dark
-            small
-            depressed
-            color="red darken-2"
-            
-            style="font-size: 10px; font-weight: 900"
-            v-on:click="toggleLintWindow"
+
+      <v-tooltip bottom max-width="200">
+        <v-btn
+          v-if="this.lintStatus.isError"
+          slot="activator"
+          dark
+          small
+          depressed
+          color="red darken-2"
+          style="font-size: 10px; font-weight: 900"
+          v-on:click="toggleLintWindow"
+        >
+          <v-icon dark icon style="font-size: 16px; color: #fff"
+            >report_problem</v-icon
           >
-         <v-icon dark icon style="font-size: 16px; color: #fff">report_problem</v-icon>
-          </v-btn>
-            <span v-html="config.tooltips.linting.text"></span>
+        </v-btn>
+        <span v-html="config.tooltips.linting.text"></span>
       </v-tooltip>
 
       <v-spacer></v-spacer>
-       &nbsp;&nbsp;
-      
+      &nbsp;&nbsp;
+
       <v-tooltip bottom>
         <v-dialog v-model="statistics" max-width="500" slot="activator">
           <v-btn
@@ -116,8 +119,11 @@
         <span>Github</span>
       </v-tooltip>
       <v-tooltip bottom open-delay="400">
-    <v-toolbar-side-icon @click="toggleLintWindow" slot="activator"></v-toolbar-side-icon>
-     <span>{{config.tooltips.lintWindow.text}}</span>
+        <v-toolbar-side-icon
+          @click="toggleLintWindow"
+          slot="activator"
+        ></v-toolbar-side-icon>
+        <span>{{ config.tooltips.lintWindow.text }}</span>
       </v-tooltip>
     </v-toolbar>
     <v-snackbar v-model="snackbar" top>

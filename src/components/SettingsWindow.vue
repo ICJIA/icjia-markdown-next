@@ -1,7 +1,6 @@
 <template>
   <div>
-    
-   <v-navigation-drawer
+    <v-navigation-drawer
       v-model="settingsWindow"
       absolute
       fixed
@@ -10,55 +9,21 @@
       style="z-index: 5000 !important; background: #eee"
       disable-resize-watcher
     >
-    
- 
-    
-    <v-layout row >
-    <v-flex xs12>
-      
-        <v-toolbar dense color="indigo accent-2" dark>
-         
-             <!-- <v-icon class="close-icon" @click="toggleSettingsWindow">close</v-icon> -->
-          <v-toolbar-title style="font-size: 18px">SETTINGS</v-toolbar-title>
-          
-          <v-spacer></v-spacer>
-          <v-btn icon @click="toggleSettingsWindow">
+      <v-layout row>
+        <v-flex xs12>
+          <v-toolbar dense color="indigo accent-2" dark>
+            <!-- <v-icon class="close-icon" @click="toggleSettingsWindow">close</v-icon> -->
+            <v-toolbar-title style="font-size: 18px">SETTINGS</v-toolbar-title>
+
+            <v-spacer></v-spacer>
+            <v-btn icon @click="toggleSettingsWindow">
               <v-icon>chevron_left</v-icon>
             </v-btn>
-        
-        </v-toolbar>
+          </v-toolbar>
 
-      Settings here
-       
-        
-
-      
-     
-    </v-flex>
-  </v-layout>
-  
-
-    <!-- <v-list class="pa-1">
-       
-
-        <v-list-tile avatar tag="div">
-          <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg">
-          </v-list-tile-avatar>
-
-          <v-list-tile-content>
-            <v-list-tile-title>John Leider</v-list-tile-title>
-          </v-list-tile-content>
-
-          <v-list-tile-action>
-            <v-btn icon>
-              <v-icon>chevron_left</v-icon>
-            </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
-      </v-list> -->
-
-   
+          Settings here
+        </v-flex>
+      </v-layout>
     </v-navigation-drawer>
   </div>
 </template>
