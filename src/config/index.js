@@ -69,7 +69,7 @@ const config = {
     },
     linting: {
       text:
-        "<strong>LINTING ALERT</strong><br><br>To turn off real-time linting, click the settings menu in the upper left.<br><br>A linter is a tool that analyzes code to indicate programming errors, bugs, or stylistic discrepencies.<br><br>"
+        "<strong>LINTING ALERT</strong><br><br>To turn off real-time linting, click the settings menu in the upper left.<br><br>A linter is a tool that analyzes a text to indicate errors, bugs, or stylistic discrepencies.<br><br>"
     },
     lintWindow: {
       text: "Show linting alerts"
@@ -200,6 +200,12 @@ const config = {
         },
         { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
+          name: "shortenLink",
+          action: "shortenLink",
+          icon: "wrap_text",
+          tooltip: "Create bit.ly short link"
+        },
+        {
           name: "centerText",
           action: "centerText",
           icon: "format_align_center",
@@ -285,7 +291,12 @@ const config = {
           icon: "crop_original",
           tooltip: "Center Image"
         },
-        { name: "link", action: "link", icon: "link", tooltip: "Link" },
+        {
+          name: "shortenLink",
+          action: "shortenLink",
+          icon: "wrap_text",
+          tooltip: "Create bit.ly short link"
+        },
         {
           name: "clear",
           action: "clear",
