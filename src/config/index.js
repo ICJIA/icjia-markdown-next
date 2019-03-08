@@ -203,7 +203,7 @@ const config = {
           name: "shortenLink",
           action: "shortenLink",
           icon: "wrap_text",
-          tooltip: "Create bit.ly short link"
+          tooltip: "Create short link from URL"
         },
         {
           name: "centerText",
@@ -279,6 +279,13 @@ const config = {
           icon: "format_quote",
           tooltip: "Blockquote"
         },
+        { name: "link", action: "link", icon: "link", tooltip: "Link" },
+        {
+          name: "shortenLink",
+          action: "shortenLink",
+          icon: "wrap_text",
+          tooltip: "Create short link from URL"
+        },
         {
           name: "centerText",
           action: "centerText",
@@ -291,12 +298,7 @@ const config = {
           icon: "crop_original",
           tooltip: "Center Image"
         },
-        {
-          name: "shortenLink",
-          action: "shortenLink",
-          icon: "wrap_text",
-          tooltip: "Create bit.ly short link"
-        },
+
         {
           name: "clear",
           action: "clear",

@@ -99,14 +99,13 @@
         </v-layout>
       </div>
     </v-content>
-    <!-- <lint-window></lint-window> -->
   </div>
 </template>
 
 <script>
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
-import LintWindow from "@/components/LintWindow";
+
 import { EventBus } from "@/event-bus.js";
 import { store, mutations } from "@/store";
 
@@ -133,8 +132,7 @@ require("codemirror/addon/edit/closebrackets");
 
 export default {
   components: {
-    NavMarkdown,
-    LintWindow
+    NavMarkdown
   },
   mounted() {
     this.initializeEditor();
@@ -356,6 +354,9 @@ export default {
         case "clear":
           this.clear();
           break;
+        case "shortenLink":
+          this.shortenLink();
+          break;
         default:
           break;
       }
@@ -468,6 +469,23 @@ export default {
     },
     getLoremIpsumEntity() {
       return loremIpsum(this.config.loremIpsum) + " ";
+    },
+
+    async shortenLink() {
+      let doc = this.editor.getDoc();
+      let cursor = doc.getCursor();
+      let selection = doc.getSelection();
+
+      let result;
+      try {
+        result = await bitly.shorten(selection);
+        console.log(result);
+        doc.replaceSelection(result.url);
+        EventBus.$emit("displayStatus", "Short URL successfully generated");
+      } catch (e) {
+        EventBus.$emit("displayStatus", "ERROR: Not a valid URL");
+        console.log(e);
+      }
     }
   },
 
