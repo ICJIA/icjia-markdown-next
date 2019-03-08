@@ -441,25 +441,31 @@ export default {
       this.showHtml = false;
     },
     copyHtmlToClipboard() {
+      EventBus.$emit("isProcessing", true);
       this.$copyText(this.html).then(
         function(e) {
           EventBus.$emit("displayStatus", "HTML copied to clipboard.");
+          EventBus.$emit("isProcessing", false);
         },
         function(e) {
           EventBus.$emit(
             "displayStatus",
             "ERROR: HTML not copied to clipboard."
           );
+          EventBus.$emit("isProcessing", false);
         }
       );
       this.showHtml = false;
     },
     copyMarkdownToClipboard() {
+      EventBus.$emit("isProcessing", true);
       this.$copyText(this.markdown).then(
         function(e) {
+          EventBus.$emit("isProcessing", false);
           EventBus.$emit("displayStatus", "Markdown copied to clipboard.");
         },
         function(e) {
+          EventBus.$emit("isProcessing", false);
           EventBus.$emit(
             "displayStatus",
             "ERROR: Markdown not copied to clipboard."

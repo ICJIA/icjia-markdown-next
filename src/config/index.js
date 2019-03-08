@@ -175,7 +175,7 @@ const config = {
    *
    *
    */
-  maxVisibleTools: 6,
+  maxVisibleTools: 7,
   defaultMode: "standard",
   modes: {
     standard: {
@@ -202,7 +202,7 @@ const config = {
         {
           name: "shortenLink",
           action: "shortenLink",
-          icon: "wrap_text",
+          icon: "offline_bolt",
           tooltip: "Create short link from URL"
         },
         {
@@ -283,7 +283,7 @@ const config = {
         {
           name: "shortenLink",
           action: "shortenLink",
-          icon: "wrap_text",
+          icon: "offline_bolt",
           tooltip: "Create short link from URL"
         },
         {
