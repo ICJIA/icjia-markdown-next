@@ -76,7 +76,7 @@
 <script>
 // import config from "@/config";
 import { EventBus } from "@/event-bus.js";
-import { store, mutations } from "@/store";
+import { store } from "@/store";
 // import config from "@/config";
 // import { capitalize } from "@/filters";
 export default {
@@ -84,8 +84,7 @@ export default {
     return {
       lintWindow: false,
       lintStatus: {},
-      config: store.config,
-      autoAlert: store.config.lintingAutoAlert
+      config: store.config
     };
   },
   mounted() {

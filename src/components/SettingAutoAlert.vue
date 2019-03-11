@@ -23,6 +23,7 @@
 
 <script>
 import { store } from "@/store";
+import { EventBus } from "@/event-bus.js";
 export default {
   data() {
     return {
@@ -45,6 +46,8 @@ export default {
       },
       set(isLintingAutoAlertEnabled) {
         store.config.isLintingAutoAlertEnabled = isLintingAutoAlertEnabled;
+        const status = isLintingAutoAlertEnabled ? "ON" : "OFF";
+        EventBus.$emit("displayStatus", `Linting Auto Alert: ${status}`);
       }
     }
   }

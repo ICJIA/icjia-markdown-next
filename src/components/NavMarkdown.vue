@@ -262,7 +262,7 @@ function clearFileInput(ctrl) {
 import { EventBus } from "@/event-bus.js";
 // import config from "@/config";
 import { capitalize } from "@/filters";
-import { store, mutations } from "@/store";
+import { store } from "@/store";
 
 export default {
   created() {

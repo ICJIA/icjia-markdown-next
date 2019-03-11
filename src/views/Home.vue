@@ -107,7 +107,7 @@ import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
 
 import { EventBus } from "@/event-bus.js";
-import { store, mutations } from "@/store";
+import { store } from "@/store";
 
 const { BitlyClient } = require("bitly");
 const bitly = new BitlyClient(process.env.VUE_APP_BITLY, {});

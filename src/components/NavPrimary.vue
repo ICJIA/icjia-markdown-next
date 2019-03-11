@@ -147,7 +147,7 @@ const info = require("../../package.json");
 // import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 import { capitalize } from "@/filters";
-import { store, mutations } from "@/store";
+import { store } from "@/store";
 export default {
   created() {
     this.modes = Object.keys(this.config.modes);
