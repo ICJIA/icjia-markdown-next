@@ -50,25 +50,6 @@ export default {
     toggleSettingsWindow() {
       EventBus.$emit("toggleSettingsWindow");
     }
-  },
-
-  computed: {
-    isLintingEnabled: {
-      get() {
-        return store.config.isLintingEnabled;
-      },
-      set(isLintingEnabled) {
-        store.config.isLintingEnabled = isLintingEnabled;
-      }
-    },
-    isLintingAutoAlertEnabled: {
-      get() {
-        return store.config.isLintingAutoAlertEnabled;
-      },
-      set(isLintingAutoAlertEnabled) {
-        store.config.isLintingAutoAlertEnabled = isLintingAutoAlertEnabled;
-      }
-    }
   }
 };
 </script>
