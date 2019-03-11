@@ -20,8 +20,7 @@
               <v-icon>chevron_left</v-icon>
             </v-btn>
           </v-toolbar>
-
-          Settings here
+          <auto-alert></auto-alert>
         </v-flex>
       </v-layout>
     </v-navigation-drawer>
@@ -29,16 +28,16 @@
 </template>
 
 <script>
-import config from "@/config";
 import { EventBus } from "@/event-bus.js";
-import { store, mutations } from "@/store";
-// import config from "@/config";
-// import { capitalize } from "@/filters";
+import { store } from "@/store";
+import AutoAlert from "@/components/SettingAutoAlert";
 export default {
+  components: {
+    AutoAlert
+  },
   data() {
     return {
       settingsWindow: false,
-
       config: store.config
     };
   },
@@ -52,8 +51,25 @@ export default {
       EventBus.$emit("toggleSettingsWindow");
     }
   },
-  computed: {},
-  watch: {}
+
+  computed: {
+    isLintingEnabled: {
+      get() {
+        return store.config.isLintingEnabled;
+      },
+      set(isLintingEnabled) {
+        store.config.isLintingEnabled = isLintingEnabled;
+      }
+    },
+    isLintingAutoAlertEnabled: {
+      get() {
+        return store.config.isLintingAutoAlertEnabled;
+      },
+      set(isLintingAutoAlertEnabled) {
+        store.config.isLintingAutoAlertEnabled = isLintingAutoAlertEnabled;
+      }
+    }
+  }
 };
 </script>
 

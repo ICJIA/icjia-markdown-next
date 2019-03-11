@@ -69,7 +69,7 @@ const config = {
     },
     linting: {
       text:
-        "<strong>LINTING ALERT</strong><br><br>To turn off real-time linting, click the settings menu in the upper left.<br><br>A linter is a tool that analyzes a text to indicate errors, bugs, or stylistic discrepencies.<br><br>"
+        "<strong>LINTING ALERT</strong><br><br>Click alert for more information.<br><br>A linter is a tool that analyzes a text to indicate errors, bugs, or stylistic discrepencies.<br><br>"
     },
     lintWindow: {
       text: "Show linting alerts"
@@ -163,10 +163,10 @@ const config = {
    *
    *
    */
-  lintingEnabled: true,
+  isLintingEnabled: true,
+  isLintingAutoAlertEnabled: false,
   lintingDefault: "relaxed.json",
   lintingRulePath: "config/markdownlint/",
-  lintingAutoAlert: true,
 
   /**
    *
@@ -203,7 +203,7 @@ const config = {
           name: "shortenLink",
           action: "shortenLink",
           icon: "offline_bolt",
-          tooltip: "Create short link from URL"
+          tooltip: "Create bit.ly short link from URL"
         },
         {
           name: "centerText",
@@ -284,7 +284,7 @@ const config = {
           name: "shortenLink",
           action: "shortenLink",
           icon: "offline_bolt",
-          tooltip: "Create short link from URL"
+          tooltip: "Create bit.ly short link from URL"
         },
         {
           name: "centerText",

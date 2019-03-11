@@ -119,20 +119,13 @@ export default {
   },
   watch: {
     lintStatus() {
-      if (store.config.lintingAutoAlert) {
+      if (store.config.isLintingAutoAlertEnabled) {
         if (!this.lintStatus.isError) {
           this.lintWindow = false;
         } else {
           this.lintWindow = true;
         }
       }
-    },
-    autoAlert() {
-      let status;
-      this.autoAlert ? (status = "ON") : (status = "OFF");
-      let msg = `Linting Auto Alert turned ${status}`;
-      EventBus.$emit("displayStatus", msg);
-      mutations.toggleLintingAutoAlert(this.autoAlert);
     }
   }
 };
