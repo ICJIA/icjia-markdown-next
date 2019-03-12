@@ -51,8 +51,6 @@
         </v-card>
       </v-dialog>
 
-      <nav-markdown></nav-markdown>
-
       <div
         v-if="$browserDetect.isIE"
         class="text-xs-center pt-5 pb-5"
@@ -105,13 +103,11 @@
 <script>
 import config from "@/config";
 import NavMarkdown from "@/components/NavMarkdown";
-
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
 
 const { BitlyClient } = require("bitly");
 const bitly = new BitlyClient(process.env.VUE_APP_BITLY, {});
-
 let FileSaver = require("file-saver");
 let loremIpsum = require("lorem-ipsum");
 
@@ -175,6 +171,13 @@ export default {
           this.yaml = {};
         }
       });
+      this.editor.on("optionChange", cm => {
+        console.log("option changed");
+        /**
+         *
+         * TODO: CodeMirror rerender content here
+         */
+      });
     },
     setInitialText() {
       if (config.localStorageKey in localStorage) {
@@ -208,20 +211,9 @@ export default {
         let status = this.isScrollSynced ? "ON" : "OFF";
         EventBus.$emit("displayStatus", `Scroll sync turned ${status}`);
       });
-      EventBus.$on("markdownFocus", () => {
-        // console.log("put focus on markdown panel");
-        // console.log(this.editor.hasFocus());
-        // let editor = document.getElementById("editor");
-        // editor.focus();
-      });
+
       EventBus.$on("updateEditorConfig", ({ option, value }) => {
-        //console.log("update Editor config here: ", mode, value);
-        // this.editor.setOption(option, value);
-        // console.log(this.editor.getOption(option));
-        // this.$nextTick(() => {
-        //   this.model = md.render(this.editor.getValue());
-        //   console.log(this.model);
-        // });
+        this.editor.setOption(option, value);
       });
     },
     initializeAutoSave() {
@@ -232,7 +224,7 @@ export default {
       }, config.autoSaveInterval);
     },
     lintMarkdown(content) {
-      console.log("linting");
+      //console.log("linting");
       const options = {
         strings: {
           content
@@ -250,7 +242,7 @@ export default {
             lintStatus.isError = true;
             lintStatus.result = result;
           } else {
-            console.log("No linting errors");
+            //console.log("No linting errors");
             lintStatus.isError = false;
             lintStatus.result = {};
             lintStatus.result.content = "";
@@ -270,12 +262,7 @@ export default {
     updateViewerScroll(e) {
       if (this.isScrollSynced) {
         this.editorScrollTop = this.editor.getScrollInfo().top;
-        // console.log(
-        //   "Editor ",
-        //   this.editorScrollTop,
-        //   " Offset: ",
-        //   this.scrollOffset
-        // );
+
         if (this.editorScrollTop > config.scrollOffset) {
           this.viewerScroll.scrollTop =
             this.editorScrollTop + config.scrollOffset;
@@ -286,15 +273,6 @@ export default {
     },
     updateEditorScroll(e) {
       this.viewerScrollTop = e.target.scrollTop;
-      // if (this.isScrollSynced) {
-      // console.log(
-      //   "Viewer ",
-      //   this.viewerScrollTop,
-      //   " Offset: ",
-      //   this.scrollOffset
-      // );
-      //   this.editor.scrollTo(null, viewerScrollTop);
-      // }
       return null;
     },
     insertEntity(action) {

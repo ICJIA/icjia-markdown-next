@@ -1,11 +1,11 @@
 <template>
   <v-app id="markdown-app">
-   
     <nav-primary></nav-primary>
- <settings-window></settings-window>
+    <nav-markdown></nav-markdown>
     <router-view />
+    <settings-window></settings-window>
+
     <lint-window></lint-window>
-    
   </v-app>
 </template>
 
@@ -13,9 +13,11 @@
 import LintWindow from "@/components/LintWindow";
 import SettingsWindow from "@/components/SettingsWindow";
 import NavPrimary from "@/components/NavPrimary";
+import NavMarkdown from "@/components/NavMarkdown";
 export default {
   components: {
     NavPrimary,
+    NavMarkdown,
     LintWindow,
     SettingsWindow
   },

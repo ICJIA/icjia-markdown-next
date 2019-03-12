@@ -3,7 +3,7 @@
     <v-navigation-drawer
       v-model="settingsWindow"
       absolute
-      fixed
+      temporary
       :clipped="false"
       width="320"
       style="z-index: 5000 !important; background: #eee"
@@ -19,6 +19,7 @@
         </v-btn>
       </v-toolbar>
       <auto-alert></auto-alert>
+      <!-- <markdown-it></markdown-it> -->
     </v-navigation-drawer>
   </div>
 </template>
@@ -27,10 +28,11 @@
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
 import AutoAlert from "@/components/SettingAutoAlert";
-
+import MarkdownIt from "@/components/SettingMarkdownIt";
 export default {
   components: {
-    AutoAlert
+    AutoAlert,
+    MarkdownIt
   },
   data() {
     return {
