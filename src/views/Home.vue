@@ -214,6 +214,15 @@ export default {
         // let editor = document.getElementById("editor");
         // editor.focus();
       });
+      EventBus.$on("updateEditorConfig", ({ option, value }) => {
+        //console.log("update Editor config here: ", mode, value);
+        // this.editor.setOption(option, value);
+        // console.log(this.editor.getOption(option));
+        // this.$nextTick(() => {
+        //   this.model = md.render(this.editor.getValue());
+        //   console.log(this.model);
+        // });
+      });
     },
     initializeAutoSave() {
       window.setInterval(() => {
@@ -306,7 +315,7 @@ export default {
           this.insertAround("[", "](http://)");
           break;
         case "image":
-          this.insertBefore("![alt-text-here](http://)", 2);
+          this.insertBefore("![insert-alt-text-here](http://)", 2);
           break;
         case "unorderedList":
           this.insertBefore("* ", 2);

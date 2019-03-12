@@ -14,7 +14,7 @@ const config = {
    *
    */
   markdownItOptions: {
-    html: true,
+    html: false,
     xhtmlOut: false,
     breaks: true,
     langPrefix: "language-",

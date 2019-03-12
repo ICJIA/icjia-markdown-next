@@ -1,24 +1,24 @@
 <template>
-  <div class="mt-4 pl-2 pr-2">
-    <v-card>
-      <!-- <v-layout style="background: #ddd;">
-                <v-card-title
-                  style="font-weight: 900; text-transform: uppercase;"
-                  >LINTING</v-card-title
-                >
-                <v-spacer></v-spacer>
-                <v-switch v-model="isLintingEnabled"></v-switch>
-              </v-layout> -->
-      <v-layout style="background: #ddd;">
-        <v-card-title
-          style="font-weight: 700; text-transform: uppercase; font-size: 12px;"
-          >LINTING AUTO ALERT</v-card-title
-        >
-        <v-spacer></v-spacer>
-        <v-switch v-model="isLintingAutoAlertEnabled"></v-switch>
+  <v-card class="mt-1">
+    <v-container fluid grid-list-lg>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <v-card color="grey lighten-2" class="black--text">
+            <v-layout>
+              <v-flex xs9>
+                <v-card-title primary-title class="settingsHeading">
+                  Linting Auto Alert
+                </v-card-title>
+              </v-flex>
+              <v-flex xs3>
+                <v-switch v-model="isLintingAutoAlertEnabled"></v-switch>
+              </v-flex>
+            </v-layout>
+          </v-card>
+        </v-flex>
       </v-layout>
-    </v-card>
-  </div>
+    </v-container>
+  </v-card>
 </template>
 
 <script>
@@ -32,14 +32,14 @@ export default {
     };
   },
   computed: {
-    isLintingEnabled: {
-      get() {
-        return store.config.isLintingEnabled;
-      },
-      set(isLintingEnabled) {
-        store.config.isLintingEnabled = isLintingEnabled;
-      }
-    },
+    // isLintingEnabled: {
+    //   get() {
+    //     return store.config.isLintingEnabled;
+    //   },
+    //   set(isLintingEnabled) {
+    //     store.config.isLintingEnabled = isLintingEnabled;
+    //   }
+    // },
     isLintingAutoAlertEnabled: {
       get() {
         return store.config.isLintingAutoAlertEnabled;

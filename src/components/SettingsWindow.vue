@@ -9,20 +9,16 @@
       style="z-index: 5000 !important; background: #eee"
       disable-resize-watcher
     >
-      <v-layout row>
-        <v-flex xs12>
-          <v-toolbar dense color="indigo accent-2" dark>
-            <!-- <v-icon class="close-icon" @click="toggleSettingsWindow">close</v-icon> -->
-            <v-toolbar-title style="font-size: 18px">SETTINGS</v-toolbar-title>
+      <v-toolbar dense color="indigo accent-2" dark>
+        <!-- <v-icon class="close-icon" @click="toggleSettingsWindow">close</v-icon> -->
+        <v-toolbar-title style="font-size: 18px">SETTINGS</v-toolbar-title>
 
-            <v-spacer></v-spacer>
-            <v-btn icon @click="toggleSettingsWindow">
-              <v-icon>chevron_left</v-icon>
-            </v-btn>
-          </v-toolbar>
-          <auto-alert></auto-alert>
-        </v-flex>
-      </v-layout>
+        <v-spacer></v-spacer>
+        <v-btn icon @click="toggleSettingsWindow">
+          <v-icon>chevron_left</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <auto-alert></auto-alert>
     </v-navigation-drawer>
   </div>
 </template>
@@ -31,6 +27,7 @@
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
 import AutoAlert from "@/components/SettingAutoAlert";
+
 export default {
   components: {
     AutoAlert
@@ -70,5 +67,11 @@ export default {
 
 .close-icon:hover {
   color: #aaa;
+}
+
+.settingsHeading {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 </style>
