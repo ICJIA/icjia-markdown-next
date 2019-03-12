@@ -9,14 +9,17 @@
         <span>{{ config.tooltips.settingsWindow.text }}</span>
       </v-tooltip>
 
-      <v-toolbar-title>
-        <router-link to="/" class="navTitle"
-          ><span style="font-weight: 400;">ICJIA</span>&nbsp;<span
-            style="font-weight: 900;"
-            >MARKDOWN EDITOR</span
-          ></router-link
-        >
-      </v-toolbar-title>
+      <v-tooltip bottom>
+        <v-toolbar-title slot="activator">
+          <router-link to="/" class="navTitle"
+            ><span style="font-weight: 400;">ICJIA</span>&nbsp;<span
+              style="font-weight: 900;"
+              >MARKDOWN EDITOR</span
+            ></router-link
+          >
+        </v-toolbar-title>
+        <span v-html="config.tooltips['icjia']['text']"></span>
+      </v-tooltip>
       &nbsp;&nbsp;&nbsp;&nbsp;
 
       <v-tooltip bottom max-width="200">

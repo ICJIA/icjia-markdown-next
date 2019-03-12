@@ -168,6 +168,10 @@ const config = {
     {
       name: "ICJIA Legacy Markdown Editor",
       url: "https://legacy-markdown.icjia.cloud/"
+    },
+    {
+      name: "ICJIA Home Page",
+      url: "http://www.icjia.state.il.us"
     }
   ],
   /**
