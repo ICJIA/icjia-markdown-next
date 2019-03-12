@@ -150,6 +150,29 @@ const config = {
   /**
    *
    *
+   * External Resources
+   *
+   *
+   */
+  displayExternalResources: true,
+  externalResources: [
+    { name: "Markdown Guide", url: "https://www.markdownguide.org/" },
+    {
+      name: "Markdown Quick Reference",
+      url: "https://en.support.wordpress.com/markdown-quick-reference/"
+    },
+    {
+      name: "ICJIA Style Guide",
+      url: "http://www.icjia.state.il.us/sandbox/typography"
+    },
+    {
+      name: "ICJIA Legacy Markdown Editor",
+      url: "https://legacy-markdown.icjia.cloud/"
+    }
+  ],
+  /**
+   *
+   *
    * Styles for rendered HTML
    *
    *

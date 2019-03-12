@@ -53,7 +53,7 @@
                 <v-subheader
                   class="grey--text text--darken-4"
                   style="font-size: 12px;"
-                  >Snippets & Examples</v-subheader
+                  >Markdown Snippets & Examples</v-subheader
                 >
 
                 <v-list-tile
@@ -72,9 +72,33 @@
                   >
                 </v-list-tile>
               </div>
+
+              <div v-if="config.displayExternalResources">
+                <v-subheader
+                  class="grey--text text--darken-4"
+                  style="font-size: 12px;"
+                  >External Resources</v-subheader
+                >
+
+                <v-list-tile
+                  v-for="resource in config.externalResources"
+                  :key="resource.url"
+                  class="moreEntitites"
+                >
+                  <v-list-tile-title
+                    v-on:click="gotoExternalResource(resource.url)"
+                    style="font-size: 12px;"
+                  >
+                    <v-icon style="width: 35px; font-size: 16px;"
+                      >open_in_new</v-icon
+                    >
+                    &nbsp;&nbsp;{{ resource.name }}</v-list-tile-title
+                  >
+                </v-list-tile>
+              </div>
             </v-list>
           </v-menu>
-          <span>Snippets & Examples</span>
+          <span>Snippets & External Resources</span>
         </v-tooltip>
 
         <v-divider class="mx-2" vertical></v-divider>
@@ -328,6 +352,9 @@ export default {
     selectMode(mode) {
       this.mode = mode;
       EventBus.$emit("setMode", this.mode);
+    },
+    gotoExternalResource(url) {
+      window.open(url, "_blank");
     }
   },
   computed: {
@@ -383,5 +410,26 @@ export default {
   min-width: 32px;
   margin: 2px;
   padding: 0;
+}
+
+.v-input {
+  max-width: 125px;
+}
+.v-btn--icon.v-btn--small {
+  width: 20px !important;
+}
+.sampleTitle:hover {
+  cursor: pointer;
+  color: blue;
+}
+.scrollSync .v-label {
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #222;
+}
+.moreEntitites:hover {
+  cursor: pointer;
+  color: blue;
 }
 </style>
