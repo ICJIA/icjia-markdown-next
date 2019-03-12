@@ -1,25 +1,23 @@
 <template>
-  <v-layout row wrap>
-    <v-flex xs12 sm6>
-      <v-toolbar
-        flat
-        color="grey lighten-2"
-        style="padding-top: 5px; z-index: 100; position: fixed; top: 50px; margin-left: -10px"
-      >
+  <v-layout
+    row
+    wrap
+    style="position: fixed; top: 48px; width: 100%; z-index: 100;"
+  >
+    <v-flex xs12>
+      <v-toolbar dense>
         <div
           v-for="tool in visibleTools"
           :key="tool.action"
           class="hidden-sm-and-down"
-          style="margin-left: -3px"
         >
           <v-tooltip bottom>
             <v-btn
-              small
-              icon
+              class="navButton"
               slot="activator"
               @click.prevent="getEntity(tool.action)"
             >
-              <v-icon size="20px">{{ tool.icon }}</v-icon>
+              <v-icon>{{ tool.icon }}</v-icon>
             </v-btn>
             <span>{{ tool.tooltip }}</span>
           </v-tooltip>
@@ -28,12 +26,11 @@
         <v-tooltip bottom>
           <v-menu
             offset-y
-            nudge-left="100"
             transition="slide-x-transition"
             style="z-index: 150;"
             slot="activator"
           >
-            <v-btn icon slot="activator" style="margin-left: -5px">
+            <v-btn icon slot="activator">
               <v-icon>more_vert</v-icon>
             </v-btn>
             <v-list dense>
@@ -53,11 +50,10 @@
                 >
               </v-list-tile>
               <div v-if="config.displaySnippets">
-                <v-divider></v-divider>
                 <v-subheader
-                  class="grey--text text--darken-1"
+                  class="grey--text text--darken-4"
                   style="font-size: 12px;"
-                  >Markdown Snippets</v-subheader
+                  >Snippets & Examples</v-subheader
                 >
 
                 <v-list-tile
@@ -78,22 +74,20 @@
               </div>
             </v-list>
           </v-menu>
-          <span>Additional {{ this.mode | capitalize }} Tools</span>
+          <span>Snippets & Examples</span>
         </v-tooltip>
-        <!-- </span> -->
+
+        <v-divider class="mx-2" vertical></v-divider>
 
         <v-tooltip bottom>
           <v-btn
-            small
+            class="navButton"
             dark
             color="blue darken-4"
             slot="activator"
             @click.prevent="getEntity('saveMarkdown')"
-            style="font-size: 10px; font-weight: 900"
-            >Save MD
-            <v-icon dark right style="font-size: 14px; font-weight: 900"
-              >save_alt</v-icon
-            >
+          >
+            <v-icon dark>save_alt</v-icon>
           </v-btn>
           <span>{{ config.tooltips["saveMd"].text }}</span>
         </v-tooltip>
@@ -106,15 +100,12 @@
             slot="activator"
           >
             <v-btn
-              small
+              class="navButton"
               slot="activator"
               color="blue darken-4"
               dark
-              style="font-size: 10px; font-weight: 900"
-              >Load MD
-              <v-icon dark right style="font-size: 14px; font-weight: 900"
-                >cloud_upload</v-icon
-              >
+            >
+              <v-icon dark>cloud_upload</v-icon>
             </v-btn>
             <v-card class="text-xs-center">
               <v-card-title class="headline">Load Markdown File</v-card-title>
@@ -136,44 +127,34 @@
 
         <v-tooltip bottom>
           <v-btn
-            small
             dark
             color="blue darken-4"
             slot="activator"
             @click.prevent="getEntity('mdToClipboard')"
-            style="font-size: 10px; font-weight: 900"
-            >Copy
-            <v-icon dark right style="font-size: 14px; font-weight: 900"
-              >assignment</v-icon
-            >
+            class="navButton"
+          >
+            <v-icon dark>assignment</v-icon>
           </v-btn>
           <span>{{ config.tooltips["copyMd"].text }}</span>
         </v-tooltip>
 
+        <v-divider class="mx-2" vertical></v-divider>
+
         <v-tooltip bottom max-width="200">
           <v-btn
-            small
+            class="navButton"
             :dark="isYaml"
             :disabled="!isYaml"
-            color="blue darken-4"
+            color="teal darken-2"
             slot="activator"
             @click.prevent="getEntity('showYaml')"
-            style="font-size: 10px; font-weight: 900"
-            >YAML
-            <v-icon dark right style="font-size: 14px; font-weight: 900"
-              >power</v-icon
-            >
+          >
+            <v-icon dark>power</v-icon>
           </v-btn>
           <span v-html="config.tooltips['showYaml'].text"></span>
         </v-tooltip>
-      </v-toolbar>
-    </v-flex>
-    <v-flex xs6 class="hidden-sm-and-down">
-      <v-toolbar
-        flat
-        color="grey lighten-2"
-        style="padding-top: 5px; z-index: 100; position: fixed; top: 50px;"
-      >
+
+        <v-spacer></v-spacer>
         <v-select
           :items="config.stylesheets"
           label="Stylesheet"
@@ -229,7 +210,7 @@
           </v-btn>
           <span>{{ config.tooltips["copyHtml"].text }}</span>
         </v-tooltip>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <v-divider class="mx-2" vertical></v-divider>
 
         <v-tooltip bottom max-width="150">
           <v-switch
@@ -398,28 +379,9 @@ export default {
 </script>
 
 <style>
-.v-input {
-  max-width: 125px;
-}
-
-.v-btn--icon.v-btn--small {
-  width: 20px !important;
-}
-
-.sampleTitle:hover {
-  cursor: pointer;
-  color: blue;
-}
-
-.scrollSync .v-label {
-  font-size: 9px;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #222;
-}
-
-.moreEntitites:hover {
-  cursor: pointer;
-  color: blue;
+.v-btn.navButton {
+  min-width: 32px;
+  margin: 2px;
+  padding: 0;
 }
 </style>

@@ -58,9 +58,8 @@
           slot="activator"
           dark
           small
-          depressed
           color="red darken-2"
-          style="font-size: 10px; font-weight: 900"
+          class="lintAlertButton"
           v-on:click="toggleLintWindow"
         >
           <v-icon dark icon style="font-size: 16px; color: #fff"
@@ -259,5 +258,11 @@ a.navTitle:hover {
   padding-left: 3px;
   padding-top: 2px;
   padding-bottom: 2px;
+}
+
+.v-btn.lintAlertButton {
+  min-width: 40px;
+  margin: 2px;
+  padding: 0;
 }
 </style>

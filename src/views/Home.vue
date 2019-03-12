@@ -76,7 +76,7 @@
         </h1>
       </div>
 
-      <div style="margin-top: 75px;" class="master">
+      <div style="margin-top: 50px;" class="master">
         <v-layout row wrap>
           <v-flex xs12 sm6>
             <textarea id="editor" style="margin-top: -5px;"></textarea>
@@ -293,7 +293,10 @@ export default {
           this.insertAround("[", "](http://)");
           break;
         case "image":
-          this.insertBefore("![insert-alt-text-here](http://)", 2);
+          this.insertBefore(
+            "![INSERT_ALT_TEXT_HERE](https://via.placeholder.com/500x300){.img-center}",
+            2
+          );
           break;
         case "unorderedList":
           this.insertBefore("* ", 2);

@@ -8,11 +8,11 @@ Recently, the Illinois Department of Juvenile Justice (IDJJ) has seen a decrease
 
 On January 1, 2010, misdemeanor offenses for 17-year-olds began prosecution in the juvenile justice system. In 2014, Illinois further incorporated 17-year-old juveniles with felony offenses into the juvenile justice system ([705 ILCS 405/5-120](http://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=070504050K5-120)). In 2017, a new law was passed to expand sealing and expunging convictions to more eligible youth and increase restrictions on sharing juvenile record information with the general public sharing. This latter change may impact future research mentioned in the limitations section of this article.
 
-### Figure 1{.text-center}
+#### Figure 1
 
-### Number of Illinios Department of Juvenile Justice Admissions Between SFY08 and SFY16{.text-center}
+#### Number of Illinios Department of Juvenile Justice Admissions Between SFY08 and SFY16
 
-## Illinois Juvenile Justice System{.text-center}
+## Illinois Juvenile Justice System
 
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 
@@ -77,17 +77,17 @@ Race and ethnicity are categorized together in the IDJJ exit data files. Of the 
 
 Eighty percent of youth aged 18 years were admitted to IDJJ for a technical violation during the period studied; 46 percent of 17-year-olds were initially admitted for a technical violation between SFY08 and SFY13 (_Figure 3_).
 
-### Figure 2{.text-center}
+#### Figure 2{.text-center}
 
-### Percentages of Youth Exits by Race/Ethnicity and IDJJ Youth Exit Cohort Between SFY08 and SFY13 (N=12,299){.text-center}
+#### Percentages of Youth Exits by Race/Ethnicity and IDJJ Youth Exit Cohort Between SFY08 and SFY13 (N=12,299){.text-center}
 
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 
 _Source_: ICJIA analysis of IDJJ data.
 
-### Figure 3{.text-center}
+#### Figure 3{.text-center}
 
-### Percentage of Youth Exit Cohort Age at Admission to IDJJ Between SFY08 and SFY13 (N=12,299){.text-center}
+#### Percentage of Youth Exit Cohort Age at Admission to IDJJ Between SFY08 and SFY13 (N=12,299){.text-center}
 
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 
@@ -103,9 +103,9 @@ Between SFY08 and SFY13, the overall average length of stay (LOS) was approximat
 
 Discussion of priors includes the committing offense arrest, unless otherwise specified.[^8] Approximately 94 percent of youth exiting IDJJ had at least one arrest dated prior to the admit date (including their committing offense). About 49 percent of youth exiting IDJJ had served at least one prior additional IDJJ commitment, not including their exit commitment. On average, youth sampled had about eight arrests (a median of six prior arrests) including the committing offense (_Figure 4_).
 
-### Figure 4{.text-center}
+#### Figure 4{.text-center}
 
-### Mean and Median Numbers of Prior Arrests Among Youth Exiting IDJJ Between SFY08 and SFY13 by Youth Exit Cohort (n=11,562){.text-center}
+#### Mean and Median Numbers of Prior Arrests Among Youth Exiting IDJJ Between SFY08 and SFY13 by Youth Exit Cohort (n=11,562){.text-center}
 
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 
@@ -121,9 +121,9 @@ Of the 12,299 IDJJ youth exits between SFY08 and SFY13, 87 percent were rearrest
 
 The median and average days to first rearrest were greatest for youth released in SFY10 and SFY11, and shortest for those released in SFY08 and SFY13.
 
-### Figure 5{.text-center}
+#### Figure 5{.text-center}
 
-### Percentage of Youth Rearrested within Three Years Post-Release from an IDJJ Facility by Youth Exit Cohort (N=12,299){.text-center}
+#### Percentage of Youth Rearrested within Three Years Post-Release from an IDJJ Facility by Youth Exit Cohort (N=12,299){.text-center}
 
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 _Source_: ICJIA analysis of CHRI data.
@@ -148,9 +148,9 @@ Eighty percent of recommitments to IDJJ were for technical violations. Most of t
 
 There was a general decrease between SFY08 and SFY13 in average and median days to IDJJ recommitment. Overall, there was an average of 251 days to IDJJ recommitment and a median of 176 days.
 
-### Figure 6{.text-center}
+#### Figure 6{.text-center}
 
-### Percentage of Youth Recommitted to IDJJ by Youth Exit Cohort (N=12,299){.text-center}
+#### Percentage of Youth Recommitted to IDJJ by Youth Exit Cohort (N=12,299){.text-center}
 
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 
@@ -164,9 +164,9 @@ Overall, 54 percent of the IDJJ youth exits were committed to the Illinois Depar
 
 There should be caution when interpreting the decrease in percent of youth exits released in SFY12 and SFY13 who were then committed to IDOC. This decrease may be the product of the amount of follow-up time for some youth exiting IDJJ who may not have aged out of the juvenile justice system. If a juvenile was admitted at age 13 or 14 in SFY12 or SFY13, it is unlikely s/he would be eligible for the adult system due to age, unless s/he commits an offense at age 16 that would qualify as an automatic transfer to the adult system.
 
-### Figure 7
+#### Figure 7
 
-### Percentage of Youth Committed to IDOC by Youth Exit Cohort (N=12,299)
+#### Percentage of Youth Committed to IDOC by Youth Exit Cohort (N=12,299)
 
 ![FILLER_IMAGE](https://via.placeholder.com/500x300){.img-center}
 

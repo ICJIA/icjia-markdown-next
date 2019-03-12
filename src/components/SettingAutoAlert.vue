@@ -7,7 +7,7 @@
             <v-layout>
               <v-flex xs9>
                 <v-card-title primary-title class="settingsHeading">
-                  Linting Auto Alert
+                  Linting Auto Alerts
                 </v-card-title>
               </v-flex>
               <v-flex xs3>

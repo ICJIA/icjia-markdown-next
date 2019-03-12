@@ -14,6 +14,7 @@ import LintWindow from "@/components/LintWindow";
 import SettingsWindow from "@/components/SettingsWindow";
 import NavPrimary from "@/components/NavPrimary";
 import NavMarkdown from "@/components/NavMarkdown";
+
 export default {
   components: {
     NavPrimary,

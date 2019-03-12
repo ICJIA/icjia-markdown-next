@@ -44,7 +44,7 @@ const config = {
     },
     showYaml: {
       text:
-        "Display YAML metadata.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard.<br><br>YAML is frequently used at the beginning of a markdown file to insert document-specific metadata.<br><br>If no YAML exists, this button is disabled."
+        "If no YAML data exists, this button is disabled.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard.<br><br>YAML is frequently used at the beginning of a markdown file to insert document-specific metadata.<br><br>"
     },
     saveHtml: {
       text: "Save as HTML"
@@ -69,13 +69,13 @@ const config = {
     },
     linting: {
       text:
-        "<strong>LINTING ALERT</strong><br><br>Click alert button for more information.<br><br>A linter is a tool that analyzes a text to indicate errors, bugs, or stylistic discrepencies.<br><br>To enable or disable real-time linting notifications, click the settings icon in the upper left."
+        "<strong>LINTING ALERT</strong><br><br>Click alert for more information.<br><br>A linter is a tool that analyzes a text to indicate errors, bugs, or stylistic discrepencies.<br><br>To enable or disable real-time linting notifications, click the settings icon in the upper left."
     },
     lintWindow: {
       text: "Show linting alerts"
     },
     settingsWindow: {
-      text: "Configure application settings"
+      text: "Settings"
     },
     close: {
       text: "Close"
@@ -175,7 +175,7 @@ const config = {
    *
    *
    */
-  maxVisibleTools: 7,
+  maxVisibleTools: 11,
   defaultMode: "standard",
   modes: {
     standard: {
@@ -198,37 +198,6 @@ const config = {
           icon: "format_quote",
           tooltip: "Blockquote"
         },
-        { name: "link", action: "link", icon: "link", tooltip: "Link" },
-        {
-          name: "shortenLink",
-          action: "shortenLink",
-          icon: "offline_bolt",
-          tooltip: "Create bit.ly short link from URL"
-        },
-        {
-          name: "centerText",
-          action: "centerText",
-          icon: "format_align_center",
-          tooltip: "Center Text"
-        },
-        {
-          name: "centerImage",
-          action: "centerImage",
-          icon: "crop_original",
-          tooltip: "Center Image"
-        },
-        {
-          name: "clear",
-          action: "clear",
-          icon: "clear",
-          tooltip: "Clear all content"
-        },
-        {
-          name: "image",
-          action: "image",
-          icon: "insert_photo",
-          tooltip: "Image"
-        },
         {
           name: "unorderedList",
           action: "unorderedList",
@@ -241,13 +210,25 @@ const config = {
           icon: "format_list_numbered",
           tooltip: "Numbered List"
         },
-
+        { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
-          name: "footnote",
-          action: "footnote",
-          icon: "short_text",
-          tooltip: "Footnote"
+          name: "shortenLink",
+          action: "shortenLink",
+          icon: "offline_bolt",
+          tooltip: "Create bit.ly short link from URL"
         },
+        {
+          name: "image",
+          action: "image",
+          icon: "insert_photo",
+          tooltip: "Image"
+        },
+        // {
+        //   name: "footnote",
+        //   action: "footnote",
+        //   icon: "short_text",
+        //   tooltip: "Footnote"
+        // },
 
         {
           name: "loremipsum",
@@ -255,6 +236,12 @@ const config = {
           icon: "line_style",
           tooltip: "Lorem Ipsum chunk",
           display: "icon"
+        },
+        {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear all content"
         }
       ]
     },
@@ -279,38 +266,6 @@ const config = {
           icon: "format_quote",
           tooltip: "Blockquote"
         },
-        { name: "link", action: "link", icon: "link", tooltip: "Link" },
-        {
-          name: "shortenLink",
-          action: "shortenLink",
-          icon: "offline_bolt",
-          tooltip: "Create bit.ly short link from URL"
-        },
-        {
-          name: "centerText",
-          action: "centerText",
-          icon: "format_align_center",
-          tooltip: "Center Text"
-        },
-        {
-          name: "centerImage",
-          action: "centerImage",
-          icon: "crop_original",
-          tooltip: "Center Image"
-        },
-
-        {
-          name: "clear",
-          action: "clear",
-          icon: "clear",
-          tooltip: "Clear all content"
-        },
-        {
-          name: "image",
-          action: "image",
-          icon: "insert_photo",
-          tooltip: "Image"
-        },
         {
           name: "unorderedList",
           action: "unorderedList",
@@ -323,13 +278,25 @@ const config = {
           icon: "format_list_numbered",
           tooltip: "Numbered List"
         },
-
+        { name: "link", action: "link", icon: "link", tooltip: "Link" },
         {
-          name: "footnote",
-          action: "footnote",
-          icon: "short_text",
-          tooltip: "Footnote"
+          name: "shortenLink",
+          action: "shortenLink",
+          icon: "offline_bolt",
+          tooltip: "Create bit.ly short link from URL"
         },
+        {
+          name: "image",
+          action: "image",
+          icon: "insert_photo",
+          tooltip: "Image"
+        },
+        // {
+        //   name: "footnote",
+        //   action: "footnote",
+        //   icon: "short_text",
+        //   tooltip: "Footnote"
+        // },
 
         {
           name: "loremipsum",
@@ -337,6 +304,12 @@ const config = {
           icon: "line_style",
           tooltip: "Lorem Ipsum chunk",
           display: "icon"
+        },
+        {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear all content"
         }
       ]
     }
