@@ -6,6 +6,8 @@ At its inception, the goal of the juvenile justice system was to rehabilitate wa
 
 Recently, the Illinois Department of Juvenile Justice (IDJJ) has seen a decrease in delinquency commitments (adjudications) to their prison facilities (_Figure 1_). This is likely attributed to several Illinois statutes passed to decrease youth frequency, depth, and time spent in contact with the justice system, while increasing community-based supervision and treatment options, unless the youth presents a danger to the community ([705 ILCS 405/5-120](http://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=070504050K5-120)).
 
+### Third Level Heading
+
 On January 1, 2010, misdemeanor offenses for 17-year-olds began prosecution in the juvenile justice system. In 2014, Illinois further incorporated 17-year-old juveniles with felony offenses into the juvenile justice system ([705 ILCS 405/5-120](http://www.ilga.gov/legislation/ilcs/fulltext.asp?DocName=070504050K5-120)). In 2017, a new law was passed to expand sealing and expunging convictions to more eligible youth and increase restrictions on sharing juvenile record information with the general public sharing. This latter change may impact future research mentioned in the limitations section of this article.
 
 #### Figure 1
