@@ -102,7 +102,7 @@
 
 <script>
 import config from "@/config";
-import NavMarkdown from "@/components/NavMarkdown";
+
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
 
@@ -121,15 +121,21 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-emoji"))
   .use(require("markdown-it-attrs"))
   .use(require("@/markdown-it-meta-fork"))
-  .use(require("markdown-it-container"));
+  .use(require("markdown-it-container"))
+  .use(require("markdown-it-highlightjs"));
 
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
 
+// function makeMarker() {
+//   var marker = document.createElement("div");
+//   marker.style.color = "#822";
+//   marker.innerHTML = "●";
+//   return marker;
+// }
+
 export default {
-  components: {
-    NavMarkdown
-  },
+  components: {},
   mounted() {
     this.initializeEditor();
     this.initializeEditorEvents();
@@ -160,9 +166,11 @@ export default {
         this.line = cm.getCursor(true);
         this.lintMarkdown(cm.getValue());
 
+        // cm.setGutterMarker(3, "breakpoints", makeMarker());
+
         /**
          * Check if YAML delimter ('---') is present. If not, clear YAML.
-         * This is necessary since deleting YAML delimiters doesn't delete the rendered YAML from markdown-it-meta.
+         * This is necessary since deleting YAML delimiters doesn't delete previously rendered YAML from markdown-it-meta.
          */
         let yamlCheck = this.editor.doc.getLine(0);
         if (yamlCheck === "---") {
@@ -171,12 +179,9 @@ export default {
           this.yaml = {};
         }
       });
+
       this.editor.on("optionChange", cm => {
         console.log("option changed");
-        /**
-         *
-         * TODO: CodeMirror rerender content here
-         */
       });
     },
     setInitialText() {
@@ -224,7 +229,6 @@ export default {
       }, config.autoSaveInterval);
     },
     lintMarkdown(content) {
-      //console.log("linting");
       const options = {
         strings: {
           content
@@ -569,8 +573,7 @@ export default {
       editorScrollTop: null,
       viewerScrollTop: null,
       yaml: {},
-      isLintingError: false,
-      vm: this
+      isLintingError: false
     };
   }
 };

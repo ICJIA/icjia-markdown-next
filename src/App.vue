@@ -1,11 +1,10 @@
 <template>
   <v-app id="markdown-app">
     <nav-primary></nav-primary>
-    <nav-markdown></nav-markdown>
+    <nav-markdown v-if="showTools"></nav-markdown>
     <router-view />
-    <settings-window></settings-window>
-
-    <lint-window></lint-window>
+    <settings-window v-if="showTools"></settings-window>
+    <lint-window v-if="showTools"></lint-window>
   </v-app>
 </template>
 
@@ -22,14 +21,20 @@ export default {
     LintWindow,
     SettingsWindow
   },
+  mounted() {},
   data() {
     return {};
+  },
+  computed: {
+    showTools() {
+      return this.$route.meta.showTools;
+    }
   }
 };
 </script>
 
 <style lang="scss">
 .theme--light.application {
-  background: #ccc;
+  background: #ddd;
 }
 </style>

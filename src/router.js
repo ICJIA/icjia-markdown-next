@@ -9,29 +9,32 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/:modeParam",
-      name: "modeParam",
-      component: Home
-    },
-    {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      meta: { showTools: true }
     },
-    // {
-    //   path: "/sandbox",
-    //   name: "sandbox",
-
-    //   component: () =>
-    //     import(/* webpackChunkName: "about" */ "./views/Sandbox.vue")
-    // },
+    {
+      path: "/support",
+      name: "support",
+      component: () =>
+        import(/* webpackChunkName: "error" */ "./views/Support.vue"),
+      meta: { showTools: false }
+    },
     {
       path: "/404",
       name: "error",
       component: () =>
         import(/* webpackChunkName: "error" */ "./views/404.vue"),
-      meta: {}
+      meta: { showTools: false }
     },
+    {
+      path: "/:modeParam",
+      name: "modeParam",
+      component: Home,
+      meta: { showTools: true }
+    },
+
     {
       path: "*",
       redirect: { name: "error" }

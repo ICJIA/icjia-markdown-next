@@ -36,7 +36,7 @@
               class="text-center mt-3"
               style="font-size: 28px; font-weight: 900; color: green"
             >
-              No alerts. Hooray!
+              No alerts.<br />
             </div>
           </div>
 
@@ -77,9 +77,11 @@
 // import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
+
 // import config from "@/config";
 // import { capitalize } from "@/filters";
 export default {
+  components: {},
   data() {
     return {
       lintWindow: false,

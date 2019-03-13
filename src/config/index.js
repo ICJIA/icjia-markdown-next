@@ -4,7 +4,8 @@ const config = {
     mode: "markdown",
     tabSize: "2",
     indentWithTabs: true,
-    lineWrapping: true
+    lineWrapping: true,
+    gutters: ["CodeMirror-linenumbers", "breakpoints"]
   },
   /**
    *
@@ -44,7 +45,7 @@ const config = {
     },
     showYaml: {
       text:
-        "If no YAML data exists, this button is disabled.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard.<br><br>YAML is frequently used at the beginning of a markdown file to insert document-specific metadata.<br><br>"
+        "If YAML data exists, this button is enabled.<br><br><strong>YAML</strong> (<strong>Y</strong>AML <strong>A</strong>in't <strong>M</strong>arkup <strong>L</strong>anguage) is a human friendly data serialization standard.<br><br>YAML is frequently used at the beginning of a markdown file to insert document-specific metadata.<br><br>"
     },
     saveHtml: {
       text: "Save as HTML"
@@ -98,7 +99,8 @@ const config = {
    */
   stylesheets: [
     { text: "standard", value: "standard.css", display: "Standard" },
-    { text: "research", value: "research.css", display: "Research" }
+    { text: "research", value: "research.css", display: "Research" },
+    { text: "grants", value: "grants.css", display: "Grants" }
   ],
   defaultStylesheet: {
     text: "standard",
@@ -143,9 +145,10 @@ const config = {
   displaySnippets: true,
   snippets: [
     { name: "Welcome", filename: "welcome.md" },
-    { name: "Table", filename: "table.md" },
-    { name: "Image", filename: "fillerImage.md" },
-    { name: "Article", filename: "article.md" }
+    { name: "Table Example", filename: "table.md" },
+    { name: "Image Example", filename: "fillerImage.md" },
+    { name: "Article Example", filename: "article.md" },
+    { name: "NOFO Example", filename: "nofo.md" }
   ],
   /**
    *
@@ -278,6 +281,74 @@ const config = {
       display: "Research",
       color: "#f41d56",
       icon: "insert_chart_outlined",
+      tools: [
+        { name: "header", action: "header", icon: "title", tooltip: "Header" },
+        { name: "bold", action: "bold", icon: "format_bold", tooltip: "Bold" },
+        {
+          name: "italicize",
+          action: "italicize",
+          icon: "format_italic",
+          tooltip: "Italicize"
+        },
+        {
+          name: "blockquote",
+          action: "blockquote",
+          icon: "format_quote",
+          tooltip: "Blockquote"
+        },
+        {
+          name: "unorderedList",
+          action: "unorderedList",
+          icon: "format_list_bulleted",
+          tooltip: "Bulleted List"
+        },
+        {
+          name: "orderedList",
+          action: "orderedList",
+          icon: "format_list_numbered",
+          tooltip: "Numbered List"
+        },
+        { name: "link", action: "link", icon: "link", tooltip: "Link" },
+        {
+          name: "shortenLink",
+          action: "shortenLink",
+          icon: "offline_bolt",
+          tooltip: "Create bit.ly short link from URL"
+        },
+        {
+          name: "image",
+          action: "image",
+          icon: "insert_photo",
+          tooltip: "Image"
+        },
+        // {
+        //   name: "footnote",
+        //   action: "footnote",
+        //   icon: "short_text",
+        //   tooltip: "Footnote"
+        // },
+
+        {
+          name: "loremipsum",
+          action: "loremipsum",
+          icon: "line_style",
+          tooltip: "Lorem Ipsum chunk",
+          display: "icon"
+        },
+        {
+          name: "clear",
+          action: "clear",
+          icon: "clear",
+          tooltip: "Clear all content"
+        }
+      ]
+    },
+    grants: {
+      tooltip:
+        "<strong>Grants mode is still in development.</strong><br><br>Includes shortcuts, styles, and markdown snippets for FSGU.<br><br>",
+      display: "Grants",
+      color: "#f41d56",
+      icon: "attach_money",
       tools: [
         { name: "header", action: "header", icon: "title", tooltip: "Header" },
         { name: "bold", action: "bold", icon: "format_bold", tooltip: "Bold" },

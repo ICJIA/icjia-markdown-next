@@ -5,6 +5,7 @@
         <v-toolbar-side-icon
           @click="toggleSettingsWindow"
           slot="activator"
+          v-if="showTools"
         ></v-toolbar-side-icon>
         <span>{{ config.tooltips.settingsWindow.text }}</span>
       </v-tooltip>
@@ -23,7 +24,12 @@
       &nbsp;&nbsp;&nbsp;&nbsp;
 
       <v-tooltip bottom max-width="200">
-        <v-menu transition="slide-y-transition" bottom slot="activator">
+        <v-menu
+          transition="slide-y-transition"
+          bottom
+          slot="activator"
+          v-if="showTools"
+        >
           <v-btn
             slot="activator"
             small
@@ -32,10 +38,10 @@
             dark
             style="font-size: 10px; font-weight: 900"
           >
-            Mode:&nbsp;{{ mode
-            }}<v-icon dark right style="font-size: 14px; font-weight: 900">{{
+            Mode:&nbsp;{{ mode }}
+            <!-- <v-icon dark right style="font-size: 14px; font-weight: 900">{{
               getModeIcon
-            }}</v-icon>
+            }}</v-icon> -->
           </v-btn>
           <v-list>
             <v-list-tile
@@ -57,7 +63,7 @@
 
       <v-tooltip bottom max-width="200">
         <v-btn
-          v-if="this.lintStatus.isError"
+          v-if="this.lintStatus.isError && showTools"
           slot="activator"
           dark
           small
@@ -85,7 +91,12 @@
       &nbsp;&nbsp;
 
       <v-tooltip bottom>
-        <v-dialog v-model="statistics" max-width="500" slot="activator">
+        <v-dialog
+          v-model="statistics"
+          max-width="500"
+          slot="activator"
+          v-if="showTools"
+        >
           <v-btn
             slot="activator"
             flat
@@ -133,6 +144,7 @@
         <v-toolbar-side-icon
           @click="toggleLintWindow"
           slot="activator"
+          v-if="showTools"
         ></v-toolbar-side-icon>
         <span>{{ config.tooltips.lintWindow.text }}</span>
       </v-tooltip>
@@ -175,7 +187,7 @@ export default {
     });
     EventBus.$on("setMode", mode => {
       this.mode = mode;
-      //console.log(mode);
+      console.log(mode);
     });
     EventBus.$on("lintStatus", lintStatus => {
       this.lintStatus = lintStatus;
@@ -211,6 +223,9 @@ export default {
     getModeColor() {
       let color = this.config.modes[this.mode]["color"];
       return `color: ${color}`;
+    },
+    showTools() {
+      return this.$route.meta.showTools;
     }
   },
   data() {
