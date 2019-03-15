@@ -79,7 +79,7 @@
               <div
                 :style="getBottomPadding"
                 class="markdown-body"
-                style="padding: 10px"
+                style="padding: 10px; background: #ddd;"
                 v-html="html"
               ></div>
             </div>

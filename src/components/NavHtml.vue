@@ -19,6 +19,18 @@
           </v-btn>
           <span>{{ config.tooltips["saveMd"].text }}</span>
         </v-tooltip>
+        <v-divider class="mx-2" vertical></v-divider>
+        <v-tooltip bottom max-width="150">
+          <v-switch
+            v-model="displayHtmlPreview"
+            slot="activator"
+            label="HTML Preview"
+            class="scrollSync"
+            hide-details
+          ></v-switch>
+          <span>{{ config.tooltips["scrollSync"].text }}</span>
+        </v-tooltip>
+        <v-divider class="mx-2" vertical></v-divider>
 
         <v-spacer></v-spacer>
         <v-tooltip bottom>
@@ -94,6 +106,18 @@ export default {
     },
     prettify() {
       EventBus.$emit("prettify");
+    }
+  },
+  computed: {
+    displayHtmlPreview: {
+      get() {
+        return store.config.session.displayHtmlPreview;
+      },
+      set(displayHtmlPreview) {
+        store.config.session.displayHtmlPreview = displayHtmlPreview;
+        const status = displayHtmlPreview ? "ON" : "OFF";
+        EventBus.$emit("displayStatus", `HTML Preview: ${status}`);
+      }
     }
   }
 };
