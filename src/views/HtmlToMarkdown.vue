@@ -32,7 +32,7 @@
         <v-flex xs12 :sm6="!displayHtmlPreview" :sm4="displayHtmlPreview">
           <div>
             <v-btn dark small outline color="blue accent-3" class="target"
-              >RAW HTML</v-btn
+              >HTML</v-btn
             >
           </div>
         </v-flex>
@@ -127,9 +127,10 @@ export default {
   },
   mounted() {
     this.initializeEditor();
-    this.editor.getDoc().setValue("<h1>Paste HTML here</h1>");
+
     this.initializeEditorEvents();
     this.initializeToolbarEvents();
+    this.editor.getDoc().setValue("<h1>Paste HTML</h1>");
   },
   methods: {
     initializeEditor: function() {
@@ -180,19 +181,13 @@ export default {
 
       EventBus.$on("sendToEditor", () => {
         //console.log("send to editor: ", this.config.session.convertedMarkdown);
-        if (this.model.length > 0) {
-          EventBus.$emit(
-            "displayStatus",
-            "Converted Markdown successfully imported."
-          );
-          this.config.session.convertedMarkdown = this.model;
-          this.$router.push("/");
-        } else {
-          EventBus.$emit(
-            "displayStatus",
-            "ERROR: Please enter some HTML before importing."
-          );
-        }
+
+        EventBus.$emit(
+          "displayStatus",
+          "Converted Markdown successfully imported."
+        );
+        this.config.session.convertedMarkdown = this.model;
+        this.$router.push("/");
       });
 
       EventBus.$on("prettify", () => {
