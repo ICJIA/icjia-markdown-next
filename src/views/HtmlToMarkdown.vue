@@ -43,7 +43,7 @@
         </v-flex>
         <v-flex v-if="displayHtmlPreview" xs12 :sm4="displayHtmlPreview">
           <v-btn dark outline small color="blue accent-3" class="target"
-            >RENDERED MARKDOWN</v-btn
+            >HTML PREVIEW FROM MARKDOWN</v-btn
           >
         </v-flex>
       </v-layout>
