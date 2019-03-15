@@ -195,6 +195,7 @@ export default {
       EventBus.$on("prettify", () => {
         let prettifiedHTML = beautify_html(this.editor.getValue());
         this.editor.getDoc().setValue(prettifiedHTML);
+        EventBus.$emit("displayStatus", "HTML Re-formatted");
       });
     }
   },
