@@ -1,6 +1,13 @@
 <template>
   <div>
-    <v-toolbar fixed color="indigo" dark dense app style="z-index: 1000">
+    <v-toolbar
+      fixed
+      :class="getToolbarColor()"
+      dark
+      dense
+      app
+      style="z-index: 1000"
+    >
       <v-tooltip bottom max-width="200">
         <v-toolbar-side-icon
           @click="toggleSettingsWindow"
@@ -225,6 +232,12 @@ export default {
     },
     toggleSettingsWindow() {
       EventBus.$emit("toggleSettingsWindow");
+    },
+    getToolbarColor() {
+      if (this.routeName === "/html") {
+        return "blue darken-2";
+      }
+      return "indigo";
     }
   },
   computed: {
