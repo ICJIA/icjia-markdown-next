@@ -12,7 +12,6 @@
         <v-toolbar-side-icon
           @click="toggleSettingsWindow"
           slot="activator"
-          v-if="navPrimary && navMarkdown"
         ></v-toolbar-side-icon>
         <span>{{ config.tooltips.settingsWindow.text }}</span>
       </v-tooltip>
@@ -231,6 +230,7 @@ export default {
       EventBus.$emit("toggleLintWindow");
     },
     toggleSettingsWindow() {
+      console.log("toggle settings");
       EventBus.$emit("toggleSettingsWindow");
     },
     getToolbarColor() {

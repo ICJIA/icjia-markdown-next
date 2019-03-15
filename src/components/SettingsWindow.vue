@@ -11,7 +11,7 @@
     >
       <v-toolbar dense color="indigo accent-2" dark>
         <!-- <v-icon class="close-icon" @click="toggleSettingsWindow">close</v-icon> -->
-        <v-toolbar-title style="font-size: 18px">SETTINGS</v-toolbar-title>
+        <v-toolbar-title style="font-size: 18px">APP SETTINGS</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn icon @click="toggleSettingsWindow">

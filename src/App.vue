@@ -5,7 +5,7 @@
 
     <nav-html v-if="navHtml"></nav-html>
     <router-view />
-    <settings-window v-if="navMarkdown"></settings-window>
+    <settings-window></settings-window>
     <lint-window v-if="navMarkdown"></lint-window>
   </v-app>
 </template>
