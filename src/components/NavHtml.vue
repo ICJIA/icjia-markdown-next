@@ -29,7 +29,7 @@
             slot="activator"
             @click.prevent="saveMdToFile"
           >
-            SAVE MD&nbsp;<v-icon dark>save_alt</v-icon>
+            SAVE MARKDOWN&nbsp;<v-icon dark>save_alt</v-icon>
           </v-btn>
           <span>{{ config.tooltips["saveMd"].text }}</span>
         </v-tooltip>
@@ -41,7 +41,7 @@
             color="blue darken-4"
             slot="activator"
             @click.prevent="copyMdToClipboard"
-            >COPY MD&nbsp;
+            >COPY MARKDOWN&nbsp;
             <v-icon dark>assignment</v-icon>
           </v-btn>
           <span>{{ config.tooltips["copyMd"].text }}</span>
@@ -55,7 +55,7 @@
             dark
             @click.prevent="sendToEditor"
           >
-            SEND TO EDITOR&nbsp
+            SEND MARKDOWN TO EDITOR&nbsp
             <v-icon dark>launch</v-icon>
           </v-btn>
 

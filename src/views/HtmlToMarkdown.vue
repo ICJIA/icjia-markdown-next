@@ -116,6 +116,8 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-highlightjs"));
 
 const turndownService = new TurndownService({ headingStyle: "atx" });
+const gfm = turndownPluginGfm.gfm;
+turndownService.use(gfm);
 
 export default {
   data() {
