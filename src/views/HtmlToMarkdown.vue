@@ -96,7 +96,11 @@ import { store } from "@/store";
 
 let FileSaver = require("file-saver");
 
-const beautify_html = require("js-beautify").html;
+//const beautify_html = require("js-beautify").html;
+
+const prettier = require("prettier/standalone");
+const plugins = [require("prettier/parser-html")];
+
 const codeMirror = require("codemirror");
 
 require("codemirror/mode/markdown/markdown");
@@ -126,8 +130,6 @@ export default {
     this.editor.getDoc().setValue("<h1>Paste HTML here</h1>");
     this.initializeEditorEvents();
     this.initializeToolbarEvents();
-
-    //console.log(this.displayHtmlPreview);
   },
   methods: {
     initializeEditor: function() {
@@ -139,14 +141,8 @@ export default {
 
     initializeEditorEvents: function() {
       this.editor.on("change", cm => {
-        //this.model = md.render(cm.getValue());
-        // this.line = cm.getCursor(true);
-        // this.lintMarkdown(cm.getValue());
         this.model = turndownService.turndown(cm.getValue());
         this.html = md.render(this.model);
-
-        //console.log(turndownService.turndown(cm.getValue()));
-        //console.log(this.model);
       });
     },
     initializeToolbarEvents() {
@@ -184,16 +180,26 @@ export default {
 
       EventBus.$on("sendToEditor", () => {
         //console.log("send to editor: ", this.config.session.convertedMarkdown);
-        EventBus.$emit(
-          "displayStatus",
-          "Converted Markdown successfully imported."
-        );
-        this.config.session.convertedMarkdown = this.model;
-        this.$router.push("/");
+        if (this.model.length > 0) {
+          EventBus.$emit(
+            "displayStatus",
+            "Converted Markdown successfully imported."
+          );
+          this.config.session.convertedMarkdown = this.model;
+          this.$router.push("/");
+        } else {
+          EventBus.$emit(
+            "displayStatus",
+            "ERROR: Please enter some HTML before importing."
+          );
+        }
       });
 
       EventBus.$on("prettify", () => {
-        let prettifiedHTML = beautify_html(this.editor.getValue());
+        let prettifiedHTML = prettier.format(this.editor.getValue(), {
+          parser: "html",
+          plugins
+        });
         this.editor.getDoc().setValue(prettifiedHTML);
         EventBus.$emit("displayStatus", "HTML Re-formatted");
       });

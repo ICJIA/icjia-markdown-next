@@ -4,16 +4,14 @@ const config = {
     mode: "markdown",
     tabSize: "2",
     indentWithTabs: true,
-    lineWrapping: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints"]
+    lineWrapping: true
   },
   codeMirrorOptionsHtml: {
     lineNumbers: true,
-    mode: "html",
+    name: "htmlmixed",
     tabSize: "2",
     indentWithTabs: true,
-    lineWrapping: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints"]
+    lineWrapping: true
   },
   /**
    *

@@ -76,7 +76,7 @@
         </h1>
       </div>
 
-      <v-layout
+      <!-- <v-layout
         style="margin-top: 50px; background: #eee; border-bottom: 1px solid #bbb;"
       >
         <v-flex xs6>
@@ -101,9 +101,12 @@
             >WEB PREVIEW</v-btn
           >
         </v-flex>
-      </v-layout>
+      </v-layout> -->
 
-      <div class="master">
+      <div
+        class="master"
+        style="margin-top: 50px; background: #eee; border-bottom: 1px solid #bbb;"
+      >
         <v-layout row wrap>
           <v-flex xs12 sm6>
             <textarea id="editor" style="margin-top: -5px;"></textarea>
