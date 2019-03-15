@@ -30,9 +30,11 @@
         style="margin-top: 50px; background: #eee; border-bottom: 1px solid #bbb;"
       >
         <v-flex xs12 :sm6="!displayHtmlPreview" :sm4="displayHtmlPreview">
-          <v-btn dark small outline color="blue accent-3" class="target"
-            >RAW HTML</v-btn
-          >
+          <div>
+            <v-btn dark small outline color="blue accent-3" class="target"
+              >RAW HTML</v-btn
+            >
+          </div>
         </v-flex>
         <v-flex v-if="displayHtmlPreview" xs12 :sm4="displayHtmlPreview">
           <v-btn dark outline small color="blue accent-3" class="target"
@@ -40,7 +42,7 @@
           >
         </v-flex>
         <v-flex xs12 :sm6="!displayHtmlPreview" :sm4="displayHtmlPreview">
-          <v-btn dark outline small color="blue accent-3" class="target"
+          <v-btn dark outline small color="blue accent-3" class="target ml-2"
             >MARKDOWN</v-btn
           >
         </v-flex>
@@ -188,6 +190,11 @@ export default {
         );
         this.config.session.convertedMarkdown = this.model;
         this.$router.push("/");
+      });
+
+      EventBus.$on("prettify", () => {
+        let prettifiedHTML = beautify_html(this.editor.getValue());
+        this.editor.getDoc().setValue(prettifiedHTML);
       });
     }
   },

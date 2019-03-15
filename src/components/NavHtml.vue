@@ -7,6 +7,18 @@
     <v-flex xs12>
       <v-toolbar dense>
         <v-toolbar-title></v-toolbar-title>
+        <v-tooltip bottom>
+          <v-btn
+            small
+            dark
+            color="blue darken-4"
+            slot="activator"
+            @click.prevent="prettify"
+          >
+            FORMAT HTML&nbsp;<v-icon dark>code</v-icon>
+          </v-btn>
+          <span>{{ config.tooltips["saveMd"].text }}</span>
+        </v-tooltip>
 
         <v-spacer></v-spacer>
         <v-tooltip bottom>
@@ -79,6 +91,9 @@ export default {
     },
     sendToEditor() {
       EventBus.$emit("sendToEditor");
+    },
+    prettify() {
+      EventBus.$emit("prettify");
     }
   }
 };
