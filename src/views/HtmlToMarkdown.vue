@@ -36,14 +36,14 @@
             >
           </div>
         </v-flex>
-        <v-flex v-if="displayHtmlPreview" xs12 :sm4="displayHtmlPreview">
-          <v-btn dark outline small color="blue accent-3" class="target"
-            >PREVIEW</v-btn
-          >
-        </v-flex>
         <v-flex xs12 :sm6="!displayHtmlPreview" :sm4="displayHtmlPreview">
           <v-btn dark outline small color="blue accent-3" class="target ml-2"
             >MARKDOWN</v-btn
+          >
+        </v-flex>
+        <v-flex v-if="displayHtmlPreview" xs12 :sm4="displayHtmlPreview">
+          <v-btn dark outline small color="blue accent-3" class="target"
+            >RENDERED MARKDOWN</v-btn
           >
         </v-flex>
       </v-layout>
@@ -52,20 +52,6 @@
         <v-layout row wrap>
           <v-flex xs12 :sm6="!displayHtmlPreview" :sm4="displayHtmlPreview">
             <textarea id="editor" style="margin-top: -5px;"></textarea>
-          </v-flex>
-          <v-flex
-            v-if="displayHtmlPreview"
-            xs12
-            :sm4="displayHtmlPreview"
-            style="margin-top: -0px; padding-right: 0px; padding-left: 5px; "
-          >
-            <div
-              class="rendered-body"
-              style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
-              id="viewer-scroll"
-            >
-              <div :style="getBottomPadding" v-html="html"></div>
-            </div>
           </v-flex>
           <v-flex
             xs12
@@ -81,6 +67,20 @@
               <div :style="getBottomPadding">
                 <pre class="markdown">{{ model }}</pre>
               </div>
+            </div>
+          </v-flex>
+          <v-flex
+            v-if="displayHtmlPreview"
+            xs12
+            :sm4="displayHtmlPreview"
+            style="margin-top: -0px; padding-right: 0px; padding-left: 5px; "
+          >
+            <div
+              class="rendered-body"
+              style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
+              id="viewer-scroll"
+            >
+              <div :style="getBottomPadding" v-html="html"></div>
             </div>
           </v-flex>
         </v-layout>
@@ -127,10 +127,9 @@ export default {
   },
   mounted() {
     this.initializeEditor();
-
+    this.editor.getDoc().setValue("<h1>Paste HTML</h1>");
     this.initializeEditorEvents();
     this.initializeToolbarEvents();
-    this.editor.getDoc().setValue("<h1>Paste HTML</h1>");
   },
   methods: {
     initializeEditor: function() {
