@@ -1,10 +1,12 @@
 <template>
   <v-app id="markdown-app">
-    <nav-primary></nav-primary>
-    <nav-markdown v-if="showTools"></nav-markdown>
+    <nav-primary v-if="navPrimary"></nav-primary>
+    <nav-markdown v-if="navMarkdown"></nav-markdown>
+
+    <nav-html v-if="navHtml"></nav-html>
     <router-view />
-    <settings-window v-if="showTools"></settings-window>
-    <lint-window v-if="showTools"></lint-window>
+    <settings-window v-if="navMarkdown"></settings-window>
+    <lint-window v-if="navMarkdown"></lint-window>
   </v-app>
 </template>
 
@@ -13,11 +15,13 @@ import LintWindow from "@/components/LintWindow";
 import SettingsWindow from "@/components/SettingsWindow";
 import NavPrimary from "@/components/NavPrimary";
 import NavMarkdown from "@/components/NavMarkdown";
+import NavHtml from "@/components/NavHtml";
 
 export default {
   components: {
     NavPrimary,
     NavMarkdown,
+    NavHtml,
     LintWindow,
     SettingsWindow
   },
@@ -26,8 +30,14 @@ export default {
     return {};
   },
   computed: {
-    showTools() {
-      return this.$route.meta.showTools;
+    navMarkdown() {
+      return this.$route.meta.navMarkdown;
+    },
+    navPrimary() {
+      return this.$route.meta.navPrimary;
+    },
+    navHtml() {
+      return this.$route.meta.navHtml;
     }
   }
 };

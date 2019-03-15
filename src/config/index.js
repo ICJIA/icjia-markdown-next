@@ -1,7 +1,15 @@
 const config = {
-  codeMirrorOptions: {
+  codeMirrorOptionsMarkdown: {
     lineNumbers: true,
     mode: "markdown",
+    tabSize: "2",
+    indentWithTabs: true,
+    lineWrapping: true,
+    gutters: ["CodeMirror-linenumbers", "breakpoints"]
+  },
+  codeMirrorOptionsHtml: {
+    lineNumbers: true,
+    mode: "html",
     tabSize: "2",
     indentWithTabs: true,
     lineWrapping: true,
@@ -80,6 +88,12 @@ const config = {
     },
     close: {
       text: "Close"
+    },
+    htmlToMarkdown: {
+      text: "Convert HTML to Markdown"
+    },
+    exportMdToEditor: {
+      text: "Open Converted Markdown in Editor"
     }
   },
   /**
@@ -209,7 +223,8 @@ const config = {
   defaultMode: "standard",
   modes: {
     standard: {
-      tooltip: "Default Markdown mode.",
+      tooltip:
+        "<strong>Standard mode is still in development.</strong><br><br>Includes shortcuts, styles, and snippets suitable for any markdown document.<br><br>This is the default mode.",
       color: "white",
       icon: "create",
       display: "Standard",
@@ -411,6 +426,27 @@ const config = {
         }
       ]
     }
+  },
+  /**
+   *
+   *
+   * Misc config
+   *
+   *
+   */
+  allowSaveAsHtml: false,
+  /**
+   *
+   *
+   * Session state defaults
+   *
+   *
+   */
+  session: {
+    mode: "standard",
+    displayHtmlPreview: false,
+    convertedMarkdown: "",
+    markdownInProgress: ""
   }
 };
 

@@ -5,7 +5,7 @@
         <v-toolbar-side-icon
           @click="toggleSettingsWindow"
           slot="activator"
-          v-if="showTools"
+          v-if="navPrimary && navMarkdown"
         ></v-toolbar-side-icon>
         <span>{{ config.tooltips.settingsWindow.text }}</span>
       </v-tooltip>
@@ -28,7 +28,7 @@
           transition="slide-y-transition"
           bottom
           slot="activator"
-          v-if="showTools"
+          v-if="navPrimary && navMarkdown"
         >
           <v-btn
             slot="activator"
@@ -63,7 +63,7 @@
 
       <v-tooltip bottom max-width="200">
         <v-btn
-          v-if="this.lintStatus.isError && showTools"
+          v-if="this.lintStatus.isError && navPrimary && navMarkdown"
           slot="activator"
           dark
           small
@@ -95,7 +95,7 @@
           v-model="statistics"
           max-width="500"
           slot="activator"
-          v-if="showTools"
+          v-if="navPrimary && navMarkdown"
         >
           <v-btn
             slot="activator"
@@ -144,7 +144,7 @@
         <v-toolbar-side-icon
           @click="toggleLintWindow"
           slot="activator"
-          v-if="showTools"
+          v-if="navPrimary && navMarkdown"
         ></v-toolbar-side-icon>
         <span>{{ config.tooltips.lintWindow.text }}</span>
       </v-tooltip>
@@ -163,16 +163,21 @@ import { EventBus } from "@/event-bus.js";
 import { capitalize } from "@/filters";
 import { store } from "@/store";
 export default {
+  name: "NavPrimary",
   created() {
     this.modes = Object.keys(this.config.modes);
-    let modeParam = this.$route.params.modeParam;
-    let mode;
-    if (modeParam !== undefined && this.modes.includes(modeParam)) {
-      mode = modeParam;
+    if (Object.entries(this.config.session.mode).length === 0) {
+      let modeParam = this.$route.params.modeParam;
+      let mode;
+      if (modeParam !== undefined && this.modes.includes(modeParam)) {
+        mode = modeParam;
+      } else {
+        mode = this.config.defaultMode;
+      }
+      this.mode = mode.toLowerCase();
     } else {
-      mode = this.config.defaultMode;
+      this.mode = this.config.session.mode;
     }
-    this.mode = mode.toLowerCase();
   },
   mounted() {
     EventBus.$on("displayStatus", msg => {
@@ -187,7 +192,7 @@ export default {
     });
     EventBus.$on("setMode", mode => {
       this.mode = mode;
-      console.log(mode);
+      this.config.session.mode = this.mode;
     });
     EventBus.$on("lintStatus", lintStatus => {
       this.lintStatus = lintStatus;
@@ -224,8 +229,11 @@ export default {
       let color = this.config.modes[this.mode]["color"];
       return `color: ${color}`;
     },
-    showTools() {
-      return this.$route.meta.showTools;
+    navMarkdown() {
+      return this.$route.meta.navMarkdown;
+    },
+    navPrimary() {
+      return this.$route.meta.navPrimary;
     }
   },
   data() {

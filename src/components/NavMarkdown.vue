@@ -178,6 +178,21 @@
           <span v-html="config.tooltips['showYaml'].text"></span>
         </v-tooltip>
 
+        <v-divider class="mx-2" vertical></v-divider>
+
+        <v-tooltip bottom max-width="200">
+          <v-btn
+            dark
+            class="navButton"
+            color="blue-grey lighten-1"
+            slot="activator"
+            @click.prevent="htmlToMarkdown"
+          >
+            <v-icon dark>code</v-icon>
+          </v-btn>
+          <span v-html="config.tooltips['htmlToMarkdown'].text"></span>
+        </v-tooltip>
+
         <v-spacer></v-spacer>
         <v-select
           :items="config.stylesheets"
@@ -197,6 +212,7 @@
             slot="activator"
             @click.prevent="getEntity('saveHtml')"
             style="font-size: 10px; font-weight: 900"
+            v-if="config.allowSaveAsHtml"
             >Save HTML
             <v-icon dark right style="font-size: 14px; font-weight: 900"
               >save_alt</v-icon
@@ -212,7 +228,7 @@
             slot="activator"
             @click.prevent="getEntity('showHtml')"
             style="font-size: 10px; font-weight: 900"
-            >Show
+            >Show HTML
             <v-icon dark right style="font-size: 14px;font-weight: 900"
               >code</v-icon
             >
@@ -227,7 +243,7 @@
             slot="activator"
             @click.prevent="getEntity('copyHtml')"
             style="font-size: 10px; font-weight: 900"
-            >Copy
+            >Copy HTML
             <v-icon dark right style="font-size: 14px; font-weight: 900"
               >assignment</v-icon
             >
@@ -270,17 +286,22 @@ import { capitalize } from "@/filters";
 import { store } from "@/store";
 
 export default {
+  name: "NavMarkdown",
   created() {
     this.modes = Object.keys(this.config.modes);
-
-    let modeParam = this.$route.params.modeParam;
-    let mode;
-    if (modeParam !== undefined && this.modes.includes(modeParam)) {
-      mode = modeParam;
+    if (Object.entries(this.config.session.mode).length === 0) {
+      let modeParam = this.$route.params.modeParam;
+      let mode;
+      if (modeParam !== undefined && this.modes.includes(modeParam)) {
+        mode = modeParam;
+      } else {
+        mode = this.config.defaultMode;
+      }
+      this.mode = mode.toLowerCase();
     } else {
-      mode = this.config.defaultMode;
+      this.mode = this.config.session.mode;
     }
-    this.mode = mode.toLowerCase();
+
     this.stylesheetSelection = this.stylesheetObj;
     this.loadStyleSheet(this.stylesheetObj.value);
   },
@@ -289,7 +310,7 @@ export default {
   },
   mounted() {
     //
-    EventBus.$emit("setMode", this.mode);
+    //EventBus.$emit("setMode", this.mode);
     EventBus.$on("yamlStatus", isYaml => {
       this.isYaml = isYaml;
       // console.log(this.isYaml);
@@ -297,6 +318,7 @@ export default {
 
     EventBus.$on("setMode", mode => {
       this.mode = mode;
+      this.config.session.mode = mode;
       this.stylesheetSelection = this.stylesheetObj;
       this.loadStyleSheet(this.stylesheetObj.value);
     });
@@ -304,6 +326,10 @@ export default {
   methods: {
     getEntity(action) {
       EventBus.$emit("entityEvent", action);
+    },
+    htmlToMarkdown() {
+      EventBus.$emit("saveMarkdownToLocalStorage");
+      this.$router.push("/html");
     },
 
     loadStyleSheet(e) {
@@ -349,10 +375,7 @@ export default {
       this.dialog = false;
       clearFileInput(document.getElementById("fileInput"));
     },
-    selectMode(mode) {
-      this.mode = mode;
-      EventBus.$emit("setMode", this.mode);
-    },
+
     gotoExternalResource(url) {
       window.open(url, "_blank");
     }
@@ -407,8 +430,8 @@ export default {
 
 <style>
 .v-btn.navButton {
-  min-width: 32px;
-  margin: 2px;
+  min-width: 30px;
+  margin: 1px;
   padding: 0;
 }
 

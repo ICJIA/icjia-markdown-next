@@ -76,7 +76,32 @@
         </h1>
       </div>
 
-      <div style="margin-top: 50px;" class="master">
+      <v-layout
+        style="margin-top: 50px; background: #eee; border-bottom: 1px solid #bbb;"
+      >
+        <v-flex xs6>
+          <v-btn
+            dark
+            small
+            color="blue accent-3"
+            class="target"
+            @click.prevent="getEntity('mdToClipboard')"
+            >MARKDOWN</v-btn
+          >
+        </v-flex>
+        <v-flex xs6>
+          <v-btn
+            dark
+            small
+            color="blue accent-3"
+            class="target"
+            @click.prevent="getEntity('copyHtml')"
+            >WEB PREVIEW</v-btn
+          >
+        </v-flex>
+      </v-layout>
+
+      <div class="master">
         <v-layout row wrap>
           <v-flex xs12 sm6>
             <textarea id="editor" style="margin-top: -5px;"></textarea>
@@ -152,7 +177,7 @@ export default {
     initializeEditor: function() {
       this.editor = codeMirror.fromTextArea(
         document.getElementById("editor"),
-        config.codeMirrorOptions
+        config.codeMirrorOptionsMarkdown
       );
     },
     initializeEditorEvents: function() {
@@ -165,7 +190,7 @@ export default {
         this.model = md.render(cm.getValue());
         this.line = cm.getCursor(true);
         this.lintMarkdown(cm.getValue());
-
+        this.config.session.markdownInProgress = cm.getValue();
         // cm.setGutterMarker(3, "breakpoints", makeMarker());
 
         /**
@@ -181,15 +206,32 @@ export default {
       });
 
       this.editor.on("optionChange", cm => {
-        console.log("option changed");
+        //console.log("option changed");
       });
     },
     setInitialText() {
+      /* Is there html -> markdown in config.session? */
+      if (Object.entries(this.config.session.convertedMarkdown).length != 0) {
+        this.editor.getDoc().setValue(this.config.session.convertedMarkdown);
+        this.lintMarkdown(this.editor.getValue());
+        this.config.session.convertedMarkdown = "";
+        return;
+      }
+
+      /* Is there markdown-in-progress in config.session? */
+      if (Object.entries(this.config.session.markdownInProgress).length != 0) {
+        this.editor.getDoc().setValue(this.config.session.markdownInProgress);
+        this.lintMarkdown(this.editor.getValue());
+        return;
+      }
+
+      /* If neither, then first check for localstorage key ... */
       if (config.localStorageKey in localStorage) {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
         this.lintMarkdown(this.editor.getValue());
       } else {
+        /* ... and if no localstage key, insert generic welcome. */
         let welcomeMarkdown = require(`@/snippets/welcome.md`);
         this.editor.getDoc().setValue(welcomeMarkdown);
         this.lintMarkdown(this.editor.getValue());
@@ -201,6 +243,7 @@ export default {
       });
       EventBus.$on("loadMarkdown", content => {
         this.editor.getDoc().setValue(content);
+        console.log("Load markdown event: ", content);
       });
       // ping
       EventBus.$on("getMarkdown", () => {
@@ -220,6 +263,8 @@ export default {
       EventBus.$on("updateEditorConfig", ({ option, value }) => {
         this.editor.setOption(option, value);
       });
+
+      EventBus.$on("saveMarkdownToLocalStorage", () => {});
     },
     initializeAutoSave() {
       window.setInterval(() => {
@@ -469,6 +514,9 @@ export default {
     },
     getLoremIpsumEntity() {
       return loremIpsum(this.config.loremIpsum) + " ";
+    },
+    getEntity(action) {
+      EventBus.$emit("entityEvent", action);
     },
 
     async shortenLink() {

@@ -12,27 +12,35 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home,
-      meta: { showTools: true }
+      meta: { navPrimary: true, navMarkdown: true, navHtml: false }
     },
     {
       path: "/support",
       name: "support",
       component: () =>
         import(/* webpackChunkName: "error" */ "./views/Support.vue"),
-      meta: { showTools: false }
+      meta: { navPrimary: true, navMarkdown: false, navHtml: false }
     },
+    {
+      path: "/html",
+      name: "html",
+      component: () =>
+        import(/* webpackChunkName: "error" */ "./views/HtmlToMarkdown.vue"),
+      meta: { navPrimary: true, navMarkdown: false, navHtml: true }
+    },
+
     {
       path: "/404",
       name: "error",
       component: () =>
         import(/* webpackChunkName: "error" */ "./views/404.vue"),
-      meta: { showTools: false }
+      meta: { navPrimary: true, navMarkdown: false, navHtml: false }
     },
     {
       path: "/:modeParam",
       name: "modeParam",
       component: Home,
-      meta: { showTools: true }
+      meta: { navPrimary: true, navMarkdown: true, navHtml: false }
     },
 
     {
