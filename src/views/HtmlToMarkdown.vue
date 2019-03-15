@@ -140,7 +140,6 @@ export default {
         // this.lintMarkdown(cm.getValue());
         this.model = turndownService.turndown(cm.getValue());
         this.html = md.render(this.model);
-        this.config.session.convertedMarkdown = this.model;
 
         //console.log(turndownService.turndown(cm.getValue()));
         //console.log(this.model);
@@ -185,6 +184,7 @@ export default {
           "displayStatus",
           "Converted Markdown successfully imported."
         );
+        this.config.session.convertedMarkdown = this.model;
         this.$router.push("/");
       });
     }
