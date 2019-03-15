@@ -82,6 +82,7 @@
         <v-flex xs6>
           <v-btn
             dark
+            outline
             small
             color="blue accent-3"
             class="target"
@@ -91,6 +92,7 @@
         </v-flex>
         <v-flex xs6>
           <v-btn
+            outline
             dark
             small
             color="blue accent-3"

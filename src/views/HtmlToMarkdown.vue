@@ -30,15 +30,17 @@
         style="margin-top: 50px; background: #eee; border-bottom: 1px solid #bbb;"
       >
         <v-flex xs12 :sm6="!displayHtmlPreview" :sm4="displayHtmlPreview">
-          <v-btn dark small color="blue accent-3" class="target"
+          <v-btn dark small outline color="blue accent-3" class="target"
             >RAW HTML</v-btn
           >
         </v-flex>
         <v-flex v-if="displayHtmlPreview" xs12 :sm4="displayHtmlPreview">
-          <v-btn dark small color="blue accent-3" class="target">PREVIEW</v-btn>
+          <v-btn dark outline small color="blue accent-3" class="target"
+            >PREVIEW</v-btn
+          >
         </v-flex>
         <v-flex xs12 :sm6="!displayHtmlPreview" :sm4="displayHtmlPreview">
-          <v-btn dark small color="blue accent-3" class="target"
+          <v-btn dark outline small color="blue accent-3" class="target"
             >MARKDOWN</v-btn
           >
         </v-flex>
