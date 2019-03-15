@@ -181,7 +181,10 @@ export default {
 
       EventBus.$on("sendToEditor", () => {
         //console.log("send to editor: ", this.config.session.convertedMarkdown);
-
+        EventBus.$emit(
+          "displayStatus",
+          "Converted Markdown successfully imported."
+        );
         this.$router.push("/");
       });
     }
