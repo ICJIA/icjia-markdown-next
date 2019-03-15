@@ -73,14 +73,15 @@
             v-if="displayHtmlPreview"
             xs12
             :sm4="displayHtmlPreview"
-            style="margin-top: -0px; padding-right: 0px; padding-left: 5px; "
+            style="margin-top: -0px; padding-right: 5px; padding-left: 5px; "
           >
-            <div
-              class="rendered-body"
-              style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
-              id="viewer-scroll"
-            >
-              <div :style="getBottomPadding" v-html="html"></div>
+            <div class="rendered-body ">
+              <div
+                :style="getBottomPadding"
+                class="markdown-body"
+                style="padding: 10px"
+                v-html="html"
+              ></div>
             </div>
           </v-flex>
         </v-layout>
