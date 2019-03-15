@@ -443,7 +443,7 @@ const config = {
    */
   session: {
     mode: "standard",
-    displayHtmlPreview: true,
+    displayHtmlPreview: false,
     convertedMarkdown: "",
     markdownInProgress: ""
   }

@@ -200,6 +200,10 @@ export default {
         this.editor.getDoc().setValue(prettifiedHTML);
         EventBus.$emit("displayStatus", "HTML Re-formatted");
       });
+
+      EventBus.$on("exit", () => {
+        this.$router.push("/");
+      });
     }
   },
   computed: {

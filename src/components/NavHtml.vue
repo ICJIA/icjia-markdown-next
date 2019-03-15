@@ -19,6 +19,7 @@
           </v-btn>
           <span>{{ config.tooltips["saveMd"].text }}</span>
         </v-tooltip>
+
         <v-divider class="mx-2" vertical></v-divider>
         <v-tooltip bottom max-width="150">
           <v-switch
@@ -73,6 +74,19 @@
 
           <span>{{ config.tooltips["exportMdToEditor"].text }}</span>
         </v-tooltip>
+        <v-divider class="mx-2" vertical></v-divider>
+        <v-tooltip bottom>
+          <v-btn
+            small
+            dark
+            color="blue darken-4"
+            slot="activator"
+            @click.prevent="exit"
+          >
+            EXIT&nbsp;<v-icon dark>close</v-icon>
+          </v-btn>
+          <span>{{ config.tooltips["saveMd"].text }}</span>
+        </v-tooltip>
       </v-toolbar>
     </v-flex>
   </v-layout>
@@ -106,6 +120,9 @@ export default {
     },
     prettify() {
       EventBus.$emit("prettify");
+    },
+    exit() {
+      EventBus.$emit("exit");
     }
   },
   computed: {
@@ -115,8 +132,8 @@ export default {
       },
       set(displayHtmlPreview) {
         store.config.session.displayHtmlPreview = displayHtmlPreview;
-        const status = displayHtmlPreview ? "ON" : "OFF";
-        EventBus.$emit("displayStatus", `HTML Preview: ${status}`);
+        //const status = displayHtmlPreview ? "ON" : "OFF";
+        //EventBus.$emit("displayStatus", `HTML Preview: ${status}`);
       }
     }
   }
