@@ -15,7 +15,13 @@
           <router-link to="/" class="navTitle"
             ><span style="font-weight: 400;">ICJIA</span>&nbsp;<span
               style="font-weight: 900;"
-              >MARKDOWN EDITOR</span
+              >MARKDOWN EDITOR
+              <span v-if="routeName === '/html'" style="font-weight: 400; "
+                >|
+                <span style="color: #ddd;"
+                  >HTML to Markdown Converter</span
+                ></span
+              ></span
             ></router-link
           >
         </v-toolbar-title>
@@ -178,6 +184,7 @@ export default {
     } else {
       this.mode = this.config.session.mode;
     }
+    console.log(this.$route.path);
   },
   mounted() {
     EventBus.$on("displayStatus", msg => {
@@ -234,6 +241,9 @@ export default {
     },
     navPrimary() {
       return this.$route.meta.navPrimary;
+    },
+    routeName() {
+      return this.$route.path;
     }
   },
   data() {

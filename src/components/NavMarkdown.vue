@@ -73,6 +73,24 @@
                 </v-list-tile>
               </div>
 
+              <div v-if="config.displayUtilities">
+                <v-subheader
+                  class="grey--text text--darken-4"
+                  style="font-size: 12px;"
+                  >Utilities</v-subheader
+                >
+
+                <v-list-tile class="moreEntitites">
+                  <v-list-tile-title
+                    style="font-size: 12px;"
+                    v-on:click="htmlToMarkdown"
+                  >
+                    <v-icon style="width: 35px; font-size: 16px;">code</v-icon>
+                    &nbsp;&nbsp;Convert HTML to Markdown</v-list-tile-title
+                  >
+                </v-list-tile>
+              </div>
+
               <div v-if="config.displayExternalResources">
                 <v-subheader
                   class="grey--text text--darken-4"
@@ -178,7 +196,7 @@
           <span v-html="config.tooltips['showYaml'].text"></span>
         </v-tooltip>
 
-        <v-divider class="mx-2" vertical></v-divider>
+        <!-- <v-divider class="mx-2" vertical></v-divider>
 
         <v-tooltip bottom max-width="200">
           <v-btn
@@ -191,7 +209,7 @@
             <v-icon dark>code</v-icon>
           </v-btn>
           <span v-html="config.tooltips['htmlToMarkdown'].text"></span>
-        </v-tooltip>
+        </v-tooltip> -->
 
         <v-spacer></v-spacer>
         <v-select

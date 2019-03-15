@@ -152,11 +152,12 @@ const config = {
   /**
    *
    *
-   * Snippets
+   * Snippets & Menu options
    *
    *
    */
   displaySnippets: true,
+  displayUtilities: true,
   snippets: [
     { name: "Welcome", filename: "welcome.md" },
     { name: "Table Example", filename: "table.md" },
@@ -183,12 +184,12 @@ const config = {
       url: "http://www.icjia.state.il.us/sandbox/typography"
     },
     {
-      name: "ICJIA Legacy Markdown Editor",
-      url: "https://legacy-markdown.icjia.cloud/"
-    },
-    {
       name: "ICJIA Home Page",
       url: "http://www.icjia.state.il.us"
+    },
+    {
+      name: "Go to the old Markdown Editor",
+      url: "https://legacy-markdown.icjia.cloud/"
     }
   ],
   /**
