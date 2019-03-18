@@ -16,7 +16,7 @@ const config = {
   /**
    *
    *
-   * Markdown defaults
+   * Markdown-it defaults
    *
    *
    */
@@ -445,7 +445,8 @@ const config = {
     mode: "standard",
     displayHtmlPreview: false,
     convertedMarkdown: "",
-    markdownInProgress: ""
+    markdownInProgress: "",
+    renderer: "markdown"
   }
 };
 
