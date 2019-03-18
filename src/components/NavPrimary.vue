@@ -230,7 +230,6 @@ export default {
       EventBus.$emit("toggleLintWindow");
     },
     toggleSettingsWindow() {
-      console.log("toggle settings");
       EventBus.$emit("toggleSettingsWindow");
     },
     getToolbarColor() {
