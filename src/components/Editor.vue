@@ -66,11 +66,10 @@ export default {
     if (modeParam !== undefined && this.modes.includes(modeParam)) {
       mode = modeParam;
     } else {
-      mode = this.config.defaultMode;
+      mode = this.config.session.mode;
     }
-    this.mode = mode.toLowerCase();
-    // eslint-disable-next-line no-console
-    console.log(this.mode);
+    mode = mode.toLowerCase();
+    this.config.session.mode = mode;
   },
   mounted() {
     this.initializeEditor();
