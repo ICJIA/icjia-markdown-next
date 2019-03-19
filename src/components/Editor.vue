@@ -145,8 +145,8 @@ export default {
       }
     },
     initializeEventListeners() {
-      EventBus.$on("entityEvent", action => {
-        this.insertEntity(action);
+      EventBus.$on("triggerAction", action => {
+        console.log("Action: ", action);
       });
       EventBus.$on("loadMarkdown", content => {
         this.editor.getDoc().setValue(content);

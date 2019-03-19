@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="grey lighten-4" dense>
+  <v-toolbar color="grey lighten-2" dense>
     <v-toolbar-items
       class="hidden-sm-and-down"
       v-for="(btn, index) in btns"
@@ -8,18 +8,33 @@
       <span v-if="btn === '|'">
         <v-divider vertical class="mx-2"></v-divider>
       </span>
-      <v-btn small v-else class="navButton">
-        <span style="font-size: 10px !important;"
-          >{{ buttons[btn]["text"] }}&nbsp;</span
+
+      <span v-else-if="btn === 'vert'">
+        <v-btn icon @click="trigger(buttons[btn]['action'])">
+          <v-icon>more_vert</v-icon>
+        </v-btn>
+      </span>
+
+      <v-btn
+        small
+        v-else
+        class="navButton"
+        @click="trigger(buttons[btn]['action'])"
+      >
+        <span
+          style="font-size: 10px !important; font-weight: 900; padding-left: 3px; padding-right: 3px;"
+          v-if="buttons[btn]['size'] === 'lg'"
+          >{{ buttons[btn]["text"] }}</span
         >
         <v-icon dark style="font-size: 22px !important;">{{
           buttons[btn]["icon"]
-        }}</v-icon>
+        }}</v-icon
+        >&nbsp;
       </v-btn>
     </v-toolbar-items>
-
-    <v-spacer></v-spacer>
-    <v-divider vertical></v-divider>
+    <!-- <v-btn icon>
+      <v-icon>more_vert</v-icon>
+    </v-btn> -->
   </v-toolbar>
 </template>
 
@@ -29,48 +44,55 @@ import { store } from "@/store";
 function isEmpty(s) {
   return s === null || s === undefined ? true : /^[\s\xa0]*$/.test(s);
 }
+function buildButtons(buttons) {
+  let btns = buttons
+    .toLowerCase()
+    .split(/(\s)/)
+    .filter(function(w) {
+      return !isEmpty(w);
+    });
+  return btns;
+}
 export default {
   mounted() {
-    this.buildToolbar();
+    this.btns = buildButtons(this.markdownButtons);
   },
   methods: {
-    buildToolbar() {
-      let btns = this.toolbar
-        .toLowerCase()
-        .split(/(\s)/)
-        .filter(function(w) {
-          return !isEmpty(w);
-        });
-      this.btns = btns;
+    trigger(action) {
+      EventBus.$emit("triggerAction", action);
     }
   },
   data() {
     return {
       config: store.config,
-      toolbar: "book assessment | announcement book | ",
+      markdownButtons:
+        "announcement assessment announcement assessment announcement assessment announcement assessment vert | book book book ",
       btns: [],
 
       buttons: {
         announcement: {
           text: "Button 1",
           icon: "announcement",
-          type: "sm",
-          event: "announcement"
+          size: "sm",
+          action: "announcement"
         },
 
         assessment: {
           text: "Button 2",
           icon: "assessment",
-          type: "sm",
-          event: "assessment"
+          size: "sm",
+          action: "assessment"
         },
         book: {
           text: "Button 3",
           icon: "book",
-          type: "lg",
-          event: "book"
+          size: "lg",
+          action: "book"
         },
-        "|": {}
+        "|": {},
+        vert: {
+          action: "snippets"
+        }
       }
     };
   }
@@ -80,13 +102,13 @@ export default {
 <style scoped>
 .v-btn.navButton {
   min-width: 40px;
-  margin: 3px;
-  padding: 3px;
+
+  padding: 3px !important;
   max-height: 35px;
 }
 
 .v-toolbar__items {
   height: inherit;
-  margin: 3px;
+  padding: 2px;
 }
 </style>
