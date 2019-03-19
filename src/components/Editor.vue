@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="wrapper"
-    :class="{ markdown: isRenderingMarkdown, html: isRenderingHtml }"
-  >
+  <div class="wrapper markdown">
     <div class="box header">
       <nav-primary></nav-primary>
       <nav-secondary></nav-secondary>
@@ -16,14 +13,6 @@
       id="viewer-scroll"
       v-html="target"
     ></div>
-
-    <div class="box preview" v-if="isRenderingHtml">
-      html preview here
-    </div>
-
-    <div class="box footer">
-      <nav-footer></nav-footer>
-    </div>
   </div>
 </template>
 
@@ -34,7 +23,6 @@
 
 import NavPrimary from "@/components/NavPrimary";
 import NavSecondary from "@/components/NavSecondary";
-import NavFooter from "@/components/NavFooter";
 
 /**
  * CodeMirror
@@ -67,14 +55,28 @@ const beautify_html = require("js-beautify").html;
 export default {
   components: {
     NavPrimary,
-    NavSecondary,
-    NavFooter
+    NavSecondary
+  },
+  created() {
+    this.modes = Object.keys(this.config.modes);
+
+    let modeParam = this.$route.params.modeParam;
+    let mode;
+
+    if (modeParam !== undefined && this.modes.includes(modeParam)) {
+      mode = modeParam;
+    } else {
+      mode = this.config.defaultMode;
+    }
+    this.mode = mode.toLowerCase();
+    // eslint-disable-next-line no-console
+    console.log(this.mode);
   },
   mounted() {
     this.initializeEditor();
     this.initializeEditorEvents();
     this.setInitialText();
-    this.initializeComponentEventListeners();
+    this.initializeEventListeners();
     /**
      * Turn off autosave in dev mopde
      */
@@ -142,7 +144,7 @@ export default {
         this.lintMarkdown(this.editor.getValue());
       }
     },
-    initializeComponentEventListeners() {
+    initializeEventListeners() {
       EventBus.$on("entityEvent", action => {
         this.insertEntity(action);
       });
@@ -205,14 +207,7 @@ export default {
       });
     }
   },
-  computed: {
-    isRenderingMarkdown() {
-      return this.config.session.renderer === "markdown";
-    },
-    isRenderingHtml() {
-      return this.config.session.renderer === "html";
-    }
-  },
+  computed: {},
   data() {
     return {
       config: store.config,
@@ -263,8 +258,8 @@ export default {
   grid-gap: 1px;
   background-color: #bbb;
   color: #fff;
-  min-height: 99.85vh !important;
-  grid-template-rows: fit-content(150px) 1fr 50px;
+  min-height: 99.8vh !important;
+  grid-template-rows: fit-content(150px) 1fr;
 }
 
 .wrapper.markdown {
@@ -273,14 +268,6 @@ export default {
     "source  target"
     "footer  footer";
   grid-template-columns: minmax(50%, 1fr) minmax(50%, 1fr);
-}
-
-.wrapper.html {
-  grid-template-areas:
-    "header   header header"
-    "source  target preview"
-    "footer  footer footer";
-  grid-template-columns: minmax(33%, 1fr) minmax(33%, 1fr) minmax(33%, 1fr);
 }
 
 .CodeMirror {

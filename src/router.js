@@ -15,18 +15,23 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home,
-      meta: { navPrimary: true, navMarkdown: true, navHtml: false }
+      meta: {}
     },
-   
 
     {
       path: "/404",
       name: "error",
       component: () =>
         import(/* webpackChunkName: "error" */ "./views/404.vue"),
-      meta: { navPrimary: true, navMarkdown: false, navHtml: false }
+      meta: {}
     },
-   
+    {
+      path: "/:modeParam",
+      name: "modeParam",
+      component: Home,
+      meta: {}
+    },
+
     {
       path: "*",
       redirect: { name: "error" }
