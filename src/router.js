@@ -6,6 +6,7 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
+  // eslint-disable-next-line no-unused-vars
   scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 };
   },

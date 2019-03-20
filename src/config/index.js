@@ -100,7 +100,7 @@ const config = {
    *
    *
    */
-  autoSaveInterval: 15000,
+
   localStorageKey: "icjia-markdown-autosave",
 
   /**
@@ -130,18 +130,17 @@ const config = {
    *
    *
    */
-  isLintingEnabled: true,
-  isLintingAutoAlertEnabled: false,
-  lintingDefault: "relaxed.json",
-  lintingRulePath: "config/markdownlint/",
 
+  lintingRulePath: "config/markdownlint/",
   /**
    *
    *
-   * Mode defaults
-   *
+   * Stylesheets
    *
    */
+  stylesheetStaticPath: "/css/",
+  allowManualStyleSelection: false,
+
   maxVisibleTools: 10,
   buttons: {
     announcement: {
@@ -164,6 +163,7 @@ const config = {
       action: "book"
     },
     "|": {},
+
     snippets: {
       text: "Snippets & Examples",
       icon: "vert",
@@ -174,16 +174,37 @@ const config = {
 
   modes: {
     standard: {
+      display: "Standard",
+      tooltip: "This is the tooltip for Standard mode",
+      stylesheet: {
+        value: "standard.css",
+        display: "Standard"
+      },
       markdownButtons:
-        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |"
+        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |",
+      htmlButtons: "announcement assessment | book |"
     },
     research: {
+      display: "Research",
+      tooltip: "This is the tooltip for Research mode",
+      stylesheet: {
+        value: "research.css",
+        display: "Standard"
+      },
       markdownButtons:
-        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |"
+        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |",
+      htmlButtons: "announcement assessment | book |"
     },
     grants: {
+      display: "Grants",
+      tooltip: "This is the tooltip for Grants mode",
+      stylesheet: {
+        value: "grants.css",
+        display: "Standard"
+      },
       markdownButtons:
-        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |"
+        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |",
+      htmlButtons: "announcement assessment | book |"
     }
   },
 
@@ -196,8 +217,13 @@ const config = {
    */
   session: {
     mode: "standard",
-    convertedMarkdown: "",
-    markdownInProgress: ""
+    rendered: "",
+    markdown: "",
+    isLintingEnabled: true,
+    isLintingAutoAlertEnabled: false,
+    lintingRuleset: "relaxed.json",
+    autoSaveInterval: 15000,
+    currentStyleSheet: null
   }
 };
 

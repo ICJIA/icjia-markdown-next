@@ -1,18 +1,35 @@
 <template>
-  <div class="wrapper markdown">
-    <div class="box header">
+  <div class="markdown-page">
+    <v-content>
       <nav-primary></nav-primary>
       <nav-secondary></nav-secondary>
-    </div>
-
-    <div class="box source">
-      <textarea id="editor-source"></textarea>
-    </div>
-    <div
-      class="box target markdown-body"
-      id="viewer-scroll"
-      v-html="target"
-    ></div>
+      <div
+        class="master"
+        style="margin-top: 100px; background: #fff; border-bottom: 1px solid #bbb;"
+      >
+        <v-layout row wrap>
+          <v-flex xs12 sm6>
+            <textarea id="editor"></textarea>
+          </v-flex>
+          <v-flex
+            xs12
+            sm6
+            style="margin-top: -0px; padding-right: 0px; padding-left: 5px; "
+          >
+            <div
+              class="markdown-body"
+              style="padding-left: 10px; padding-right: 10px; padding-top: 10px;"
+              id="viewer-scroll"
+            >
+              <div
+                v-html="config.session.rendered"
+                :style="getBottomPadding"
+              ></div>
+            </div>
+          </v-flex>
+        </v-layout>
+      </div>
+    </v-content>
   </div>
 </template>
 
@@ -63,6 +80,10 @@ export default {
     let modeParam = this.$route.params.modeParam;
     let mode;
 
+    // if (!this.modes.includes(modeParam)) {
+    //   this.$router.push("/404");
+    // }
+
     if (modeParam !== undefined && this.modes.includes(modeParam)) {
       mode = modeParam;
     } else {
@@ -70,25 +91,30 @@ export default {
     }
     mode = mode.toLowerCase();
     this.config.session.mode = mode;
+    // eslint-disable-next-line no-console
+    console.log("Mode: ", this.config.session.mode);
   },
   mounted() {
     this.initializeEditor();
     this.initializeEditorEvents();
     this.setInitialText();
     this.initializeEventListeners();
+
     /**
      * Turn off autosave in dev mopde
      */
     if (process.env.NODE_ENV != "development") {
       this.initializeAutoSave();
     }
+    this.loadStyleSheet(this.config.session.mode);
   },
   methods: {
     initializeEditor: function() {
       this.editor = codeMirror.fromTextArea(
-        document.getElementById("editor-source"),
+        document.getElementById("editor"),
         config.codeMirrorOptionsMarkdown
       );
+      this.editor.setSize(null, "100%");
     },
     initializeEditorEvents: function() {
       EventBus.$emit("updateWordCount", this.wordCount);
@@ -97,10 +123,11 @@ export default {
       this.editorScroll.addEventListener("scroll", this.updateViewerScroll);
       this.viewerScroll.addEventListener("scroll", this.updateEditorScroll);
       this.editor.on("change", cm => {
-        this.target = md.render(cm.getValue());
+        let rendered = md.render(cm.getValue());
         this.line = cm.getCursor(true);
         this.lintMarkdown(cm.getValue());
-        this.config.session.markdownInProgress = cm.getValue();
+        this.config.session.markdown = cm.getValue();
+        this.config.session.rendered = rendered;
         // cm.setGutterMarker(3, "breakpoints", makeMarker());
         /**
          * Check if YAML delimter ('---') is present. If not, clear YAML.
@@ -117,17 +144,37 @@ export default {
         //console.log("option changed");
       });
     },
+    loadStyleSheet(mode) {
+      if (this.config.session.currentStyleSheet) {
+        //console.log("removing style sheet already loaded");
+        document
+          .querySelector(
+            `link[href$="${this.config.stylesheetStaticPath}${
+              this.config.session.currentStyleSheet
+            }"]`
+          )
+          .remove();
+      }
+      this.config.session.mode = mode;
+      let currentStyleSheet = this.stylesheetObj.value;
+      //console.log(currentStyleSheet);
+      let file = document.createElement("link");
+      file.rel = "stylesheet";
+      file.href = `${this.config.stylesheetStaticPath}${currentStyleSheet}`;
+      document.head.appendChild(file);
+      this.config.session.currentStyleSheet = currentStyleSheet;
+    },
     setInitialText() {
       /* Is there html -> markdown in config.session? */
-      if (Object.entries(this.config.session.convertedMarkdown).length != 0) {
-        this.editor.getDoc().setValue(this.config.session.convertedMarkdown);
-        this.lintMarkdown(this.editor.getValue());
-        this.config.session.convertedMarkdown = "";
-        return;
-      }
+      // if (Object.entries(this.config.session.rendered).length != 0) {
+      //   this.editor.getDoc().setValue(this.config.session.rendered);
+      //   this.lintMarkdown(this.editor.getValue());
+      //   this.config.session.rendered = "";
+      //   return;
+      // }
       /* Is there markdown-in-progress in config.session? */
-      if (Object.entries(this.config.session.markdownInProgress).length != 0) {
-        this.editor.getDoc().setValue(this.config.session.markdownInProgress);
+      if (Object.entries(this.config.session.markdown).length != 0) {
+        this.editor.getDoc().setValue(this.config.session.markdown);
         this.lintMarkdown(this.editor.getValue());
         return;
       }
@@ -145,11 +192,10 @@ export default {
     },
     initializeEventListeners() {
       EventBus.$on("triggerAction", action => {
-        console.log("Action: ", action);
+        this.doAction(action);
       });
       EventBus.$on("loadMarkdown", content => {
         this.editor.getDoc().setValue(content);
-        console.log("Load markdown event: ", content);
       });
       // ping
       EventBus.$on("getMarkdown", () => {
@@ -168,11 +214,15 @@ export default {
         this.editor.setOption(option, value);
       });
       EventBus.$on("saveMarkdownToLocalStorage", () => {});
+      EventBus.$on("setMode", mode => {
+        this.loadStyleSheet(mode);
+      });
     },
     initializeAutoSave() {
       window.setInterval(() => {
         let saveTime = new Date();
         localStorage.setItem(config.localStorageKey, this.markdown);
+        // eslint-disable-next-line no-console
         console.log("Autosaved to local storage: ", saveTime);
       }, config.autoSaveInterval);
     },
@@ -182,14 +232,16 @@ export default {
           content
         },
         config: require(`@/${this.config.lintingRulePath}${
-          this.config.lintingDefault
+          this.config.session.lintingRuleset
         }`)
       };
       window.markdownlint(options, (err, result) => {
         let lintStatus = {};
         if (!err) {
           if (result.toString().length) {
+            // eslint-disable-next-line no-console
             console.error("Linting error");
+            // eslint-disable-next-line no-console
             console.log(result.toString());
             lintStatus.isError = true;
             lintStatus.result = result;
@@ -204,13 +256,90 @@ export default {
           });
         }
       });
+    },
+    doAction(action) {
+      console.log("Do Action: ", action);
+    },
+    /**
+     *
+     * CodeMirror actions
+     *
+     */
+    insert: function(insertion) {
+      let doc = this.editor.getDoc();
+      let cursor = doc.getCursor();
+      doc.replaceRange(insertion, { line: cursor.line, ch: cursor.ch });
+    },
+    insertAround: function(start, end) {
+      let doc = this.editor.getDoc();
+      let cursor = doc.getCursor();
+      if (doc.somethingSelected()) {
+        let selection = doc.getSelection();
+        doc.replaceSelection(start + selection + end);
+      } else {
+        // If no selection then insert start and end args and set cursor position between the two.
+        doc.replaceRange(start + end, { line: cursor.line, ch: cursor.ch });
+        doc.setCursor({ line: cursor.line, ch: cursor.ch + start.length });
+      }
+    },
+    insertAfter: function(end) {
+      let doc = this.editor.getDoc();
+      let cursor = doc.getCursor();
+      if (doc.somethingSelected()) {
+        let selection = doc.getSelection();
+        doc.replaceSelection(selection + end);
+      } else {
+        doc.replaceRange(end, { line: cursor.line, ch: cursor.ch });
+      }
+    },
+    insertBefore: function insertBefore(insertion, cursorOffset) {
+      let doc = this.editor.getDoc();
+      let cursor = doc.getCursor();
+      if (doc.somethingSelected()) {
+        let selections = doc.listSelections();
+        selections.forEach(function(selection) {
+          let pos = [selection.head.line, selection.anchor.line].sort();
+          for (var i = pos[0]; i <= pos[1]; i++) {
+            doc.replaceRange(insertion, { line: i, ch: 0 });
+          }
+          doc.setCursor({ line: pos[0], ch: cursorOffset || 0 });
+        });
+      } else {
+        doc.replaceRange(insertion, { line: cursor.line, ch: 0 });
+        doc.setCursor({ line: cursor.line, ch: cursorOffset || 0 });
+      }
     }
   },
-  computed: {},
+  computed: {
+    stylesheetObj() {
+      return this.config.modes[this.config.session.mode]["stylesheet"];
+    },
+    getBottomPadding: function() {
+      return `padding-bottom: ${config.viewerBottomPadding}px`;
+    }
+  },
   data() {
     return {
       config: store.config,
-      target: ""
+      rendered: "",
+      line: null,
+      dialog: false,
+      notifications: false,
+      showHtml: false,
+      showYaml: false,
+      footnote: 1,
+      editor: null,
+      isHidden: true,
+      offsetTop: 0,
+      scrollElement: null,
+      editorScroll: null,
+      viewerScroll: null,
+      isScrollSynced: true,
+      editorScrollTop: null,
+      viewerScrollTop: null,
+      yaml: {},
+      isLintingError: false,
+      currentStyleSheet: null
     };
   }
 };
@@ -218,59 +347,46 @@ export default {
 
 <style>
 @import url("../../node_modules/codemirror/lib/codemirror.css");
-
-.source {
-  grid-area: source;
-  background: #fff;
-}
-
-.target {
-  grid-area: target;
-  background: #fff;
-  padding: 10px;
-}
-
-.preview {
-  grid-area: preview;
-  background: #eee;
-}
-.header {
-  grid-area: header;
-}
-
-.footer {
-  grid-area: footer;
-}
-
-.header,
-.footer {
-  background-color: #999;
-}
-
-.box {
-  /* background-color: #eee; */
-  color: #333;
-}
-
-.wrapper {
-  display: grid;
-  grid-gap: 1px;
-  background-color: #bbb;
-  color: #fff;
-  min-height: 99.8vh !important;
-  grid-template-rows: fit-content(150px) 1fr;
-}
-
-.wrapper.markdown {
-  grid-template-areas:
-    "header   header"
-    "source  target"
-    "footer  footer";
-  grid-template-columns: minmax(50%, 1fr) minmax(50%, 1fr);
-}
-
 .CodeMirror {
   background: #fff;
-  min-height: 100% !important;
+  height: 85vh !important;
+}
+.markdown-body {
+  background: #fff;
+  overflow-y: auto;
+  height: 85vh !important;
+  border-left: 1px solid #eee;
+}
+#showHtml {
+  font-weight: 900;
+}
+code:after,
+code:before,
+kbd:after,
+kbd:before {
+  content: "";
+  /* letter-spacing: -1px; */
+}
+code {
+  background-color: #f5f5f5;
+  color: #333;
+  box-shadow: none;
+}
+code.html {
+  font-size: 14px;
+  background: #fff;
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 10px;
+  font-weight: 700;
+}
+.v-dialog {
+  margin-top: 54px;
+}
+a.browserDetect {
+  color: #333 !important;
+}
+.lint-error {
+  color: #ccc;
 }
 </style>
