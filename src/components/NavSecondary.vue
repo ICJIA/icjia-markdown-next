@@ -8,17 +8,15 @@
       <v-toolbar color="grey lighten-2" dense>
         <v-toolbar-items
           class="hidden-sm-and-down"
-          v-for="(tool, index) in toolbar"
+          v-for="(tool, index) in markdownButtons"
           :key="index"
         >
-          <span v-if="tool === '|'">
+          <span v-if="config.buttons[tool]['type'] === 'separator'">
             <v-divider vertical class="mx-2"></v-divider>
           </span>
 
-          <span v-else-if="tool === 'snippets'">
-            <component
-              v-bind:is="config.buttons[tool]['component']"
-            ></component>
+          <span v-else-if="config.buttons[tool]['type'] === 'component'">
+            <component v-bind:is="config.buttons[tool]['name']"></component>
           </span>
 
           <nav-button
@@ -51,7 +49,7 @@ export default {
   },
 
   mounted() {
-    this.toolbar = buildButtons(
+    this.markdownButtons = buildButtons(
       this.config.modes[this.config.session.mode]["markdownButtons"]
     );
   },
@@ -59,7 +57,7 @@ export default {
   data() {
     return {
       config: store.config,
-      toolbar: null
+      markdownButtons: null
     };
   }
 };

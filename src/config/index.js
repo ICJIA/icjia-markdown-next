@@ -147,28 +147,34 @@ const config = {
       text: "Button 1",
       icon: "announcement",
       size: "sm",
-      action: "announcement"
+      action: "announcement",
+      type: "button"
     },
 
     assessment: {
       text: "Button 2",
       icon: "assessment",
       size: "sm",
-      action: "assessment"
+      action: "assessment",
+      type: "button"
     },
     book: {
       text: "Button 3",
       icon: "book",
       size: "lg",
-      action: "book"
+      action: "book",
+      type: "button"
     },
-    "|": {},
+    "|": {
+      type: "separator"
+    },
 
     snippets: {
       text: "Snippets & Examples",
       icon: "vert",
       size: "sm",
-      component: "Snippets"
+      type: "component",
+      name: "Snippets"
     }
   },
 
@@ -223,7 +229,8 @@ const config = {
     isLintingAutoAlertEnabled: false,
     lintingRuleset: "relaxed.json",
     autoSaveInterval: 15000,
-    currentStyleSheet: null
+    currentStyleSheet: null,
+    isScrollSynced: true
   }
 };
 

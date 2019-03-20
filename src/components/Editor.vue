@@ -140,6 +140,7 @@ export default {
           this.yaml = {};
         }
       });
+      // eslint-disable-next-line no-unused-vars
       this.editor.on("optionChange", cm => {
         //console.log("option changed");
       });
@@ -165,20 +166,13 @@ export default {
       this.config.session.currentStyleSheet = currentStyleSheet;
     },
     setInitialText() {
-      /* Is there html -> markdown in config.session? */
-      // if (Object.entries(this.config.session.rendered).length != 0) {
-      //   this.editor.getDoc().setValue(this.config.session.rendered);
-      //   this.lintMarkdown(this.editor.getValue());
-      //   this.config.session.rendered = "";
-      //   return;
-      // }
       /* Is there markdown-in-progress in config.session? */
       if (Object.entries(this.config.session.markdown).length != 0) {
         this.editor.getDoc().setValue(this.config.session.markdown);
         this.lintMarkdown(this.editor.getValue());
         return;
       }
-      /* If neither, then first check for localstorage key ... */
+      /* If not, then first check for localstorage key ... */
       if (config.localStorageKey in localStorage) {
         let markdown = localStorage.getItem(config.localStorageKey);
         this.editor.getDoc().setValue(markdown);
@@ -197,11 +191,7 @@ export default {
       EventBus.$on("loadMarkdown", content => {
         this.editor.getDoc().setValue(content);
       });
-      // ping
-      EventBus.$on("getMarkdown", () => {
-        // pong
-        EventBus.$emit("sendMarkdown", this.markdown);
-      });
+
       EventBus.$on("getSnippet", snippet => {
         this.insert(snippet + "\n");
       });
@@ -349,12 +339,12 @@ export default {
 @import url("../../node_modules/codemirror/lib/codemirror.css");
 .CodeMirror {
   background: #fff;
-  height: 85vh !important;
+  height: 89vh !important;
 }
 .markdown-body {
   background: #fff;
   overflow-y: auto;
-  height: 85vh !important;
+  height: 89vh !important;
   border-left: 1px solid #eee;
 }
 #showHtml {

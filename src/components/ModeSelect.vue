@@ -49,16 +49,7 @@ export default {
       modes: null
     };
   },
-  computed: {
-    getModeIcon() {
-      let icon = this.config.modes[this.mode]["icon"];
-      return icon;
-    },
-    getModeColor() {
-      let color = this.config.modes[this.mode]["color"];
-      return `color: ${color}`;
-    }
-  }
+  computed: {}
 };
 </script>
 
