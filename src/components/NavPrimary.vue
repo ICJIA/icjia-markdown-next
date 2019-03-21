@@ -9,8 +9,8 @@
         <v-toolbar-side-icon></v-toolbar-side-icon>
 
         <v-toolbar-title class="white--text"
-          >ICJIA Markdown Editor</v-toolbar-title
-        >
+          >ICJIA Markdown Editor
+        </v-toolbar-title>
         &nbsp;<mode-select></mode-select>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -19,11 +19,8 @@
 </template>
 
 <script>
-import ModeSelect from "@/components/ModeSelect";
 export default {
-  components: {
-    ModeSelect
-  }
+  components: {}
 };
 </script>
 

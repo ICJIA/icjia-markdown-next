@@ -19,13 +19,13 @@
             <component v-bind:is="config.buttons[tool]['name']"></component>
           </span>
 
-          <nav-button
+          <base-nav-button
             v-else
             :action="config.buttons[tool]['action']"
             :size="config.buttons[tool]['size']"
             :text="config.buttons[tool]['text']"
             :icon="config.buttons[tool]['icon']"
-          ></nav-button>
+          ></base-nav-button>
         </v-toolbar-items>
         <v-spacer></v-spacer>
         HTML Buttons here
@@ -39,14 +39,9 @@
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
 import { buildButtons } from "@/helpers";
-import Snippets from "@/components/Snippets";
-import NavButton from "@/components/NavButton";
 
 export default {
-  components: {
-    Snippets,
-    NavButton
-  },
+  components: {},
 
   mounted() {
     this.buildButtons();

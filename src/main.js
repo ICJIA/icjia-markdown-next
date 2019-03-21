@@ -8,6 +8,8 @@ import store from "./store";
 import dotenv from "dotenv";
 dotenv.config();
 
+import "@/components/_globals.js";
+
 Vue.config.productionTip = false;
 
 import VueClipboard from "vue-clipboard2";

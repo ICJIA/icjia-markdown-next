@@ -35,13 +35,6 @@
 
 <script>
 /**
- * Custom components
- */
-
-import NavPrimary from "@/components/NavPrimary";
-import NavSecondary from "@/components/NavSecondary";
-
-/**
  * CodeMirror
  */
 
@@ -70,10 +63,7 @@ const loremIpsum = require("lorem-ipsum");
 const beautify_html = require("js-beautify").html;
 
 export default {
-  components: {
-    NavPrimary,
-    NavSecondary
-  },
+  components: {},
   created() {
     this.modes = Object.keys(this.config.modes);
 

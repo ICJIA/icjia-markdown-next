@@ -19,6 +19,8 @@
     "github-markdown-css": "^3.0.1",
     "js-beautify": "^1.9.0",
     "js-yaml": "^3.12.2",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.upperfirst": "^4.3.1",
     "lorem-ipsum": "^1.0.6",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
