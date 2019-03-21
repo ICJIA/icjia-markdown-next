@@ -198,7 +198,7 @@ const config = {
         display: "Standard"
       },
       markdownButtons:
-        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |",
+        "announcement assessment announcement | book book book snippets |",
       htmlButtons: "announcement assessment | book |"
     },
     grants: {
@@ -208,8 +208,7 @@ const config = {
         value: "grants.css",
         display: "Standard"
       },
-      markdownButtons:
-        "announcement assessment announcement assessment announcement assessment announcement assessment snippets | book book book |",
+      markdownButtons: "book book |",
       htmlButtons: "announcement assessment | book |"
     }
   },

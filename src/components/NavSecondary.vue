@@ -49,16 +49,31 @@ export default {
   },
 
   mounted() {
-    this.markdownButtons = buildButtons(
-      this.config.modes[this.config.session.mode]["markdownButtons"]
-    );
+    this.buildButtons();
   },
-  methods: {},
+  methods: {
+    buildButtons(mode = "standard") {
+      this.markdownButtons = buildButtons(
+        this.config.modes[mode]["markdownButtons"]
+      );
+    }
+  },
   data() {
     return {
       config: store.config,
       markdownButtons: null
     };
+  },
+  computed: {
+    mode() {
+      return this.config.session.mode;
+    }
+  },
+  watch: {
+    mode(newValue, oldValue) {
+      console.log(oldValue, newValue);
+      this.buildButtons(newValue);
+    }
   }
 };
 </script>
