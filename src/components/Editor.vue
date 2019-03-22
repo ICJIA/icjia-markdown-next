@@ -1,7 +1,15 @@
 <template>
   <div class="markdown-page">
     <v-content>
-      <nav-primary></nav-primary>
+      <!-- <nav-primary></nav-primary> -->
+      <base-toolbar>
+        <template v-slot:left
+          ><v-toolbar-side-icon></v-toolbar-side-icon>
+        </template>
+        <template v-slot:title>
+          ICJIA MARKDOWN EDITOR
+        </template>
+      </base-toolbar>
       <nav-secondary></nav-secondary>
       <div
         class="master"
