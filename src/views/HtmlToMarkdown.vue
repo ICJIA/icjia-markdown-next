@@ -91,6 +91,8 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
@@ -153,11 +155,11 @@ export default {
         console.log("Content to copy: ", this.model);
         EventBus.$emit("isProcessing", true);
         this.$copyText(this.model).then(
-          function(e) {
+          function() {
             EventBus.$emit("displayStatus", "Markdown copied to clipboard.");
             EventBus.$emit("isProcessing", false);
           },
-          function(e) {
+          function() {
             EventBus.$emit(
               "displayStatus",
               "ERROR: Markdown not copied to clipboard."

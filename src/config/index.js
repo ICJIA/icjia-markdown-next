@@ -202,6 +202,34 @@ const config = {
   /**
    *
    *
+   * ICJIA-specific Markdown snippets
+   *
+   *
+   */
+  icjiaImage: `<div class="article-figure">
+ 
+#### Figure 1
+#### Figure title
+ 
+![alt text][filename]
+ 
+###### Caption (Source, note, etc.)
+</div>`,
+  icjiaTable: `<div class="article-table">
+ 
+#### Table 1
+#### Table title
+ 
+| column | headers | here |
+| --- | --- | --- |
+| enter | your | values |
+| to | fill | cells |
+ 
+###### Caption (Source, note, etc.)
+</div>`,
+  /**
+   *
+   *
    * Markdown linting
    *
    *
@@ -266,6 +294,12 @@ const config = {
           action: "image",
           icon: "insert_photo",
           tooltip: "Image"
+        },
+        {
+          name: "table",
+          action: "table",
+          icon: "table_chart",
+          tooltip: "Table"
         },
         // {
         //   name: "footnote",
@@ -334,6 +368,12 @@ const config = {
           action: "image",
           icon: "insert_photo",
           tooltip: "Image"
+        },
+        {
+          name: "table",
+          action: "table",
+          icon: "table_chart",
+          tooltip: "Table"
         },
         // {
         //   name: "footnote",

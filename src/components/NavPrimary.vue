@@ -169,6 +169,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 const info = require("../../package.json");
 // import config from "@/config";
 import { EventBus } from "@/event-bus.js";

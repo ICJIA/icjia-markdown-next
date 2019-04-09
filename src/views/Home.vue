@@ -131,6 +131,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 import config from "@/config";
 
 import { EventBus } from "@/event-bus.js";
@@ -210,9 +211,9 @@ export default {
         }
       });
 
-      this.editor.on("optionChange", cm => {
-        //console.log("option changed");
-      });
+      // this.editor.on("optionChange", cm => {
+      //   //console.log("option changed");
+      // });
     },
     setInitialText() {
       /* Is there html -> markdown in config.session? */
@@ -313,7 +314,7 @@ export default {
       this.yaml = {};
       EventBus.$emit("displayStatus", "Document content and metadata cleared.");
     },
-    updateViewerScroll(e) {
+    updateViewerScroll() {
       if (this.isScrollSynced) {
         this.editorScrollTop = this.editor.getScrollInfo().top;
 
@@ -347,10 +348,10 @@ export default {
           this.insertAround("[", "](http://)");
           break;
         case "image":
-          this.insertBefore(
-            "![INSERT_ALT_TEXT_HERE](https://via.placeholder.com/500x300){.img-center}",
-            2
-          );
+          this.insertBefore(config.icjiaImage, 2);
+          break;
+        case "table":
+          this.insertBefore(config.icjiaTable, 2);
           break;
         case "unorderedList":
           this.insertBefore("* ", 2);
@@ -487,11 +488,11 @@ export default {
     copyHtmlToClipboard() {
       EventBus.$emit("isProcessing", true);
       this.$copyText(this.html).then(
-        function(e) {
+        function() {
           EventBus.$emit("displayStatus", "HTML copied to clipboard.");
           EventBus.$emit("isProcessing", false);
         },
-        function(e) {
+        function() {
           EventBus.$emit(
             "displayStatus",
             "ERROR: HTML not copied to clipboard."
@@ -504,11 +505,11 @@ export default {
     copyMarkdownToClipboard() {
       EventBus.$emit("isProcessing", true);
       this.$copyText(this.markdown).then(
-        function(e) {
+        function() {
           EventBus.$emit("isProcessing", false);
           EventBus.$emit("displayStatus", "Markdown copied to clipboard.");
         },
-        function(e) {
+        function() {
           EventBus.$emit("isProcessing", false);
           EventBus.$emit(
             "displayStatus",

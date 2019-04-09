@@ -68,7 +68,7 @@
             dark
             @click.prevent="sendToEditor"
           >
-            SEND MARKDOWN TO EDITOR&nbsp
+            SEND MARKDOWN TO EDITOR&nbsp;
             <v-icon dark>launch</v-icon>
           </v-btn>
 
@@ -93,11 +93,11 @@
 </template>
 
 <script>
-import config from "@/config";
+// import config from "@/config";
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
 
-let FileSaver = require("file-saver");
+// let FileSaver = require("file-saver");
 export default {
   name: "NavHtml",
   data() {

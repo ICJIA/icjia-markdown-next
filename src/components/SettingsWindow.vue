@@ -28,11 +28,10 @@
 import { EventBus } from "@/event-bus.js";
 import { store } from "@/store";
 import AutoAlert from "@/components/SettingAutoAlert";
-import MarkdownIt from "@/components/SettingMarkdownIt";
+
 export default {
   components: {
-    AutoAlert,
-    MarkdownIt
+    AutoAlert
   },
   data() {
     return {
