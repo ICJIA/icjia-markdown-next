@@ -12,15 +12,22 @@
         <v-toolbar-side-icon
           @click="toggleSettingsWindow"
           slot="activator"
+          class="mr-3"
         ></v-toolbar-side-icon>
         <span>{{ config.tooltips.settingsWindow.text }}</span>
       </v-tooltip>
-
+      <img
+        src="../assets/img/logo-white.png"
+        width="50"
+        alt="ICJIA Markdown Editor"
+        class="mr-1 logo"
+        @click="gotoIcjia"
+      />
       <v-tooltip bottom>
         <v-toolbar-title slot="activator">
-          <router-link to="/" class="navTitle"
-            ><span style="font-weight: 400;">ICJIA</span>&nbsp;<span
-              style="font-weight: 900;"
+          <router-link to="/" class="navTitle">
+            <!-- <span style="font-weight: 400;">ICJIA</span> -->
+            &nbsp;<span style="font-weight: 900;"
               >MARKDOWN EDITOR
               <span v-if="routeName === '/html'" style="font-weight: 400; "
                 >|
@@ -226,6 +233,9 @@ export default {
       this.mode = mode;
       EventBus.$emit("setMode", this.mode);
     },
+    gotoIcjia() {
+      location.href = "http://www.icjia.state.il.us";
+    },
 
     toggleLintWindow() {
       EventBus.$emit("toggleLintWindow");
@@ -293,6 +303,10 @@ a.navTitle:hover {
   font-weight: 900;
   text-transform: uppercase;
   font-size: 12px;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 .mode {
