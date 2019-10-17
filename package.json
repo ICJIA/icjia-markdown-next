@@ -29,6 +29,7 @@
     "markdown-it-highlightjs": "^3.0.0",
     "markdown-it-katex": "^2.0.3",
     "markdown-it-meta": "0.0.1",
+    "markdown-it-multimd-table": "^3.2.3",
     "markdown-it-named-headers": "^0.0.4",
     "raw-loader": "^1.0.0",
     "text-statistics": "^0.1.1",

@@ -153,7 +153,8 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("markdown-it-attrs"))
   .use(require("@/markdown-it-meta-fork"))
   .use(require("markdown-it-container"))
-  .use(require("markdown-it-highlightjs"));
+  .use(require("markdown-it-highlightjs"))
+  .use(require("markdown-it-multimd-table"), config.markdownItMultimdTableOptions);
 
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
