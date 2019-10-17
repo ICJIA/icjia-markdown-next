@@ -29,6 +29,10 @@ const config = {
     typographer: false,
     quotes: "“”‘’"
   },
+  markdownItMultimdTableOptions: {
+    enableMultilineRows: true,
+    enableRowspan: true
+  },
   /**
    *
    *
