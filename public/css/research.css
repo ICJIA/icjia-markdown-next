@@ -486,6 +486,7 @@ markdown-body code {
 .markdown-body .info-block {
   background-color: rgba(27, 31, 35, 0.05);
   font-family: "Lato", sans-serif;
+  font-size: 16px;
   margin: 16px 0px;
   padding: 24px 48px 16px;
 }
