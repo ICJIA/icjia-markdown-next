@@ -154,7 +154,12 @@ let md = require("markdown-it")(config.markdownItOptions)
   .use(require("@/markdown-it-meta-fork"))
   .use(require("markdown-it-container"))
   .use(require("markdown-it-highlightjs"))
-  .use(require("markdown-it-multimd-table"), config.markdownItMultimdTableOptions);
+  .use(
+    require("markdown-it-multimd-table"),
+    config.markdownItMultimdTableOptions
+  )
+  // eslint-disable-next-line no-undef
+  .use(texmath.use(katex));
 
 require("codemirror/mode/markdown/markdown");
 require("codemirror/addon/edit/closebrackets");
