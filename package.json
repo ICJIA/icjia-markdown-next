@@ -5,15 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
   },
-  "license": "MIT",
-  "repository": "https://github.com/ICJIA/icjia-markdown-next",
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.1",
     "bitly": "^6.0.8",
     "codemirror": "^5.44.0",
+    "core-js": "^3.4.3",
     "dotenv": "^7.0.0",
     "file-saver": "^2.0.1",
     "github-markdown-css": "^3.0.1",
@@ -43,10 +42,10 @@
     "vuex": "^3.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.1",
-    "@vue/cli-plugin-eslint": "^3.5.1",
-    "@vue/cli-plugin-unit-jest": "^3.5.1",
-    "@vue/cli-service": "^3.5.1",
+    "@vue/cli-plugin-babel": "^4.1.1",
+    "@vue/cli-plugin-eslint": "^4.1.1",
+    "@vue/cli-plugin-unit-jest": "^4.1.1",
+    "@vue/cli-service": "^4.1.1",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "^1.0.0-beta.29",
     "axios": "^0.18.0",
@@ -59,7 +58,7 @@
     "prettier": "1.16.4",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-axios": "^0.0.4",
-    "vue-cli-plugin-vuetify": "^0.5.0",
+    "vue-cli-plugin-vuetify": "^2.0.2",
     "vue-template-compiler": "^2.6.9"
   },
   "eslintConfig": {
@@ -108,5 +107,7 @@
       "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
     ],
     "testURL": "http://localhost/"
-  }
+  },
+  "license": "MIT",
+  "repository": "https://github.com/ICJIA/icjia-markdown-next"
 }
