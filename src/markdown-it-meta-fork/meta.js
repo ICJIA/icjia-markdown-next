@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use strict";
 
 const YAML = require("js-yaml");
@@ -46,7 +47,7 @@ function meta(md, state, start, end, silent) {
     /**
      * TODO: Figure out the 'block mapping' error below. For now, fail silently.
      *
-     *  {name: "YAMLException", reason: "can not read a block mapping entry; a multiline key may not be an implicit key", mark: Mark, message: "can not read a block mapping entry; a multiline ke…1, column 13:↵    demographics:↵                ^", stack: "YAMLException: can not read a block mapping entry;…de_modules/markdown-it/lib/parser_block.js:79:20)"}
+     * {name: "YAMLException", reason: "can not read a block mapping entry; a multiline key may not be an implicit key", mark: Mark, message: "can not read a block mapping entry; a multiline ke…1, column 13:↵    demographics:↵                ^", stack: "YAMLException: can not read a block mapping entry;…de_modules/markdown-it/lib/parser_block.js:79:20)"}
      *
      *
      */
